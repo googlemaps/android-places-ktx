@@ -1,0 +1,57 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# A workflow that updates the gh-pages branch whenever a new release is made
+name: Update documentation
+
+on:
+  push:
+    tags:
+      - '*'
+  repository_dispatch:
+      types: [gh-pages]
+
+jobs:
+  gh-page-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Checkout android-places-ktx
+      uses: actions/checkout@v2
+
+    # Run dokka and create tar
+    - name: Generate documentation
+      run: |
+        ./gradlew dokka
+
+        echo "Creating tar for generated docs"
+        cd $GITHUB_WORKSPACE/places-ktx/build/documentation && tar cvf ~/places-ktx-docs.tar .
+
+        echo "Unpacking tar into gh-pages branch"
+        git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+        cd $GITHUB_WORKSPACE && git checkout gh-pages && tar xvf ~/places-ktx-docs.tar
+
+    # Commit changes and create a PR
+    - name: PR Changes
+      uses: peter-evans/create-pull-request@v2
+      with:
+        token: ${{ secrets.SYNCED_GITHUB_TOKEN_REPO }}
+        commit-message: 'docs: Update docs'
+        committer: googlemaps-bot <googlemaps-bot@google.com>
+        author: googlemaps-bot <googlemaps-bot@google.com>
+        title: 'docs: Update docs'
+        body: |
+            Updated GitHub pages with latest from `./gradlew dokka`.
+        branch: googlemaps-bot/update_gh_pages
