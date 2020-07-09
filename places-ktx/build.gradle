@@ -29,6 +29,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -36,4 +40,11 @@ dependencies {
     implementation deps.kotlinxCoroutines.android
     implementation deps.kotlinxCoroutines.playServices
     api deps.places
+
+    // Tests
+    testImplementation deps.androidx.test
+    testImplementation deps.androidx.junit
+    testImplementation deps.junit
+    testImplementation deps.mockito
+    testImplementation deps.mockitoKotlin
 }

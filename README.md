@@ -33,33 +33,33 @@ Alternatively, if you are using the Places static library along with the [Maps S
 
 ## Example Usage
 
-### Coroutines
-
-Accessing API responses made by `PlacesClient` can be retrieved using coroutines vs. using [Task](https://developers.google.com/android/reference/com/google/android/gms/tasks/Task.html) objects. The example here demonstrates how you can use this feature alongside with Android’s [ViewModel KTX](viewmodel-ktx)’s `viewModelScope`.
+Accessing API responses made by `PlacesClient` can be retrieved using coroutines vs. using
+[Task](https://developers.google.com/android/reference/com/google/android/gms/tasks/Task.html) objects.
+The example here demonstrates how you can use this feature alongside with Android’s [ViewModel KTX](viewmodel-ktx)’s `viewModelScope`.
+Additionally, you can use a DSL provided by this library to construct requests vs. using builders.
 
 _Before_
-```java
-    final LocationBias bias = RectangularBounds.newInstance(
-        new LatLng(22.458744, 88.208162), // SW lat, lng
-        new LatLng(22.730671, 88.524896) // NE lat, lng
+```kotlin
+    val bias = RectangularBounds.newInstance(
+        LatLng(22.458744, 88.208162), // SW lat, lng
+        LatLng(22.730671, 88.524896) // NE lat, lng
     );
 
-    // Create a new programmatic Place Autocomplete request in Places SDK for Android
-    final FindAutocompletePredictionsRequest newRequest = FindAutocompletePredictionsRequest
+    // Create a new programmatic Place Autocomplete request in Places SDK for Android using builders
+    val newRequest = FindAutocompletePredictionsRequest
         .builder()
-        .setSessionToken(sessionToken)
         .setLocationBias(bias)
         .setTypeFilter(TypeFilter.ESTABLISHMENT)
-        .setQuery(query)
+        .setQuery("123 Main Street")
         .setCountries("IN")
         .build();
 
     // Perform autocomplete predictions request
-    placesClient.findAutocompletePredictions(newRequest).addOnSuccessListener((response) -> {
+    placesClient.findAutocompletePredictions(newRequest).addOnSuccessListener { response ->
         // Handle response
-    }).addOnFailureListener((exception) -> {
+    }.addOnFailureListener { exception ->
         // Handle exception
-    });
+    }
 ```
 
 _After_
@@ -74,14 +74,13 @@ viewModelScope.launch(handler) {
         LatLng(37.808300, -122.391338) // NE lat, lng
     )
 
-    // Create a new programmatic Place Autocomplete request in Places SDK for Android
-    val request = FindAutocompletePredictionsRequest
-        .builder()
-        .setLocationBias(bias)
-        .setTypeFilter(TypeFilter.ESTABLISHMENT)
-        .setQuery(query)
-        .setCountries("US")
-        .build()
+    // Create a new programmatic Place Autocomplete request in Places SDK for Android using DSL
+    val request = findAutocompletePredictionsRequest {
+        setLocationBias(bias)
+        setTypeFilter(TypeFilter.ESTABLISHMENT)
+        setQuery("123 Main Street")
+        setCountries("US")
+    }
 
     // Perform autocomplete predictions request
     val response = placesClient.awaitFindAutocompletePredictions(request)
