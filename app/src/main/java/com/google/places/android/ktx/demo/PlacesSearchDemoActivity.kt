@@ -67,13 +67,13 @@ class PlacesSearchDemoActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         val searchView = menu.findItem(R.id.search).actionView as SearchView
-        searchView.also {
-            it.queryHint = getString(R.string.search_a_place)
-            it.isIconifiedByDefault = false
-            it.isFocusable = true
-            it.isIconified = false
-            it.requestFocusFromTouch()
-            it.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchView.apply {
+            queryHint = getString(R.string.search_a_place)
+            isIconifiedByDefault = false
+            isFocusable = true
+            isIconified = false
+            requestFocusFromTouch()
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     return false
                 }
@@ -88,11 +88,16 @@ class PlacesSearchDemoActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        findViewById<RecyclerView>(R.id.recycler_view).also {
-            val layoutManager = LinearLayoutManager(this)
-            it.layoutManager = layoutManager
-            it.adapter = adapter
-            it.addItemDecoration(DividerItemDecoration(this, layoutManager.orientation))
+        val linearLayoutManager = LinearLayoutManager(this)
+        findViewById<RecyclerView>(R.id.recycler_view).apply {
+            layoutManager = linearLayoutManager
+            adapter = adapter
+            addItemDecoration(
+                DividerItemDecoration(
+                    this@PlacesSearchDemoActivity,
+                    linearLayoutManager.orientation
+                )
+            )
         }
     }
 

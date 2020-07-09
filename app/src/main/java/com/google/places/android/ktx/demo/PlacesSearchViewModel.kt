@@ -26,6 +26,7 @@ import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.ktx.api.net.awaitFindAutocompletePredictions
+import com.google.android.libraries.places.ktx.api.net.findAutocompletePredictionsRequest
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -48,6 +49,9 @@ class PlacesSearchViewModel @ViewModelInject constructor(
             _events.value = PlacesSearchEventError(throwable)
         }
         searchJob = viewModelScope.launch(handler) {
+            // Add delay so that network call is performed only after there is a 300 ms pause in the
+            // search query. This prevents network calls from being invoked if the user is still
+            // typing.
             delay(300)
 
             val bias: LocationBias = RectangularBounds.newInstance(
@@ -55,13 +59,13 @@ class PlacesSearchViewModel @ViewModelInject constructor(
                 LatLng(37.808300, -122.391338) // NE lat, lng
             )
 
-            val request = FindAutocompletePredictionsRequest
-                .builder()
-                .setLocationBias(bias)
-                .setTypeFilter(TypeFilter.ESTABLISHMENT)
-                .setQuery(query)
-                .setCountries("US")
-                .build()
+            val request = findAutocompletePredictionsRequest {
+                setLocationBias(bias)
+                setTypeFilter(TypeFilter.ESTABLISHMENT)
+                setQuery(query)
+                setCountries("US")
+            }
+
             val response = placesClient
                 .awaitFindAutocompletePredictions(request)
             _events.value = PlacesSearchEventFound(response.autocompletePredictions)

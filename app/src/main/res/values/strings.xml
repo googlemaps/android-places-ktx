@@ -16,7 +16,13 @@
 
 <resources>
     <string name="app_name">Android Places KTX Demo</string>
-    <string name="programmatic_place_predictions_instructions">"  This activity demonstrates as-you-type programmatic place predictions. Tap on the search icon on the toolbar and search for a place."</string>
+    <string name="programmatic_place_predictions_instructions">This activity demonstrates as-you-type programmatic place predictions. Tap on the search icon on the toolbar and search for a place.</string>
     <string name="search">Search</string>
     <string name="search_a_place">Search a Place</string>
+
+    <string name="places_demo_title">Places Search Demo</string>
+    <string name="places_demo_description">Demonstrates usages of Places KTX coroutines and DSL builder features.</string>
+
+    <string name="autocomplete_fragment_demo_title">Autocomplete Fragment Demo</string>
+    <string name="autocomplete_fragment_demo_description">Demonstrates using AutocompleteSupportFragment and placeSelectionEvents() to use Kotlin Flow.</string>
 </resources>

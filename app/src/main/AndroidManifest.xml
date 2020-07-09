@@ -26,15 +26,18 @@
         android:supportsRtl="true"
         android:name=".DemoApplication"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".PlacesSearchDemoActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" >
+        <activity android:name=".DemoActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".AutocompleteDemoActivity" />
+
+        <activity
+            android:name=".PlacesSearchDemoActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 </manifest>

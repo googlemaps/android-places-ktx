@@ -38,7 +38,8 @@ android {
 dependencies {
     implementation deps.kotlin
     implementation deps.kotlinxCoroutines.android
-    implementation deps.kotlinxCoroutines.playServices
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    api deps.kotlinxCoroutines.playServices
     api deps.places
 
     // Tests

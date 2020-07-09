@@ -22,6 +22,13 @@ import dagger.hilt.android.HiltAndroidApp
 class DemoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+
+        // Initialize the Places SDK. Note that the string value of `maps_api_key` will be generated
+        // at build-time (see app/build.gradle). The technique used here allows you to provide your
+        // API key such that the key is not checked in source control.
+        //
+        // See API Key Best Practices for more information on how to secure your API key:
+        // https://developers.google.com/maps/api-key-best-practices
         Places.initialize(this, BuildConfig.PLACES_API_KEY)
     }
 }
