@@ -25,12 +25,6 @@ dependencies {
 }
 ```
 
-Alternatively, if you are using the Places static library along with the [Maps SDK v3 BETA][maps-v3-sdk] distribution:
-
-```groovy
-// TODO
-```
-
 ## Example Usage
 
 Accessing API responses made by `PlacesClient` can be retrieved using coroutines vs. using
