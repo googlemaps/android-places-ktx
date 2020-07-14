@@ -32,5 +32,5 @@ jobs:
 
     - name: Run tests
       run: |
-        echo "Running check"
-        ./gradlew check -x lint --stacktrace
+        echo "Running unit tests"
+        ./gradlew check test -x lint --stacktrace
