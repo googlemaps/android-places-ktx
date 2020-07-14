@@ -26,7 +26,8 @@ dependencies {
 
 Alternatively, if you are using the Places standalone library (for use only with Maps v 3.1.0 beta):
 
-```groovy {
+```groovy 
+dependencies {
     implementation 'com.google.maps.android:places-v3-ktx:0.2.2'
 }
 ```
@@ -40,26 +41,26 @@ Additionally, you can use a DSL provided by this library to construct requests v
 
 _Before_
 ```kotlin
-    val bias = RectangularBounds.newInstance(
-        LatLng(22.458744, 88.208162), // SW lat, lng
-        LatLng(22.730671, 88.524896) // NE lat, lng
-    );
+val bias = RectangularBounds.newInstance(
+    LatLng(22.458744, 88.208162), // SW lat, lng
+    LatLng(22.730671, 88.524896) // NE lat, lng
+);
 
-    // Create a new programmatic Place Autocomplete request in Places SDK for Android using builders
-    val newRequest = FindAutocompletePredictionsRequest
-        .builder()
-        .setLocationBias(bias)
-        .setTypeFilter(TypeFilter.ESTABLISHMENT)
-        .setQuery("123 Main Street")
-        .setCountries("IN")
-        .build();
+// Create a new programmatic Place Autocomplete request in Places SDK for Android using builders
+val newRequest = FindAutocompletePredictionsRequest
+    .builder()
+    .setLocationBias(bias)
+    .setTypeFilter(TypeFilter.ESTABLISHMENT)
+    .setQuery("123 Main Street")
+    .setCountries("IN")
+    .build();
 
-    // Perform autocomplete predictions request
-    placesClient.findAutocompletePredictions(newRequest).addOnSuccessListener { response ->
-        // Handle response
-    }.addOnFailureListener { exception ->
-        // Handle exception
-    }
+// Perform autocomplete predictions request
+placesClient.findAutocompletePredictions(newRequest).addOnSuccessListener { response ->
+    // Handle response
+}.addOnFailureListener { exception ->
+    // Handle exception
+}
 ```
 
 _After_
