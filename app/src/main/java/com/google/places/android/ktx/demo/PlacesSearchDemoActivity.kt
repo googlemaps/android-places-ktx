@@ -91,7 +91,7 @@ class PlacesSearchDemoActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         findViewById<RecyclerView>(R.id.recycler_view).apply {
             layoutManager = linearLayoutManager
-            adapter = adapter
+            adapter = this@PlacesSearchDemoActivity.adapter
             addItemDecoration(
                 DividerItemDecoration(
                     this@PlacesSearchDemoActivity,
