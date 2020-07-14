@@ -1,4 +1,5 @@
 [![Discord](https://img.shields.io/discord/676948200904589322)](https://discord.gg/hYsWbmk)
+![Beta](https://img.shields.io/badge/stability-beta-yellow)
 ![Apache-2.0](https://img.shields.io/badge/license-Apache-blue)
 
 Places Android KTX
