@@ -21,7 +21,7 @@ If you are using the Places SDK through Google Play Services:
 dependencies {
 
     // KTX for the Places SDK for Android library
-    implementation 'com.google.maps.android:places-ktx:0.2.0'
+    implementation 'com.google.maps.android:places-ktx:0.2.1'
 }
 ```
 
