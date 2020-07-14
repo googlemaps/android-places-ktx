@@ -19,11 +19,15 @@ If you are using the Places SDK through Google Play Services:
 
 ```groovy
 dependencies {
-
-    // KTX for the Places SDK for Android library
     implementation 'com.google.maps.android:places-ktx:0.2.1'
 }
 ```
+
+Alternatively, if you are using the Places standalone library (for use only with Maps v 3.1.0 beta):
+
+```groovy {
+    implementation 'com.google.maps.android:places-v3-ktx:0.2.1'
+}
 
 ## Example Usage
 
