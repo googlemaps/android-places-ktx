@@ -28,6 +28,7 @@ Alternatively, if you are using the Places standalone library (for use only with
 ```groovy {
     implementation 'com.google.maps.android:places-v3-ktx:0.2.2'
 }
+```
 
 ## Example Usage
 
