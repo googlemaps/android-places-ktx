@@ -35,6 +35,8 @@ android {
     }
 }
 
+preBuild.dependsOn(rootProject.tasks.copyGmsToV3Beta)
+
 dependencies {
     implementation deps.kotlin
     implementation deps.kotlinxCoroutines.android
