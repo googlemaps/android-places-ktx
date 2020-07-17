@@ -44,7 +44,7 @@ _Before_
 val bias = RectangularBounds.newInstance(
     LatLng(22.458744, 88.208162), // SW lat, lng
     LatLng(22.730671, 88.524896) // NE lat, lng
-);
+)
 
 // Create a new programmatic Place Autocomplete request in Places SDK for Android using builders
 val newRequest = FindAutocompletePredictionsRequest
@@ -53,7 +53,7 @@ val newRequest = FindAutocompletePredictionsRequest
     .setTypeFilter(TypeFilter.ESTABLISHMENT)
     .setQuery("123 Main Street")
     .setCountries("IN")
-    .build();
+    .build()
 
 // Perform autocomplete predictions request
 placesClient.findAutocompletePredictions(newRequest).addOnSuccessListener { response ->
