@@ -1,0 +1,10 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:com.google.android.libraries.places.ktx.api.net$awaitFetchPhoto(com.google.android.libraries.places.api.net.PlacesClient, com.google.android.libraries.places.api.net.FetchPhotoRequest)com.google.android.libraries.places.ktx.api.net/com.google.android.libraries.places.api.net.-places-client/await-fetch-photo.html
+$dokka.location:com.google.android.libraries.places.ktx.api.net$awaitFetchPlace(com.google.android.libraries.places.api.net.PlacesClient, com.google.android.libraries.places.api.net.FetchPlaceRequest)com.google.android.libraries.places.ktx.api.net/com.google.android.libraries.places.api.net.-places-client/await-fetch-place.html
+$dokka.location:com.google.android.libraries.places.ktx.api.net$awaitFindAutocompletePredictions(com.google.android.libraries.places.api.net.PlacesClient, com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest)com.google.android.libraries.places.ktx.api.net/com.google.android.libraries.places.api.net.-places-client/await-find-autocomplete-predictions.html
+$dokka.location:com.google.android.libraries.places.ktx.api.net$awaitFindCurrentPlace(com.google.android.libraries.places.api.net.PlacesClient, com.google.android.libraries.places.api.net.FindCurrentPlaceRequest)com.google.android.libraries.places.ktx.api.net/com.google.android.libraries.places.api.net.-places-client/await-find-current-place.html
+$dokka.location:com.google.android.libraries.places.ktx.widget$placeSelectionEvents(com.google.android.libraries.places.widget.AutocompleteSupportFragment)com.google.android.libraries.places.ktx.widget/com.google.android.libraries.places.widget.-autocomplete-support-fragment/place-selection-events.html
+com.google.android.libraries.places.ktx.api.model
+com.google.android.libraries.places.ktx.api.net
+com.google.android.libraries.places.ktx.widget

@@ -1,0 +1,18 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>awaitFindCurrentPlace - places-ktx</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">places-ktx</a>&nbsp;/&nbsp;<a href="../index.html">com.google.android.libraries.places.ktx.api.net</a>&nbsp;/&nbsp;<a href="index.html">com.google.android.libraries.places.api.net.PlacesClient</a>&nbsp;/&nbsp;<a href="./await-find-current-place.html">awaitFindCurrentPlace</a><br/>
+<br/>
+<h1>awaitFindCurrentPlace</h1>
+<a name="com.google.android.libraries.places.ktx.api.net$awaitFindCurrentPlace(com.google.android.libraries.places.api.net.PlacesClient, com.google.android.libraries.places.api.net.FindCurrentPlaceRequest)"></a>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">PlacesClient</span><span class="symbol">.</span><span class="identifier">awaitFindCurrentPlace</span><span class="symbol">(</span><span class="identifier" id="com.google.android.libraries.places.ktx.api.net$awaitFindCurrentPlace(com.google.android.libraries.places.api.net.PlacesClient, com.google.android.libraries.places.api.net.FindCurrentPlaceRequest)/request">request</span><span class="symbol">:</span>&nbsp;<span class="identifier">FindCurrentPlaceRequest</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">FindCurrentPlaceResponse</span></code>
+<p>Wraps <a href="#">PlacesClient.findCurrentPlace</a> in a suspending function.</p>
+<p>Fetches the approximate current place of the user's device. Calling this method without granting
+the appropriate permissions will result in a <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/SecurityException.html">SecurityException</a> being thrown. In addition, if
+an error occurred while fetching the current place, an <a href="#">ApiException</a> will be thrown.</p>
+</BODY>
+</HTML>
