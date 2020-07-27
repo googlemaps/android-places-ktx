@@ -100,6 +100,10 @@ To run the demo app, you'll have to:
 3. Add a single line to `secure.properties` that looks like `PLACES_API_KEY="YOUR_API_KEY"`, where `YOUR_API_KEY` is the API key you obtained in the first step. You can also take a look at the [secure.properties.template](secure.properties.template) as an example.
 4. Build and run
 
+## Documentation
+
+You can learn more about all the extensions provided by this library by reading the [reference documents].
+
 ## Support
 
 Encounter an issue while using this library?
@@ -119,4 +123,5 @@ For more information, check out the detailed guide on the
 [maps-v3-sdk]: https://developers.google.com/maps/documentation/android-sdk/v3-client-migration
 [places-sdk]: https://developers.google.com/places/android-sdk/intro
 [pull request]: https://github.com/googlemaps/android-places-ktx/compare
+[reference documents]: https://googlemaps.github.io/android-places-ktx
 [viewmodel-ktx]: https://developer.android.com/kotlin/ktx#viewmodel
