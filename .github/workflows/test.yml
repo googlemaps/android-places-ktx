@@ -19,7 +19,6 @@ on:
   repository_dispatch:
     types: [test]
   pull_request:
-    branches: ['*']
     branches-ignore:
       - 'gh-pages'
 
