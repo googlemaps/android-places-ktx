@@ -60,10 +60,10 @@ class PlacesSearchViewModel @ViewModelInject constructor(
             )
 
             val request = findAutocompletePredictionsRequest {
-                setLocationBias(bias)
-                setTypeFilter(TypeFilter.ESTABLISHMENT)
-                setQuery(query)
-                setCountries("US")
+                locationBias = bias
+                typeFilter = TypeFilter.ESTABLISHMENT
+                this.query = query
+                countries = listOf("US")
             }
 
             val response = placesClient
