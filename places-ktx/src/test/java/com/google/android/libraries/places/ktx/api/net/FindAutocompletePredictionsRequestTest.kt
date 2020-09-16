@@ -27,11 +27,11 @@ class FindAutocompletePredictionsRequestTest {
     fun testBuilder() {
         val cancellationToken = CancellationTokenSource().token
         val request = findAutocompletePredictionsRequest {
-            setCancellationToken(cancellationToken)
-            setCountries("USA")
-            setLocationBias(RectangularBounds.newInstance(LatLng(1.0,1.0), LatLng(2.0, 2.0)))
-            setTypeFilter(TypeFilter.ESTABLISHMENT)
-            setQuery("query")
+            this.cancellationToken = cancellationToken
+            countries = listOf("USA")
+            locationBias = RectangularBounds.newInstance(LatLng(1.0,1.0), LatLng(2.0, 2.0))
+            typeFilter = TypeFilter.ESTABLISHMENT
+            query = "query"
         }
         assertEquals(cancellationToken, request.cancellationToken)
         assertEquals(listOf("USA"), request.countries)

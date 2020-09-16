@@ -77,10 +77,10 @@ viewModelScope.launch(handler) {
 
     // Create a new programmatic Place Autocomplete request in Places SDK for Android using DSL
     val request = findAutocompletePredictionsRequest {
-        setLocationBias(bias)
-        setTypeFilter(TypeFilter.ESTABLISHMENT)
-        setQuery("123 Main Street")
-        setCountries("US")
+        locationBias = bias
+        typeFilter = TypeFilter.ESTABLISHMENT
+        query = "123 Main Street"
+        countries = listOf("US")
     }
 
     // Perform autocomplete predictions request

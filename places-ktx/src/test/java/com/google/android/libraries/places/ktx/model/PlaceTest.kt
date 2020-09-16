@@ -25,20 +25,20 @@ class PlaceTest {
     @Test
     fun testBuilder() {
         val place = place {
-            setAddress("address")
-            setAddressComponents(AddressComponents.newInstance(
+            address = "address"
+            addressComponents = AddressComponents.newInstance(
                 listOf(
                     addressComponent("Main Street", listOf("street_address")) {
-                        setShortName("Main St.")
+                        shortName = "Main St."
                     }
                 )
-            ))
+            )
         }
         assertEquals("address", place.address)
         assertEquals(AddressComponents.newInstance(
             listOf(
                 addressComponent("Main Street", listOf("street_address")) {
-                    setShortName("Main St.")
+                    shortName = "Main St."
                 }
             )
         ), place.addressComponents)
