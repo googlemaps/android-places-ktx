@@ -28,23 +28,29 @@ class OpeningHoursTest {
     fun testBuilder() {
 
         val openingHours = openingHours {
-            periods = listOf(
-                period {
-                    close = TimeOfWeek.newInstance(
-                        DayOfWeek.MONDAY,
-                        LocalTime.newInstance(0, 0)
-                    )
-                }
+            setPeriods(
+                listOf(
+                    period {
+                        setClose(
+                            TimeOfWeek.newInstance(
+                                DayOfWeek.MONDAY,
+                                LocalTime.newInstance(0, 0)
+                            )
+                        )
+                    }
+                )
             )
-            weekdayText = listOf("Monday")
+            setWeekdayText(listOf("Monday"))
         }
 
         assertEquals(
             listOf(
                 period {
-                    close = TimeOfWeek.newInstance(
-                        DayOfWeek.MONDAY,
-                        LocalTime.newInstance(0, 0)
+                    setClose(
+                        TimeOfWeek.newInstance(
+                            DayOfWeek.MONDAY,
+                            LocalTime.newInstance(0, 0)
+                        )
                     )
                 }
             ),

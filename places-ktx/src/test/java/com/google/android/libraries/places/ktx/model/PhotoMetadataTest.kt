@@ -31,9 +31,9 @@ class PhotoMetadataTest {
     @Test
     fun testBuilderWithActions() {
         val photoMetadata = photoMetadata("reference") {
-            attributions = "attributions"
-            width = 100
-            height = 100
+            setAttributions("attributions")
+            setWidth(100)
+            setHeight(100)
         }
         assertEquals("attributions", photoMetadata.attributions)
         assertEquals(100, photoMetadata.height)

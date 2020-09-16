@@ -31,7 +31,7 @@ class FindCurrentPlaceRequestTest {
     fun testBuilderWithActions() {
         val cancellationToken = CancellationTokenSource().token
         val request = findCurrentPlaceRequest(listOf(Place.Field.NAME)) {
-            this.cancellationToken = cancellationToken
+            setCancellationToken(cancellationToken)
         }
         assertEquals(listOf(Place.Field.NAME), request.placeFields)
         assertEquals(cancellationToken, request.cancellationToken)

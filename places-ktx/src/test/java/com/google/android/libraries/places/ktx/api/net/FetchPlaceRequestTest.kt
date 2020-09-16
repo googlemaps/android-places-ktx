@@ -40,8 +40,8 @@ class FetchPlaceRequestTest {
             "placeId",
             listOf(Place.Field.NAME)
         ) {
-            this.cancellationToken = cancellationToken
-            this.sessionToken = sessionToken
+            setCancellationToken(cancellationToken)
+            setSessionToken(sessionToken)
         }
         assertEquals("placeId", request.placeId)
         assertEquals(listOf(Place.Field.NAME), request.placeFields)
