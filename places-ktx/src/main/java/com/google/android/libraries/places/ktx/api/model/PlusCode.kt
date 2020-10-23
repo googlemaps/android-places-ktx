@@ -23,7 +23,7 @@ import com.google.android.libraries.places.api.model.PlusCode
  *
  * @return the constructed [PlusCode]
  */
-inline fun plusCode(actions: PlusCode.Builder.() -> Unit): PlusCode =
+public inline fun plusCode(actions: PlusCode.Builder.() -> Unit): PlusCode =
     PlusCode.builder()
         .apply(actions)
         .build()

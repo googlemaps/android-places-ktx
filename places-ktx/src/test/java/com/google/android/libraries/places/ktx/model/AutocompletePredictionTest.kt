@@ -5,7 +5,7 @@ import com.google.android.libraries.places.ktx.api.model.autocompletePrediction
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class AutocompletePredictionTest {
+internal class AutocompletePredictionTest {
     @Test
     fun testBuilder() {
         val prediction = autocompletePrediction("placeId") {

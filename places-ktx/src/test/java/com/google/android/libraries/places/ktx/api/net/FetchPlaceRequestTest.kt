@@ -20,7 +20,7 @@ import com.google.android.libraries.places.api.model.Place
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class FetchPlaceRequestTest {
+internal class FetchPlaceRequestTest {
 
     @Test
     fun testBuilderNoActions() {

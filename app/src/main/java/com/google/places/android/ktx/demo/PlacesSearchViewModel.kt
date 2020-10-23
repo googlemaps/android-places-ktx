@@ -23,7 +23,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.model.LocationBias
 import com.google.android.libraries.places.api.model.RectangularBounds
 import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.ktx.api.net.awaitFindAutocompletePredictions
 import com.google.android.libraries.places.ktx.api.net.findAutocompletePredictionsRequest
@@ -68,6 +67,7 @@ class PlacesSearchViewModel @ViewModelInject constructor(
 
             val response = placesClient
                 .awaitFindAutocompletePredictions(request)
+
             _events.value = PlacesSearchEventFound(response.autocompletePredictions)
         }
     }

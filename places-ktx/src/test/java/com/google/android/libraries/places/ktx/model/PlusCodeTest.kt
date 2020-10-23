@@ -18,7 +18,7 @@ import com.google.android.libraries.places.ktx.api.model.plusCode
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class PlusCodeTest {
+internal class PlusCodeTest {
 
     @Test
     fun testBuilder() {

@@ -19,7 +19,7 @@ import com.google.android.libraries.places.api.model.Place
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class FindCurrentPlaceRequestTest {
+internal class FindCurrentPlaceRequestTest {
 
     @Test
     fun testBuilderNoActions() {

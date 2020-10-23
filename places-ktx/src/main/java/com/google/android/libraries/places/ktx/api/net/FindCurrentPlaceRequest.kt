@@ -25,7 +25,7 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
  *
  * @return the constructed [FindCurrentPlaceRequest]
  */
-inline fun findCurrentPlaceRequest(
+public inline fun findCurrentPlaceRequest(
     placeFields: List<Place.Field>,
     noinline actions: (FindCurrentPlaceRequest.Builder.() -> Unit)? = null
 ): FindCurrentPlaceRequest {

@@ -23,7 +23,7 @@ import com.google.android.libraries.places.api.model.Place
  *
  * @return the constructed [Place]
  */
-inline fun place(actions: Place.Builder.() -> Unit): Place =
+public inline fun place(actions: Place.Builder.() -> Unit): Place =
     Place.builder()
         .apply(actions)
         .build()

@@ -23,7 +23,7 @@ import com.google.android.libraries.places.api.model.OpeningHours
  *
  * @return the constructed [OpeningHours]
  */
-inline fun openingHours(actions: OpeningHours.Builder.() -> Unit): OpeningHours =
+public inline fun openingHours(actions: OpeningHours.Builder.() -> Unit): OpeningHours =
     OpeningHours.builder()
         .apply(actions)
         .build()

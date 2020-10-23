@@ -26,7 +26,7 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
  *
  * @return the constructed [FetchPlaceRequest]
  */
-inline fun fetchPlaceRequest(
+public inline fun fetchPlaceRequest(
     placeId: String,
     placeFields: List<Place.Field>,
     noinline actions: (FetchPlaceRequest.Builder.() -> Unit)? = null

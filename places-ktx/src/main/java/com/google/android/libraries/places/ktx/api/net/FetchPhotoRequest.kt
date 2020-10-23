@@ -25,7 +25,7 @@ import com.google.android.libraries.places.api.net.FetchPhotoRequest
  *
  * @return the constructed [FetchPhotoRequest]
  */
-inline fun fetchPhotoRequest(
+public inline fun fetchPhotoRequest(
     photoMetadata: PhotoMetadata,
     noinline actions: (FetchPhotoRequest.Builder.() -> Unit)? = null
 ): FetchPhotoRequest {

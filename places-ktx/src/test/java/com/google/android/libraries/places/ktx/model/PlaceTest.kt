@@ -20,7 +20,7 @@ import com.google.android.libraries.places.ktx.api.model.place
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class PlaceTest {
+internal class PlaceTest {
 
     @Test
     fun testBuilder() {
@@ -29,7 +29,7 @@ class PlaceTest {
             setAddressComponents(AddressComponents.newInstance(
                 listOf(
                     addressComponent("Main Street", listOf("street_address")) {
-                        setShortName("Main St.")
+                        shortName = "Main St."
                     }
                 )
             ))
@@ -38,7 +38,7 @@ class PlaceTest {
         assertEquals(AddressComponents.newInstance(
             listOf(
                 addressComponent("Main Street", listOf("street_address")) {
-                    setShortName("Main St.")
+                    shortName = "Main St."
                 }
             )
         ), place.addressComponents)

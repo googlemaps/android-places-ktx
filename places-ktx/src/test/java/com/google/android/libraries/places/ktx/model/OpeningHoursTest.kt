@@ -22,36 +22,30 @@ import com.google.android.libraries.places.ktx.api.model.period
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class OpeningHoursTest {
+internal class OpeningHoursTest {
 
     @Test
     fun testBuilder() {
 
         val openingHours = openingHours {
-            setPeriods(
-                listOf(
-                    period {
-                        setClose(
-                            TimeOfWeek.newInstance(
-                                DayOfWeek.MONDAY,
-                                LocalTime.newInstance(0, 0)
-                            )
-                        )
-                    }
-                )
-            )
+            setPeriods(listOf(
+                period {
+                    setClose(TimeOfWeek.newInstance(
+                        DayOfWeek.MONDAY,
+                        LocalTime.newInstance(0, 0)
+                    ))
+                }
+            ))
             setWeekdayText(listOf("Monday"))
         }
 
         assertEquals(
             listOf(
                 period {
-                    setClose(
-                        TimeOfWeek.newInstance(
-                            DayOfWeek.MONDAY,
-                            LocalTime.newInstance(0, 0)
-                        )
-                    )
+                    setClose(TimeOfWeek.newInstance(
+                        DayOfWeek.MONDAY,
+                        LocalTime.newInstance(0, 0)
+                    ))
                 }
             ),
             openingHours.periods

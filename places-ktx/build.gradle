@@ -30,6 +30,10 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
+    kotlinOptions {
+        freeCompilerArgs += '-Xexplicit-api=strict'
+    }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }

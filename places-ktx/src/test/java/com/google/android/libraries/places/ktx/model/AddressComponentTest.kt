@@ -18,7 +18,7 @@ import com.google.android.libraries.places.ktx.api.model.addressComponent
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class AddressComponentTest {
+internal class AddressComponentTest {
 
     @Test
     fun testBuilderNoShortName() {
@@ -36,7 +36,7 @@ class AddressComponentTest {
             "Main Street",
             listOf("street_address")
         ) {
-            setShortName("Main St.")
+            shortName = "Main St."
         }
         assertEquals("Main Street", component.name)
         assertEquals("Main St.", component.shortName)

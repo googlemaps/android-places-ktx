@@ -21,7 +21,7 @@ import com.google.android.libraries.places.api.model.TypeFilter
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class FindAutocompletePredictionsRequestTest {
+internal class FindAutocompletePredictionsRequestTest {
 
     @Test
     fun testBuilder() {

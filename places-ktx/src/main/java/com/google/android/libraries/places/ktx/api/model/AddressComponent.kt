@@ -28,7 +28,7 @@ import com.google.android.libraries.places.api.model.AddressComponent
  *
  * @return the constructed [AddressComponent]
  */
-inline fun addressComponent(
+public inline fun addressComponent(
     name: String,
     types: List<String>,
     noinline actions: (AddressComponent.Builder.() -> Unit)? = null

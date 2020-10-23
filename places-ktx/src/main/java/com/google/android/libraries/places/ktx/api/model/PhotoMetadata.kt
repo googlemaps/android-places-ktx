@@ -24,7 +24,7 @@ import com.google.android.libraries.places.api.model.PhotoMetadata
  *
  * @return the constructed [PhotoMetadata]
  */
-inline fun photoMetadata(
+public inline fun photoMetadata(
     photoReference: String,
     noinline actions: (PhotoMetadata.Builder.() -> Unit)? = null
 ): PhotoMetadata {

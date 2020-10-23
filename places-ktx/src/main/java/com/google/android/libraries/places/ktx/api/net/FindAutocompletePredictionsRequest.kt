@@ -23,7 +23,7 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
  *
  * @return the constructed [FindAutocompletePredictionsRequest]
  */
-inline fun findAutocompletePredictionsRequest(
+public inline fun findAutocompletePredictionsRequest(
     actions: FindAutocompletePredictionsRequest.Builder.() -> Unit
 ): FindAutocompletePredictionsRequest =
     FindAutocompletePredictionsRequest.builder()
