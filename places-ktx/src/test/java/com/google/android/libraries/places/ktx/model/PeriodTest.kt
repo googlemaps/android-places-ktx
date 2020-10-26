@@ -21,23 +21,19 @@ import com.google.android.libraries.places.ktx.api.model.period
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class PeriodTest {
+internal class PeriodTest {
 
     @Test
     fun testBuilder() {
         val period = period {
-            setClose(
-                TimeOfWeek.newInstance(
-                    DayOfWeek.MONDAY,
-                    LocalTime.newInstance(0, 0)
-                )
-            )
-            setOpen(
-                TimeOfWeek.newInstance(
-                    DayOfWeek.TUESDAY,
-                    LocalTime.newInstance(0, 0)
-                )
-            )
+            setClose(TimeOfWeek.newInstance(
+                DayOfWeek.MONDAY,
+                LocalTime.newInstance(0, 0)
+            ))
+            setOpen(TimeOfWeek.newInstance(
+                DayOfWeek.TUESDAY,
+                LocalTime.newInstance(0, 0)
+            ))
         }
         assertEquals(
             TimeOfWeek.newInstance(

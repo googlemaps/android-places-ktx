@@ -19,7 +19,7 @@ import com.google.android.libraries.places.ktx.api.model.photoMetadata
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class FetchPhotoRequestTest {
+internal class FetchPhotoRequestTest {
 
     @Test
     fun testBuilderNoActions() {

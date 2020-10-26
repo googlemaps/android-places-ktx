@@ -23,7 +23,7 @@ import com.google.android.libraries.places.api.model.Period
  *
  * @return the constructed [Period]
  */
-inline fun period(actions: Period.Builder.() -> Unit): Period =
+public inline fun period(actions: Period.Builder.() -> Unit): Period =
     Period.builder()
         .apply(actions)
         .build()

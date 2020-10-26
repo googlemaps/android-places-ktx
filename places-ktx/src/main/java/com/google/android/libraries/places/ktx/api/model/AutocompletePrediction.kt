@@ -10,7 +10,7 @@ import com.google.android.libraries.places.api.model.AutocompletePrediction
  *
  * @return the constructed [AutocompletePrediction]
  */
-inline fun autocompletePrediction(
+public inline fun autocompletePrediction(
     placeId: String,
     noinline actions: (AutocompletePrediction.Builder.() -> Unit)? = null
 ): AutocompletePrediction {

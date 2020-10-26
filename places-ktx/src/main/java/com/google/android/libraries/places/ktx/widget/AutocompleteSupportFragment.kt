@@ -24,11 +24,11 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-sealed class PlaceSelectionResult
+public sealed class PlaceSelectionResult
 
-data class PlaceSelectionSuccess(val place: Place) : PlaceSelectionResult()
+public data class PlaceSelectionSuccess(val place: Place) : PlaceSelectionResult()
 
-data class PlaceSelectionError(val status: Status) : PlaceSelectionResult()
+public data class PlaceSelectionError(val status: Status) : PlaceSelectionResult()
 
 // Since offer() can throw when the channel is closed (channel can close before the
 // block within awaitClose), wrap `offer` calls inside `runCatching`.
@@ -38,7 +38,7 @@ private fun <E> SendChannel<E>.offerCatching(element: E): Boolean {
 }
 
 @ExperimentalCoroutinesApi
-fun AutocompleteSupportFragment.placeSelectionEvents() : Flow<PlaceSelectionResult> =
+public fun AutocompleteSupportFragment.placeSelectionEvents() : Flow<PlaceSelectionResult> =
     callbackFlow {
         this@placeSelectionEvents.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {

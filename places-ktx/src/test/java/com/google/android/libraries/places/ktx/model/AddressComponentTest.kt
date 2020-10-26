@@ -18,7 +18,7 @@ import com.google.android.libraries.places.ktx.api.model.addressComponent
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class AddressComponentTest {
+internal class AddressComponentTest {
 
     @Test
     fun testBuilderNoShortName() {

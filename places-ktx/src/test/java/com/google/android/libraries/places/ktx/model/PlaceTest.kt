@@ -20,7 +20,7 @@ import com.google.android.libraries.places.ktx.api.model.place
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class PlaceTest {
+internal class PlaceTest {
 
     @Test
     fun testBuilder() {

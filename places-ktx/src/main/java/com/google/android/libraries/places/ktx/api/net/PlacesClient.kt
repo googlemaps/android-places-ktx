@@ -32,7 +32,7 @@ import kotlinx.coroutines.tasks.await
  *
  * Fetches a photo. If an error occurred, an [ApiException] will be thrown.
  */
-suspend fun PlacesClient.awaitFetchPhoto(request: FetchPhotoRequest): FetchPhotoResponse =
+public suspend fun PlacesClient.awaitFetchPhoto(request: FetchPhotoRequest): FetchPhotoResponse =
     this.fetchPhoto(request).await()
 
 /**
@@ -40,7 +40,7 @@ suspend fun PlacesClient.awaitFetchPhoto(request: FetchPhotoRequest): FetchPhoto
  *
  * Fetches the details of a place. If an error occurred, an [ApiException] will be thrown.
  */
-suspend fun PlacesClient.awaitFetchPlace(request: FetchPlaceRequest): FetchPlaceResponse =
+public suspend fun PlacesClient.awaitFetchPlace(request: FetchPlaceRequest): FetchPlaceResponse =
     this.fetchPlace(request).await()
 
 /**
@@ -48,7 +48,7 @@ suspend fun PlacesClient.awaitFetchPlace(request: FetchPlaceRequest): FetchPlace
  *
  * Fetches autocomplete predictions. If an error occurred, an [ApiException] will be thrown.
  */
-suspend fun PlacesClient.awaitFindAutocompletePredictions(
+public suspend fun PlacesClient.awaitFindAutocompletePredictions(
     request: FindAutocompletePredictionsRequest
 ): FindAutocompletePredictionsResponse =
     this.findAutocompletePredictions(request).await()
@@ -63,7 +63,7 @@ suspend fun PlacesClient.awaitFindAutocompletePredictions(
 @RequiresPermission(
     allOf = ["android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_WIFI_STATE"]
 )
-suspend fun PlacesClient.awaitFindCurrentPlace(
+public suspend fun PlacesClient.awaitFindCurrentPlace(
     request: FindCurrentPlaceRequest
 ): FindCurrentPlaceResponse =
     this.findCurrentPlace(request).await()
