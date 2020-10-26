@@ -29,7 +29,7 @@ internal class PlaceTest {
             setAddressComponents(AddressComponents.newInstance(
                 listOf(
                     addressComponent("Main Street", listOf("street_address")) {
-                        shortName = "Main St."
+                        setShortName("Main St.")
                     }
                 )
             ))
@@ -38,7 +38,7 @@ internal class PlaceTest {
         assertEquals(AddressComponents.newInstance(
             listOf(
                 addressComponent("Main Street", listOf("street_address")) {
-                    shortName = "Main St."
+                    setShortName("Main St.")
                 }
             )
         ), place.addressComponents)

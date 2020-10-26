@@ -36,7 +36,7 @@ internal class AddressComponentTest {
             "Main Street",
             listOf("street_address")
         ) {
-            shortName = "Main St."
+            setShortName("Main St.")
         }
         assertEquals("Main Street", component.name)
         assertEquals("Main St.", component.shortName)
