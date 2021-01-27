@@ -96,9 +96,12 @@ A [demo](app) application is contained within this repository that illustrates t
 To run the demo app, you'll have to:
 
 1. [Get a Places API key][api-key]
-2. Create a file in the root directory called `secure.properties` (this file should *NOT* be under version control to protect your API key)
-3. Add a single line to `secure.properties` that looks like `PLACES_API_KEY="YOUR_API_KEY"`, where `YOUR_API_KEY` is the API key you obtained in the first step. You can also take a look at the [secure.properties.template](secure.properties.template) as an example.
-4. Build and run
+2. Update the `local.properties` file in your root directory called (Note: this file should *NOT* be
+under version control to protect your API key) and add a single line to `local.properties` that
+looks like `PLACES_API_KEY="YOUR_API_KEY"`, where `YOUR_API_KEY` is the API key you obtained in
+the first step. You can also take a look at the [local.defaults.properties](local.defaults.properties)
+as an example.
+3. Build and run
 
 ## Documentation
 

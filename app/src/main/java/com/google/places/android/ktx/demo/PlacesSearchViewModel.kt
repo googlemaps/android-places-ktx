@@ -14,7 +14,6 @@
 
 package com.google.places.android.ktx.demo
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,12 +25,15 @@ import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.ktx.api.net.awaitFindAutocompletePredictions
 import com.google.android.libraries.places.ktx.api.net.findAutocompletePredictionsRequest
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PlacesSearchViewModel @ViewModelInject constructor(
+@HiltViewModel
+class PlacesSearchViewModel @Inject constructor(
     private val placesClient: PlacesClient
 ) : ViewModel() {
     private val _events = MutableLiveData<PlacesSearchEvent>()
