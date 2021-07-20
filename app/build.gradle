@@ -23,13 +23,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion versions.android.compileSdk
-    buildToolsVersion versions.android.buildTools
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.google.maps.android.ktx.demo"
-        minSdkVersion versions.android.minSdk
-        targetSdkVersion versions.android.targetSdk
+        minSdkVersion 16
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
     }
@@ -53,19 +52,19 @@ android {
 }
 
 dependencies {
-    implementation deps.androidx.appcompat
-    implementation deps.androidx.coreKtx
-    implementation deps.kotlin
-    implementation deps.places
-    implementation deps.playServices.maps
+    implementation "androidx.appcompat:appcompat:1.3.0"
+    implementation "androidx.core:core-ktx:1.6.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.21"
+    api "com.google.android.libraries.places:places:2.4.0"
+    implementation "com.google.android.gms:play-services-maps:17.0.1"
     implementation "androidx.fragment:fragment-ktx:1.3.5"
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
     implementation 'com.android.volley:volley:1.2.0'
 
     // Hilt
-    implementation deps.hilt.android
-    kapt deps.hilt.androidCompiler
+    implementation "com.google.dagger:hilt-android:2.37"
+    kapt "com.google.dagger:hilt-android-compiler:2.37"
 
     implementation project(':places-ktx')
 }
