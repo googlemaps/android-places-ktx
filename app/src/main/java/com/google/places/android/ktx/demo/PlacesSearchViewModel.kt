@@ -27,6 +27,7 @@ import com.google.android.libraries.places.ktx.api.net.awaitFindAutocompletePred
 import com.google.android.libraries.places.ktx.api.net.findAutocompletePredictionsRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -41,6 +42,7 @@ class PlacesSearchViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun onSearchQueryChanged(query: String) {
         searchJob?.cancel()
 
@@ -60,15 +62,13 @@ class PlacesSearchViewModel @Inject constructor(
                 LatLng(37.808300, -122.391338) // NE lat, lng
             )
 
-            val request = findAutocompletePredictionsRequest {
-                locationBias = bias
-                typeFilter = TypeFilter.ESTABLISHMENT
-                this.query = query
-                countries = listOf("US")
-            }
-
             val response = placesClient
-                .awaitFindAutocompletePredictions(request)
+                .awaitFindAutocompletePredictions {
+                    locationBias = bias
+                    typeFilter = TypeFilter.ESTABLISHMENT
+                    this.query = query
+                    countries = listOf("US")
+                }
 
             _events.value = PlacesSearchEventFound(response.autocompletePredictions)
         }

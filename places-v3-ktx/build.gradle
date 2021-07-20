@@ -2,12 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion versions.android.compileSdk
-    buildToolsVersion versions.android.buildTools
+    compileSdkVersion 30
 
     defaultConfig {
-        minSdkVersion versions.android.minSdk
-        targetSdkVersion versions.android.targetSdk
+        minSdkVersion 16
+        targetSdkVersion 30
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
@@ -22,20 +21,20 @@ android {
 }
 
 dependencies {
-    implementation deps.kotlin
-    implementation deps.kotlinxCoroutines.android
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.21"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "com.android.volley:volley:1.2.0"
-    api deps.kotlinxCoroutines.playServices
-    api deps.mapsBeta
-    api deps.playServices.gcm
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.1"
+    api "com.google.android.libraries.maps:maps:3.1.0-beta"
+    api "com.google.android.gms:play-services-gcm:17.0.0"
     api name:'places-maps-sdk-3.1.0-beta', ext:'aar'
     api 'com.google.auto.value:auto-value-annotations:1.7.3'
 
     // Tests
-    testImplementation deps.androidx.test
-    testImplementation deps.androidx.junit
-    testImplementation deps.junit
-    testImplementation deps.mockito
-    testImplementation deps.mockitoKotlin
+    testImplementation "androidx.test.ext:junit:1.1.3"
+    testImplementation "androidx.test:core:1.4.0"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "org.mockito:mockito-core:3.0.0"
 }

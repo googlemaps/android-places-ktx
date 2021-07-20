@@ -16,6 +16,10 @@ package com.google.android.libraries.places.ktx.api.net
 
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.libraries.places.api.model.PhotoMetadata
+import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPhotoResponse
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
@@ -25,6 +29,8 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.libraries.places.ktx.api.model.photoMetadata
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.tasks.await
 
 /**
@@ -32,26 +38,55 @@ import kotlinx.coroutines.tasks.await
  *
  * Fetches a photo. If an error occurred, an [ApiException] will be thrown.
  */
-public suspend fun PlacesClient.awaitFetchPhoto(request: FetchPhotoRequest): FetchPhotoResponse =
-    this.fetchPhoto(request).await()
+@ExperimentalCoroutinesApi
+public suspend fun PlacesClient.awaitFetchPhoto(
+    photoMetadata: PhotoMetadata,
+    actions: FetchPhotoRequest.Builder.() -> Unit
+): FetchPhotoResponse {
+    val cancellationTokenSource = CancellationTokenSource()
+    val request = FetchPhotoRequest.builder(photoMetadata)
+        .setCancellationToken(cancellationTokenSource.token)
+        .apply(actions)
+        .build()
+    return this.fetchPhoto(request)
+        .await(cancellationTokenSource)
+}
 
 /**
  * Wraps [PlacesClient.fetchPlace] in a suspending function.
  *
  * Fetches the details of a place. If an error occurred, an [ApiException] will be thrown.
  */
-public suspend fun PlacesClient.awaitFetchPlace(request: FetchPlaceRequest): FetchPlaceResponse =
-    this.fetchPlace(request).await()
+@ExperimentalCoroutinesApi
+public suspend fun PlacesClient.awaitFetchPlace(
+    placeId: String,
+    placeFields: List<Place.Field>,
+    actions: FetchPlaceRequest.Builder.() -> Unit
+): FetchPlaceResponse {
+    val cancellationTokenSource = CancellationTokenSource()
+    val request = FetchPlaceRequest.builder(placeId, placeFields)
+        .setCancellationToken(cancellationTokenSource.token)
+        .apply(actions)
+        .build()
+    return this.fetchPlace(request).await(cancellationTokenSource)
+}
 
 /**
  * Wraps [PlacesClient.findAutocompletePredictions] in a suspending function.
  *
  * Fetches autocomplete predictions. If an error occurred, an [ApiException] will be thrown.
  */
+@ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitFindAutocompletePredictions(
-    request: FindAutocompletePredictionsRequest
-): FindAutocompletePredictionsResponse =
-    this.findAutocompletePredictions(request).await()
+    actions: FindAutocompletePredictionsRequest.Builder.() -> Unit
+): FindAutocompletePredictionsResponse {
+    val cancellationTokenSource = CancellationTokenSource()
+    val request = FindAutocompletePredictionsRequest.builder()
+        .setCancellationToken(cancellationTokenSource.token)
+        .apply(actions)
+        .build()
+    return this.findAutocompletePredictions(request).await(cancellationTokenSource)
+}
 
 /**
  * Wraps [PlacesClient.findCurrentPlace] in a suspending function.
@@ -63,7 +98,15 @@ public suspend fun PlacesClient.awaitFindAutocompletePredictions(
 @RequiresPermission(
     allOf = ["android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_WIFI_STATE"]
 )
+@ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitFindCurrentPlace(
-    request: FindCurrentPlaceRequest
-): FindCurrentPlaceResponse =
-    this.findCurrentPlace(request).await()
+    placeFields: List<Place.Field>,
+    actions: FindCurrentPlaceRequest.Builder.() -> Unit
+): FindCurrentPlaceResponse {
+    val cancellationTokenSource = CancellationTokenSource()
+    val request = FindCurrentPlaceRequest.builder(placeFields)
+        .setCancellationToken(cancellationTokenSource.token)
+        .apply(actions)
+        .build()
+    return this.findCurrentPlace(request).await(cancellationTokenSource)
+}
