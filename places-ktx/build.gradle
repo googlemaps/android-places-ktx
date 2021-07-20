@@ -17,7 +17,6 @@
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion versions.android.compileSdk
@@ -45,6 +44,7 @@ dependencies {
     implementation deps.kotlin
     implementation deps.kotlinxCoroutines.android
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "com.android.volley:volley:1.2.0"
     api deps.kotlinxCoroutines.playServices
     api deps.places
 
