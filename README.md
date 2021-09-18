@@ -124,7 +124,7 @@ For more information, check out the detailed guide on the
 [code of conduct]: CODE_OF_CONDUCT.md
 [file an issue]: https://github.com/googlemaps/android-places-ktx/issues/new/choose
 [maps-v3-sdk]: https://developers.google.com/maps/documentation/android-sdk/v3-client-migration
-[places-sdk]: https://developers.google.com/places/android-sdk/intro
+[places-sdk]: https://developers.google.com/maps/documentation/places/android-sdk/overview
 [pull request]: https://github.com/googlemaps/android-places-ktx/compare
 [reference documents]: https://googlemaps.github.io/android-places-ktx
 [viewmodel-ktx]: https://developer.android.com/kotlin/ktx#viewmodel
