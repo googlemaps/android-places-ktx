@@ -24,7 +24,7 @@ dependencies {
 }
 ```
 
-Alternatively, if you are using the Places standalone library (for use only with Maps v 3.1.0 beta):
+(Deprecated) ~~Alternatively, if you are using the Places standalone library (for use only with Maps v 3.1.0 beta):~~
 
 ```groovy 
 dependencies {
