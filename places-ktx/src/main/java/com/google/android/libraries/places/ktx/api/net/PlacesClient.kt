@@ -41,7 +41,7 @@ import kotlinx.coroutines.tasks.await
 @ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitFetchPhoto(
     photoMetadata: PhotoMetadata,
-    actions: FetchPhotoRequest.Builder.() -> Unit
+    actions: FetchPhotoRequest.Builder.() -> Unit = {}
 ): FetchPhotoResponse {
     val cancellationTokenSource = CancellationTokenSource()
     val request = FetchPhotoRequest.builder(photoMetadata)
@@ -61,12 +61,10 @@ public suspend fun PlacesClient.awaitFetchPhoto(
 public suspend fun PlacesClient.awaitFetchPlace(
     placeId: String,
     placeFields: List<Place.Field>,
-    actions: FetchPlaceRequest.Builder.() -> Unit
 ): FetchPlaceResponse {
     val cancellationTokenSource = CancellationTokenSource()
     val request = FetchPlaceRequest.builder(placeId, placeFields)
         .setCancellationToken(cancellationTokenSource.token)
-        .apply(actions)
         .build()
     return this.fetchPlace(request).await(cancellationTokenSource)
 }
@@ -100,13 +98,11 @@ public suspend fun PlacesClient.awaitFindAutocompletePredictions(
 )
 @ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitFindCurrentPlace(
-    placeFields: List<Place.Field>,
-    actions: FindCurrentPlaceRequest.Builder.() -> Unit
+    placeFields: List<Place.Field>
 ): FindCurrentPlaceResponse {
     val cancellationTokenSource = CancellationTokenSource()
     val request = FindCurrentPlaceRequest.builder(placeFields)
         .setCancellationToken(cancellationTokenSource.token)
-        .apply(actions)
         .build()
     return this.findCurrentPlace(request).await(cancellationTokenSource)
 }
