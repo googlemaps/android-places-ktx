@@ -26,7 +26,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.37"
         classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.0"
-        classpath 'com.hiya:jacoco-android:0.2'
     }
 }
 
@@ -66,6 +65,7 @@ subprojects { project ->
     apply plugin: 'org.jetbrains.dokka'
     apply plugin: 'com.hiya.jacoco-android'
     apply plugin: 'signing'
+    apply plugin: 'com.hiya.jacoco-android'
 
     // Code coverage
     jacoco {
