@@ -22,7 +22,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.4'
-        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:0.10.1'
+        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.5.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.39"
         classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1"
@@ -77,27 +77,16 @@ subprojects { project ->
         jacoco.excludes = ['jdk.internal.*']
     }
 
-    // Documentation
-    dokka {
-        outputFormat = 'html'
-        outputDirectory = "$buildDir/documentation"
-        configuration {
-            includeNonPublic = false
-            skipEmptyPackages = true
-            skipDeprecated = true
-            reportUndocumented = true
-            jdkVersion = 8
-        }
-    }
-
     task sourcesJar(type: Jar) {
         from android.sourceSets.main.java.source
         archiveClassifier = "sources"
     }
 
-    task dokkaJar(type: Jar, dependsOn: dokka) {
-        from dokka.outputDirectory
-        archiveClassifier = "javadoc"
+    task javadocJar(type: Jar) {
+        dependsOn(tasks.named("dokkaHtml"))
+        dependsOn(tasks.named("dokkaJavadoc"))
+        archiveClassifier.set("javadoc")
+        from new File(buildDir, "dokka/javadoc")
     }
 
     publishing {
@@ -149,7 +138,7 @@ subprojects { project ->
 
                 afterEvaluate {
                     artifact "$buildDir/outputs/aar/$project.name-release.aar"
-                    artifact dokkaJar
+                    artifact javadocJar
                     artifact sourcesJar
                 }
             }
