@@ -80,17 +80,16 @@ class PlacesSearchViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun onAutocompletePredictionClicked(prediction: AutocompletePrediction) {
-        viewModelScope.launch {
-            try {
-                val place = placesClient.awaitFetchPlace(
-                    prediction.placeId,
-                    listOf(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.OPENING_HOURS)
-                )
-                Log.d("PlacesSearchViewModel", "Got place $place")
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.e("PlacesSearchViewModel", e.message, e)
-            }
+        val handler = CoroutineExceptionHandler { _, e ->
+            e.printStackTrace()
+            Log.e("PlacesSearchViewModel", e.message, e)
+        }
+        viewModelScope.launch(handler) {
+            val place = placesClient.awaitFetchPlace(
+                prediction.placeId,
+                listOf(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.OPENING_HOURS)
+            )
+            Log.d("PlacesSearchViewModel", "Got place $place")
         }
     }
 }
