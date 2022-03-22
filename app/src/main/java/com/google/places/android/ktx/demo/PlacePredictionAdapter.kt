@@ -44,12 +44,13 @@ class PlacePredictionAdapter : RecyclerView.Adapter<PlacePredictionAdapter.Place
         }
     }
 
+
     override fun getItemCount(): Int =
         predictions.size
 
-    fun setPredictions(predictions: List<AutocompletePrediction>?) {
+    fun setPredictions(predictions: List<AutocompletePrediction>) {
         this.predictions.clear()
-        this.predictions.addAll(predictions!!)
+        this.predictions.addAll(predictions)
         notifyDataSetChanged()
     }
 
@@ -61,9 +62,5 @@ class PlacePredictionAdapter : RecyclerView.Adapter<PlacePredictionAdapter.Place
             title.text = prediction.getPrimaryText(null)
             address.text = prediction.getSecondaryText(null)
         }
-    }
-
-    interface OnPlaceClickListener {
-        fun onPlaceClicked(place: AutocompletePrediction)
     }
 }

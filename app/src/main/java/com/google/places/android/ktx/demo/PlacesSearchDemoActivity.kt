@@ -21,7 +21,6 @@ import android.widget.SearchView
 import android.widget.ViewAnimator
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,11 +30,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class PlacesSearchDemoActivity : AppCompatActivity() {
 
     private val viewAnimator: ViewAnimator by lazy {
-        findViewById<ViewAnimator>(R.id.view_animator)
+        findViewById(R.id.view_animator)
     }
 
     private val progressBar: ProgressBar by lazy {
-        findViewById<ProgressBar>(R.id.progress_bar)
+        findViewById(R.id.progress_bar)
     }
 
     private val adapter = PlacePredictionAdapter()
@@ -46,8 +45,11 @@ class PlacesSearchDemoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_places_search)
         setSupportActionBar(findViewById(R.id.toolbar))
         initRecyclerView()
-        viewModel.events.observe(this, Observer { event ->
-            when(event) {
+        adapter.onPlaceClickListener = { prediction ->
+            viewModel.onAutocompletePredictionClicked(prediction)
+        }
+        viewModel.events.observe(this) { event ->
+            when (event) {
                 is PlacesSearchEventLoading -> {
                     progressBar.isIndeterminate = true
                 }
@@ -61,7 +63,7 @@ class PlacesSearchDemoActivity : AppCompatActivity() {
                     viewAnimator.displayedChild = if (event.places.isEmpty()) 0 else 1
                 }
             }
-        })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

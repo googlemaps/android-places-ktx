@@ -14,23 +14,27 @@
 
 package com.google.places.android.ktx.demo
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.android.libraries.places.api.model.LocationBias
+import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.RectangularBounds
 import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.libraries.places.ktx.api.net.awaitFetchPlace
 import com.google.android.libraries.places.ktx.api.net.awaitFindAutocompletePredictions
-import com.google.android.libraries.places.ktx.api.net.findAutocompletePredictionsRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -71,6 +75,26 @@ class PlacesSearchViewModel @Inject constructor(
                 }
 
             _events.value = PlacesSearchEventFound(response.autocompletePredictions)
+        }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun onAutocompletePredictionClicked(prediction: AutocompletePrediction) {
+        val handler = CoroutineExceptionHandler { _, e ->
+            e.printStackTrace()
+            Log.e("PlacesSearchViewModel", e.message, e)
+        }
+        viewModelScope.launch(handler) {
+            val place = placesClient.awaitFetchPlace(
+                prediction.placeId,
+                listOf(
+                    Place.Field.NAME,
+                    Place.Field.ADDRESS,
+                    Place.Field.LAT_LNG,
+                    Place.Field.BUSINESS_STATUS
+                )
+            )
+            Log.d("PlacesSearchViewModel", "Got place $place")
         }
     }
 }
