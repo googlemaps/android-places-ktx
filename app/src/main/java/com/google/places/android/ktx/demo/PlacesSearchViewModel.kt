@@ -87,7 +87,12 @@ class PlacesSearchViewModel @Inject constructor(
         viewModelScope.launch(handler) {
             val place = placesClient.awaitFetchPlace(
                 prediction.placeId,
-                listOf(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.OPENING_HOURS)
+                listOf(
+                    Place.Field.NAME,
+                    Place.Field.ADDRESS,
+                    Place.Field.LAT_LNG,
+                    Place.Field.BUSINESS_STATUS
+                )
             )
             Log.d("PlacesSearchViewModel", "Got place $place")
         }
