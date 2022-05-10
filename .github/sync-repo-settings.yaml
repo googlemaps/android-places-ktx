@@ -7,7 +7,7 @@ branchProtectionRules:
   requiredStatusCheckContexts:
     - 'cla/google'
     - 'test'
-    - 'snippet-bot-check'
+    - 'snippet-bot check'
     - 'header-check'
   requiredApprovingReviewCount: 1
   requiresCodeOwnerReviews: true
