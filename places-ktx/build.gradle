@@ -46,7 +46,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
     implementation "com.android.volley:volley:1.2.1"
     implementation 'androidx.multidex:multidex:2.0.1'
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.0-native-mt"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.3-native-mt"
     api "com.google.android.libraries.places:places:2.5.0"
 
     // Tests
