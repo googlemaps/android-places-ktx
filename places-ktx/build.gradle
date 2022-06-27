@@ -42,7 +42,7 @@ preBuild.dependsOn(rootProject.tasks.copyGmsToV3Beta)
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.21"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1-native-mt"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3-native-mt"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
     implementation "com.android.volley:volley:1.2.1"
     implementation 'androidx.multidex:multidex:2.0.1'
