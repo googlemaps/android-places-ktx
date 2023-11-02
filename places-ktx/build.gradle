@@ -46,7 +46,7 @@ dependencies {
     implementation "com.android.volley:volley:1.2.1"
     implementation 'androidx.multidex:multidex:2.0.1'
     api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.0-native-mt"
-    api "com.google.android.libraries.places:places:2.5.0"
+    api "com.google.android.libraries.places:places:3.2.0"
 
     // Tests
     testImplementation "androidx.test.ext:junit:1.1.3"

@@ -45,7 +45,7 @@ val bias = RectangularBounds.newInstance(
 val newRequest = FindAutocompletePredictionsRequest
     .builder()
     .setLocationBias(bias)
-    .setTypeFilter(TypeFilter.ESTABLISHMENT)
+    .setTypesFilter(listOf(PlaceTypes.ESTABLISHMENT))
     .setQuery("123 Main Street")
     .setCountries("IN")
     .build()
@@ -73,7 +73,7 @@ viewModelScope.launch(handler) {
     // Create a new programmatic Place Autocomplete request in Places SDK for Android using DSL
     val request = findAutocompletePredictionsRequest {
         locationBias = bias
-        typeFilter = TypeFilter.ESTABLISHMENT
+        typesFilter = listOf(PlaceTypes.ESTABLISHMENT)
         query = "123 Main Street"
         countries = listOf("US")
     }
