@@ -15,8 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.androdi.com/tools"
-    package="com.google.places.android.ktx.demo">
+    xmlns:tools="http://schemas.androdi.com/tools" >
 
     <!-- Remove ACCESS_FINE_LOCATION from the merged manifest since this sample does not use
     `PlacesClient.findCurrentPlace()` -->

@@ -31,7 +31,7 @@ buildscript {
 }
 
 ext.projectArtifactId = { project ->
-    if (project.name == 'places-ktx' || project.name == 'places-v3-ktx') {
+    if (project.name == 'places-ktx') {
         return project.name
     } else {
         return null
@@ -163,17 +163,4 @@ subprojects { project ->
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-
-/**
- * This task will copy all of the source code in this module into the `places-v3-ktx` module
- * and change its imports from the Maps SDK on Play Services to the Standalone V3 Beta Maps SDK.
- */
-task copyGmsToV3Beta(type: Copy) {
-    from 'places-ktx/src'
-    into 'places-v3-ktx/src'
-    filter { line ->
-        line.replace('com.google.android.gms.maps', 'com.google.android.libraries.maps')
-    }
 }

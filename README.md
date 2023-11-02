@@ -12,7 +12,10 @@ This repository contains Kotlin extensions (KTX) for:
 It enables you to write more concise, idiomatic Kotlin.
 
 ## Requirements
-* API level 16+
+* Kotlin-enabled project
+* Kotlin coroutines
+* API level 21+
+* An [API key](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
 
 ## Installation
 
@@ -21,14 +24,6 @@ If you are using the Places SDK through Google Play Services:
 ```groovy
 dependencies {
     implementation 'com.google.maps.android:places-ktx:2.0.0'
-}
-```
-
-(Deprecated) ~~Alternatively, if you are using the Places standalone library (for use only with Maps v 3.1.0 beta):~~
-
-```groovy 
-dependencies {
-    implementation 'com.google.maps.android:places-v3-ktx:2.0.0'
 }
 ```
 
@@ -123,7 +118,6 @@ For more information, check out the detailed guide on the
 [Discord channel]: https://discord.gg/hYsWbmk
 [code of conduct]: CODE_OF_CONDUCT.md
 [file an issue]: https://github.com/googlemaps/android-places-ktx/issues/new/choose
-[maps-v3-sdk]: https://developers.google.com/maps/documentation/android-sdk/v3-client-migration
 [places-sdk]: https://developers.google.com/maps/documentation/places/android-sdk/overview
 [pull request]: https://github.com/googlemaps/android-places-ktx/compare
 [reference documents]: https://googlemaps.github.io/android-places-ktx

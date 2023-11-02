@@ -1,4 +1,3 @@
 include ':app'
 include ':places-ktx'
-include ':places-v3-ktx'
 rootProject.name = "android-places-ktx"
