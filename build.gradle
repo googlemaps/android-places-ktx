@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Google Inc.
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,9 @@ buildscript {
         classpath 'com.android.tools.build:gradle:7.4.2'
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.5.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.40.1"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.48"
         classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1"
-        classpath 'com.hiya:jacoco-android:0.2'
+        classpath 'com.mxalbert.gradle:jacoco-android:0.2.1'
     }
 }
 
@@ -64,7 +64,7 @@ subprojects { project ->
     apply plugin: 'com.android.library'
     apply plugin: 'maven-publish'
     apply plugin: 'org.jetbrains.dokka'
-    apply plugin: 'com.hiya.jacoco-android'
+    apply plugin: 'com.mxalbert.gradle.jacoco-android'
     apply plugin: 'signing'
 
     // Code coverage
