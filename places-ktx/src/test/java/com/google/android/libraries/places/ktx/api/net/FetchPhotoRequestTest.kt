@@ -33,8 +33,8 @@ internal class FetchPhotoRequestTest {
         val photoMetadata = photoMetadata("reference")
         val cancellationToken = CancellationTokenSource().token
         val request = fetchPhotoRequest(photoMetadata) {
-            setMaxHeight(100)
-            setMaxWidth(100)
+            maxHeight = 100
+            maxWidth = 100
             setCancellationToken(cancellationToken)
         }
         assertEquals(photoMetadata, request.photoMetadata)

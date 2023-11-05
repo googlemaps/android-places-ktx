@@ -26,14 +26,14 @@ internal class PeriodTest {
     @Test
     fun testBuilder() {
         val period = period {
-            setClose(TimeOfWeek.newInstance(
+            close = TimeOfWeek.newInstance(
                 DayOfWeek.MONDAY,
                 LocalTime.newInstance(0, 0)
-            ))
-            setOpen(TimeOfWeek.newInstance(
+            )
+            open = TimeOfWeek.newInstance(
                 DayOfWeek.TUESDAY,
                 LocalTime.newInstance(0, 0)
-            ))
+            )
         }
         assertEquals(
             TimeOfWeek.newInstance(

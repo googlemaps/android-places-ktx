@@ -9,7 +9,7 @@ internal class AutocompletePredictionTest {
     @Test
     fun testBuilder() {
         val prediction = autocompletePrediction("placeId") {
-            setPlaceTypes(listOf(Place.Type.AQUARIUM))
+            placeTypes = listOf(Place.Type.AQUARIUM)
         }
         val res = prediction.getPrimaryText(null)
         assertEquals("placeId", prediction.placeId)

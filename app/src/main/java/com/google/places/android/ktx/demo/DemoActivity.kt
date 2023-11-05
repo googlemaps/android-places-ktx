@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -63,9 +63,9 @@ class DemoActivity : AppCompatActivity() {
 
     private class DemoItemView(context: Context) : LinearLayout(context) {
 
-        val title: TextView by lazy { findViewById<TextView>(R.id.textViewTitle) }
+        val title: TextView by lazy { findViewById(R.id.textViewTitle) }
 
-        val description: TextView by lazy { findViewById<TextView>(R.id.textViewDescription) }
+        val description: TextView by lazy { findViewById(R.id.textViewDescription) }
 
         init {
             LayoutInflater.from(context)

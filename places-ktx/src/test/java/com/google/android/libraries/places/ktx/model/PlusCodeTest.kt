@@ -23,8 +23,8 @@ internal class PlusCodeTest {
     @Test
     fun testBuilder() {
         val plusCode = plusCode {
-            setCompoundCode("ABC")
-            setGlobalCode("DEF")
+            compoundCode = "ABC"
+            globalCode = "DEF"
         }
         assertEquals("ABC", plusCode.compoundCode)
         assertEquals("DEF", plusCode.globalCode)
