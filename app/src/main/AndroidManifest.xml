@@ -15,7 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.androdi.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <!-- Remove ACCESS_FINE_LOCATION from the merged manifest since this sample does not use
     `PlacesClient.findCurrentPlace()` -->
