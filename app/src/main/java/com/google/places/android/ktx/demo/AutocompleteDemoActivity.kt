@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.google.android.libraries.places.ktx.widget.PlaceSelectionSuccess
 import com.google.android.libraries.places.ktx.widget.placeSelectionEvents
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class AutocompleteDemoActivity : AppCompatActivity() {
 
@@ -41,7 +41,7 @@ class AutocompleteDemoActivity : AppCompatActivity() {
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
 
         // Listen to place selection events
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             autocompleteFragment.placeSelectionEvents().collect { event ->
                 when (event) {
                     is PlaceSelectionSuccess -> Toast.makeText(

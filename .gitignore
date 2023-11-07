@@ -3,6 +3,7 @@
 *.iml
 build
 local.properties
+secrets.properties
 .classpath
 .project
 project.properties

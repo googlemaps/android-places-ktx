@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Google Inc.
+ * Copyright 2023 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,17 +21,22 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
-        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.5.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.39"
+        classpath 'com.android.tools.build:gradle:8.1.2'
+        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.9.10'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.48"
         classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1"
-        classpath 'com.hiya:jacoco-android:0.2'
+        classpath 'com.mxalbert.gradle:jacoco-android:0.2.1'
     }
 }
 
+plugins {
+    id "org.jetbrains.dokka" version "1.9.10"
+}
+
+
 ext.projectArtifactId = { project ->
-    if (project.name == 'places-ktx' || project.name == 'places-v3-ktx') {
+    if (project.name == 'places-ktx') {
         return project.name
     } else {
         return null
@@ -64,7 +69,7 @@ subprojects { project ->
     apply plugin: 'com.android.library'
     apply plugin: 'maven-publish'
     apply plugin: 'org.jetbrains.dokka'
-    apply plugin: 'com.hiya.jacoco-android'
+    apply plugin: 'com.mxalbert.gradle.jacoco-android'
     apply plugin: 'signing'
 
     // Code coverage
@@ -163,17 +168,4 @@ subprojects { project ->
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-
-/**
- * This task will copy all of the source code in this module into the `places-v3-ktx` module
- * and change its imports from the Maps SDK on Play Services to the Standalone V3 Beta Maps SDK.
- */
-task copyGmsToV3Beta(type: Copy) {
-    from 'places-ktx/src'
-    into 'places-v3-ktx/src'
-    filter { line ->
-        line.replace('com.google.android.gms.maps', 'com.google.android.libraries.maps')
-    }
 }
