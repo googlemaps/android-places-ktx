@@ -13,9 +13,7 @@
 # limitations under the License.
 
 name: Dependabot
-on: 
-  pull_request:
-  workflow_dispatch:
+on: pull_request
 
 permissions:
   contents: write
