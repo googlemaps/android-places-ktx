@@ -28,7 +28,6 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse
 import com.google.android.libraries.places.api.net.PlacesClient
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.tasks.await
 
 /**
@@ -36,7 +35,6 @@ import kotlinx.coroutines.tasks.await
  *
  * Fetches a photo. If an error occurred, an [ApiException] will be thrown.
  */
-@ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitFetchPhoto(
     photoMetadata: PhotoMetadata,
     actions: FetchPhotoRequest.Builder.() -> Unit = {}
@@ -55,7 +53,6 @@ public suspend fun PlacesClient.awaitFetchPhoto(
  *
  * Fetches the details of a place. If an error occurred, an [ApiException] will be thrown.
  */
-@ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitFetchPlace(
     placeId: String,
     placeFields: List<Place.Field>,
@@ -72,7 +69,6 @@ public suspend fun PlacesClient.awaitFetchPlace(
  *
  * Fetches autocomplete predictions. If an error occurred, an [ApiException] will be thrown.
  */
-@ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitFindAutocompletePredictions(
     actions: FindAutocompletePredictionsRequest.Builder.() -> Unit
 ): FindAutocompletePredictionsResponse {
@@ -94,7 +90,6 @@ public suspend fun PlacesClient.awaitFindAutocompletePredictions(
 @RequiresPermission(
     allOf = ["android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_WIFI_STATE"]
 )
-@ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitFindCurrentPlace(
     placeFields: List<Place.Field>
 ): FindCurrentPlaceResponse {

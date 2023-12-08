@@ -23,18 +23,16 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.android.libraries.places.api.model.LocationBias
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.PlaceTypes
 import com.google.android.libraries.places.api.model.RectangularBounds
-import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.ktx.api.net.awaitFetchPlace
 import com.google.android.libraries.places.ktx.api.net.awaitFindAutocompletePredictions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,7 +44,6 @@ class PlacesSearchViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun onSearchQueryChanged(query: String) {
         searchJob?.cancel()
 
@@ -69,7 +66,7 @@ class PlacesSearchViewModel @Inject constructor(
             val response = placesClient
                 .awaitFindAutocompletePredictions {
                     locationBias = bias
-                    typeFilter = TypeFilter.ESTABLISHMENT
+                    typesFilter = listOf(PlaceTypes.ESTABLISHMENT)
                     this.query = query
                     countries = listOf("US")
                 }
@@ -78,7 +75,6 @@ class PlacesSearchViewModel @Inject constructor(
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun onAutocompletePredictionClicked(prediction: AutocompletePrediction) {
         val handler = CoroutineExceptionHandler { _, e ->
             e.printStackTrace()

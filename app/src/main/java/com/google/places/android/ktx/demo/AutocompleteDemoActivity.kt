@@ -23,12 +23,10 @@ import com.google.android.libraries.places.ktx.widget.PlaceSelectionError
 import com.google.android.libraries.places.ktx.widget.PlaceSelectionSuccess
 import com.google.android.libraries.places.ktx.widget.placeSelectionEvents
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
 class AutocompleteDemoActivity : AppCompatActivity() {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_autocomplete)
