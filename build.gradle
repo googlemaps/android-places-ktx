@@ -21,7 +21,7 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.2'
+        classpath 'com.android.tools.build:gradle:8.1.4'
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.9.10'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.48"
@@ -77,17 +77,17 @@ subprojects { project ->
         toolVersion = "0.8.7"
     }
 
-    tasks.withType(Test) {
+    tasks.withType(Test).configureEach {
         jacoco.includeNoLocationClasses = true
         jacoco.excludes = ['jdk.internal.*']
     }
 
-    task sourcesJar(type: Jar) {
+    tasks.register('sourcesJar', Jar) {
         from android.sourceSets.main.java.source
         archiveClassifier = "sources"
     }
 
-    task javadocJar(type: Jar) {
+    tasks.register('javadocJar', Jar) {
         dependsOn(tasks.named("dokkaHtml"))
         dependsOn(tasks.named("dokkaJavadoc"))
         archiveClassifier.set("javadoc")
@@ -166,6 +166,6 @@ subprojects { project ->
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
