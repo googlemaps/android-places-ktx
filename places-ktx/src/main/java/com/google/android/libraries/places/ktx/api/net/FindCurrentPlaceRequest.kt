@@ -25,11 +25,11 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
  *
  * @return the constructed [FindCurrentPlaceRequest]
  */
-public inline fun findCurrentPlaceRequest(
+public fun findCurrentPlaceRequest(
     placeFields: List<Place.Field>,
-    noinline actions: (FindCurrentPlaceRequest.Builder.() -> Unit)? = null
+    actions: (FindCurrentPlaceRequest.Builder.() -> Unit)? = null
 ): FindCurrentPlaceRequest {
-    val request = FindCurrentPlaceRequest.builder(placeFields)
-    actions?.let { request.apply(it) }
-    return request.build()
+    return FindCurrentPlaceRequest.builder(placeFields).also { builder ->
+        actions?.let { builder.apply(it) }
+    }.build()
 }

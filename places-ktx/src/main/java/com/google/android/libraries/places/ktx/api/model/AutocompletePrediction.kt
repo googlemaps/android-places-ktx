@@ -10,11 +10,11 @@ import com.google.android.libraries.places.api.model.AutocompletePrediction
  *
  * @return the constructed [AutocompletePrediction]
  */
-public inline fun autocompletePrediction(
+public fun autocompletePrediction(
     placeId: String,
-    noinline actions: (AutocompletePrediction.Builder.() -> Unit)? = null
+    actions: (AutocompletePrediction.Builder.() -> Unit)? = null
 ): AutocompletePrediction {
-    val builder = AutocompletePrediction.builder(placeId)
-    actions?.let { builder.apply(it) }
-    return builder.build()
+    return AutocompletePrediction.builder(placeId).also { builder ->
+        actions?.let { builder.apply(it) }
+    }.build()
 }

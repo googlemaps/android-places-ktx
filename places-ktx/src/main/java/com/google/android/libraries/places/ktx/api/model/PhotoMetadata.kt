@@ -24,11 +24,11 @@ import com.google.android.libraries.places.api.model.PhotoMetadata
  *
  * @return the constructed [PhotoMetadata]
  */
-public inline fun photoMetadata(
+public fun photoMetadata(
     photoReference: String,
-    noinline actions: (PhotoMetadata.Builder.() -> Unit)? = null
+    actions: (PhotoMetadata.Builder.() -> Unit)? = null
 ): PhotoMetadata {
-    val builder = PhotoMetadata.builder(photoReference)
-    actions?.let { builder.apply(it) }
-    return builder.build()
+    return PhotoMetadata.builder(photoReference).also { builder ->
+        actions?.let { builder.apply(it) }
+    }.build()
 }

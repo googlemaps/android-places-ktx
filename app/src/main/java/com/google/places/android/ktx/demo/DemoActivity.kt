@@ -37,7 +37,7 @@ class DemoActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
-            it.adapter = DemoAdapter(this, Demo.values())
+            it.adapter = DemoAdapter(this, Demo.entries.toTypedArray())
             it.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
                 val demo = parent.adapter.getItem(position) as? Demo
                 demo?.let {
