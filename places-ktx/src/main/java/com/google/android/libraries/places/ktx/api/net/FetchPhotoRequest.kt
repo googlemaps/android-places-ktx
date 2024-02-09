@@ -25,11 +25,11 @@ import com.google.android.libraries.places.api.net.FetchPhotoRequest
  *
  * @return the constructed [FetchPhotoRequest]
  */
-public inline fun fetchPhotoRequest(
+public fun fetchPhotoRequest(
     photoMetadata: PhotoMetadata,
-    noinline actions: (FetchPhotoRequest.Builder.() -> Unit)? = null
+    actions: (FetchPhotoRequest.Builder.() -> Unit)? = null
 ): FetchPhotoRequest {
-    val request = FetchPhotoRequest.builder(photoMetadata)
-    actions?.let { request.apply(it) }
-    return request.build()
+    return FetchPhotoRequest.builder(photoMetadata).also { builder ->
+        actions?.let { builder.apply(it) }
+    }.build()
 }

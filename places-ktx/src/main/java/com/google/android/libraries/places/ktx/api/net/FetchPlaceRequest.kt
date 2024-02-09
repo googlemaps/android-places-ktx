@@ -26,12 +26,12 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
  *
  * @return the constructed [FetchPlaceRequest]
  */
-public inline fun fetchPlaceRequest(
+public fun fetchPlaceRequest(
     placeId: String,
     placeFields: List<Place.Field>,
-    noinline actions: (FetchPlaceRequest.Builder.() -> Unit)? = null
+    actions: (FetchPlaceRequest.Builder.() -> Unit)? = null
 ): FetchPlaceRequest {
-    val request = FetchPlaceRequest.builder(placeId, placeFields)
-    actions?.let { request.apply(it) }
-    return request.build()
+    return FetchPlaceRequest.builder(placeId, placeFields).also { builder ->
+        actions?.let { builder.apply(it) }
+    }.build()
 }

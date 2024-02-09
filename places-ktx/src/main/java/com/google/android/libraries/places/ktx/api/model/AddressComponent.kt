@@ -28,12 +28,12 @@ import com.google.android.libraries.places.api.model.AddressComponent
  *
  * @return the constructed [AddressComponent]
  */
-public inline fun addressComponent(
+public fun addressComponent(
     name: String,
     types: List<String>,
-    noinline actions: (AddressComponent.Builder.() -> Unit)? = null
+    actions: (AddressComponent.Builder.() -> Unit)? = null
 ): AddressComponent {
-    val builder = AddressComponent.builder(name, types)
-    actions?.let { builder.apply(it) }
-    return builder.build()
+    return AddressComponent.builder(name, types).also { builder ->
+        actions?.let { builder.apply(it) }
+    }.build()
 }

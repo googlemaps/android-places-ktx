@@ -28,6 +28,7 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse
+import com.google.android.libraries.places.api.net.IsOpenResponse
 import com.google.android.libraries.places.api.net.PlacesClient
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.tasks.await
@@ -102,4 +103,36 @@ public suspend fun PlacesClient.awaitFindCurrentPlace(
         .setCancellationToken(cancellationTokenSource.token)
         .build()
     return this.findCurrentPlace(request).await(cancellationTokenSource)
+}
+
+/**
+ * Wraps [PlacesClient.isOpen] in a suspending function with the given [Place] object.
+ *
+ * Returns whether or not a place is open. If an error occurred, an [ApiException] will be thrown.
+ */
+@ExperimentalCoroutinesApi
+public suspend fun PlacesClient.awaitIsOpen(
+    place: Place, utcTimeMillis: Long? = null
+): IsOpenResponse {
+    val cancellationTokenSource = CancellationTokenSource()
+    val request = isOpenRequest(place, utcTimeMillis) {
+        cancellationToken = cancellationTokenSource.token
+    }
+    return this.isOpen(request).await(cancellationTokenSource)
+}
+
+/**
+ * Wraps [PlacesClient.isOpen] in a suspending function with the given placeId.
+ *
+ * Returns whether or not a place is open. If an error occurred, an [ApiException] will be thrown.
+ */
+@ExperimentalCoroutinesApi
+public suspend fun PlacesClient.awaitIsOpen(
+    placeId: String,
+    utcTimeMillis: Long? = null,
+): IsOpenResponse {
+    val cancellationTokenSource = CancellationTokenSource()
+    val request =
+        isOpenRequest(placeId, utcTimeMillis) { cancellationToken = cancellationTokenSource.token }
+    return this.isOpen(request).await(cancellationTokenSource)
 }
