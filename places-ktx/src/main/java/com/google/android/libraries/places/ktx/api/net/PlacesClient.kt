@@ -139,11 +139,6 @@ public suspend fun PlacesClient.awaitIsOpen(
     return this.isOpen(request).await(cancellationTokenSource)
 }
 
-/**
- * Wraps [PlacesClient.isOpen] in a suspending function with the given placeId.
- *
- * Returns whether or not a place is open. If an error occurred, an [ApiException] will be thrown.
- */
 @ExperimentalCoroutinesApi
 /**
  * Wraps [PlacesClient.searchByText] in a suspending function.
