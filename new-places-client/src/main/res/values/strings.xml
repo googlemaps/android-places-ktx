@@ -1,0 +1,11 @@
+<resources>
+  <string name="app_name">New Places Client</string>
+  <string name="text_search_label">Text Search</string>
+  <string name="auto_complete_label">Auto Complete</string>
+  <string name="clear_search">Clear search</string>
+  <string name="places_text_search_hint">Places text search</string>
+  <string name="auto_complete_hint">Places autocomplete search</string>
+  <string name="selected_place">Selected place: %1$s</string>
+  <string name="search_action">Search</string>
+  <string name="no_address_found">No address found</string>
+</resources>

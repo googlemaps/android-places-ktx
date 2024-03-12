@@ -17,4 +17,5 @@ public fun autocompletePrediction(
     return AutocompletePrediction.builder(placeId).also { builder ->
         actions?.let { builder.apply(it) }
     }.build()
+    // This is a new function.
 }

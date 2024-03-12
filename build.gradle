@@ -34,7 +34,6 @@ plugins {
     id "org.jetbrains.dokka" version "1.9.10"
 }
 
-
 ext.projectArtifactId = { project ->
     if (project.name == 'places-ktx') {
         return project.name
