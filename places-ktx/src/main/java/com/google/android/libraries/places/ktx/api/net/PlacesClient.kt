@@ -30,6 +30,8 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse
 import com.google.android.libraries.places.api.net.IsOpenResponse
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.libraries.places.api.net.SearchByTextRequest
+import com.google.android.libraries.places.api.net.SearchByTextResponse
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.tasks.await
 
@@ -135,4 +137,26 @@ public suspend fun PlacesClient.awaitIsOpen(
     val request =
         isOpenRequest(placeId, utcTimeMillis) { cancellationToken = cancellationTokenSource.token }
     return this.isOpen(request).await(cancellationTokenSource)
+}
+
+@ExperimentalCoroutinesApi
+/**
+ * Wraps [PlacesClient.searchByText] in a suspending function.
+ *
+ * Fetches the place(s) of interest using a text query. If an error occurred, an [ApiException] will
+ * be thrown.
+ *
+ * Only available with Places SDK for Android (New).
+ */
+public suspend fun PlacesClient.awaitSearchByText(
+    textQuery: String,
+    placeFields: List<Place.Field>,
+    actions: SearchByTextRequest.Builder.() -> Unit = {},
+): SearchByTextResponse {
+    val cancellationTokenSource = CancellationTokenSource()
+    val request = searchByTextRequest(textQuery, placeFields) {
+        actions()
+        cancellationToken = cancellationTokenSource.token
+    }
+    return this.searchByText(request).await(cancellationTokenSource)
 }
