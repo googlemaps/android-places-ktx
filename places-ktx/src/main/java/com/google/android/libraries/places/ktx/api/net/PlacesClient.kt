@@ -145,8 +145,6 @@ public suspend fun PlacesClient.awaitIsOpen(
  *
  * Fetches the place(s) of interest using a text query. If an error occurred, an [ApiException] will
  * be thrown.
- *
- * Only available with Places SDK for Android (New).
  */
 public suspend fun PlacesClient.awaitSearchByText(
     textQuery: String,
