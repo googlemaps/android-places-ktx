@@ -91,7 +91,7 @@ subprojects { project ->
         dependsOn(tasks.named("dokkaHtml"))
         dependsOn(tasks.named("dokkaJavadoc"))
         archiveClassifier.set("javadoc")
-        from new File(layout.buildDirectory, "dokka/javadoc")
+        from new File(buildDir, "dokka/javadoc")
     }
 
     publishing {
