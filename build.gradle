@@ -66,11 +66,11 @@ allprojects {
 subprojects { project ->
     if (project.ext.artifactId == null) return
 
-    apply plugin: 'com.android.library'
-    apply plugin: 'maven-publish'
-    apply plugin: 'org.jetbrains.dokka'
-    apply plugin: 'com.mxalbert.gradle.jacoco-android'
-    apply plugin: 'signing'
+    plugins.apply(libs.plugins.androidLibrary.get().pluginId)
+    plugins.apply(libs.plugins.mavenPublish.get().pluginId)
+    plugins.apply(libs.plugins.dokka.get().pluginId)
+    plugins.apply(libs.plugins.jacocoAndroid.get().pluginId)
+    plugins.apply(libs.plugins.signing.get().pluginId)
 
     // Code coverage
     jacoco {
@@ -91,7 +91,7 @@ subprojects { project ->
         dependsOn(tasks.named("dokkaHtml"))
         dependsOn(tasks.named("dokkaJavadoc"))
         archiveClassifier.set("javadoc")
-        from new File(buildDir, "dokka/javadoc")
+        from new File(layout.buildDirectory, "dokka/javadoc")
     }
 
     publishing {
@@ -167,5 +167,5 @@ subprojects { project ->
 }
 
 tasks.register('clean', Delete) {
-    delete rootProject.buildDir
+    delete rootProject.layout.buildDirectory
 }
