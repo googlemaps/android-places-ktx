@@ -21,12 +21,12 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.4.1'
-        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.9.20'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.51.1"
-        classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1"
-        classpath 'com.mxalbert.gradle:jacoco-android:0.2.1'
+        classpath libs.gradle
+        classpath libs.dokka.gradle.plugin
+        classpath libs.kotlin.gradle.plugin
+        classpath libs.hilt.android.gradle.plugin
+        classpath libs.secrets.gradle.plugin
+        classpath libs.jacoco.android
     }
 }
 

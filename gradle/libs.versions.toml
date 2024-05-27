@@ -5,13 +5,18 @@ androidTargetSdk = "34"
 
 appcompat = "1.6.1"
 coreKtx = "1.13.1"
+dokkaGradlePlugin = "1.9.20"
 fragmentKtx = "1.7.1"
+gradle = "8.4.1"
 hiltAndroid = "2.51.1"
+jacocoAndroid = "0.2.1"
 kotlin = "2.0.0"
+kotlinGradlePlugin = "1.9.24"
 kotlinx-coroutines-core = "1.8.1"
 lifecycle-viewmodel-ktx = "2.8.0"
 material = "1.12.0"
 playServicesMaps = "18.2.0"
+secretsGradlePlugin = "2.0.1"
 truth = "1.4.2"
 volley = "1.2.1"
 multidex = "2.0.1"
@@ -26,14 +31,20 @@ mockito-core = "5.9.0"
 [libraries]
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokkaGradlePlugin" }
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltAndroid" }
+jacoco-android = { module = "com.mxalbert.gradle:jacoco-android", version.ref = "jacocoAndroid" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-core" }
 lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle-viewmodel-ktx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
+secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
 multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
