@@ -1,0 +1,46 @@
+[versions]
+androidCompileSdk = "34"
+androidMinSdk = "21"
+androidTargetSdk = "34"
+
+appcompat = "1.6.1"
+coreKtx = "1.13.1"
+fragmentKtx = "1.7.1"
+hiltAndroid = "2.51.1"
+kotlin = "2.0.0"
+kotlinx-coroutines-core = "1.8.1"
+lifecycle-viewmodel-ktx = "2.8.0"
+material = "1.12.0"
+playServicesMaps = "18.2.0"
+truth = "1.4.2"
+volley = "1.2.1"
+multidex = "2.0.1"
+kotlinx-coroutines-play-services = "1.8.1"
+places = "3.4.0"
+junit-ext = "1.1.5"
+test-core = "1.5.0"
+mockito-kotlin = "2.2.0"
+junit = "4.13.2"
+mockito-core = "5.9.0"
+
+[libraries]
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-core" }
+lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle-viewmodel-ktx" }
+lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
+multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
+kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "kotlinx-coroutines-play-services" }
+places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
+junit-ext = { group = "androidx.test.ext", name = "junit", version.ref = "junit-ext" }
+test-core = { group = "androidx.test", name = "core", version.ref = "test-core" }
+mockito-kotlin = { group = "com.nhaarman.mockitokotlin2", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito-core" }
