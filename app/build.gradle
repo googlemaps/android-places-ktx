@@ -1,5 +1,5 @@
 /**
- * Copyright 2023 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,12 +23,12 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk libs.versions.androidCompileSdk.get().toInteger()
 
     defaultConfig {
         applicationId "com.google.maps.android.ktx.demo"
-        minSdk 21
-        targetSdk 34
+        minSdk libs.versions.androidMinSdk.get().toInteger()
+        targetSdk libs.versions.androidTargetSdk.get().toInteger()
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -58,18 +58,18 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:1.6.1"
-    implementation "androidx.core:core-ktx:1.12.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.24"
-    implementation 'androidx.multidex:multidex:2.0.1'
-    implementation "com.google.android.gms:play-services-maps:18.2.0"
-    implementation "androidx.fragment:fragment-ktx:1.6.2"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
-    implementation 'com.google.android.material:material:1.11.0'
-    implementation 'com.android.volley:volley:1.2.1'
+    implementation libs.appcompat
+    implementation libs.core.ktx
+    implementation libs.kotlin.stdlib
+    implementation libs.multidex
+    implementation libs.play.services.maps
+    implementation libs.fragment.ktx
+    implementation libs.lifecycle.runtime.ktx
+    implementation libs.material
+    implementation libs.volley
 
     // Hilt
-    implementation "com.google.dagger:hilt-android:2.51"
+    implementation libs.hilt.android
     kapt "com.google.dagger:hilt-android-compiler:2.51.1"
 
     implementation project(':places-ktx')

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google Inc.
+ * Copyright 2024 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 34
+    compileSdk libs.versions.androidCompileSdk.get().toInteger()
 
     defaultConfig {
-        minSdk 21
-        targetSdk 34
+        minSdk libs.versions.androidMinSdk.get().toInteger()
+        targetSdk libs.versions.androidTargetSdk.get().toInteger()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
         multiDexEnabled true
@@ -42,30 +42,23 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
-
-    buildTypes {
-        debug {
-            testCoverageEnabled = true
-        }
-    }
-
     namespace "com.google.android.libraries.places.ktx"
 }
 
 dependencies {
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.24'
-    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1')
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0"
-    implementation "com.android.volley:volley:1.2.1"
-    implementation 'androidx.multidex:multidex:2.0.1'
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1"
-    api 'com.google.android.libraries.places:places:3.4.0'
+    implementation libs.kotlin.stdlib
+    implementation libs.kotlinx.coroutines.core
+    implementation libs.lifecycle.viewmodel.ktx
+    implementation libs.volley
+    implementation libs.multidex
+    api libs.kotlinx.coroutines.play.services
+    api libs.places
 
     // Tests
-    testImplementation "androidx.test.ext:junit:1.1.5"
-    testImplementation "androidx.test:core:1.5.0"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-    testImplementation "junit:junit:4.13.2"
-    testImplementation "org.mockito:mockito-core:5.11.0"
-    testImplementation "com.google.truth:truth:1.4.2"
+    testImplementation libs.junit.ext
+    testImplementation libs.test.core
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.junit
+    testImplementation libs.mockito.core
+    testImplementation libs.truth
 }
