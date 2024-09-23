@@ -36,7 +36,7 @@ class AutocompleteDemoActivity : AppCompatActivity() {
                 as AutocompleteSupportFragment
 
         // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, 	Place.Field.DISPLAY_NAME))
 
         // Listen to place selection events
         lifecycleScope.launch {
@@ -44,7 +44,7 @@ class AutocompleteDemoActivity : AppCompatActivity() {
                 when (event) {
                     is PlaceSelectionSuccess -> Toast.makeText(
                         this@AutocompleteDemoActivity,
-                        "Got place '${event.place.name}'",
+                        "Got place '${event.place.displayName}'",
                         Toast.LENGTH_SHORT
                     ).show()
                     is PlaceSelectionError -> Toast.makeText(

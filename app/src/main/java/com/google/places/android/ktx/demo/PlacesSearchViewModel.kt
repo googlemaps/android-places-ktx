@@ -30,6 +30,7 @@ import com.google.android.libraries.places.ktx.api.net.awaitFetchPlace
 import com.google.android.libraries.places.ktx.api.net.awaitFindAutocompletePredictions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -44,6 +45,7 @@ class PlacesSearchViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun onSearchQueryChanged(query: String) {
         searchJob?.cancel()
 
@@ -75,6 +77,7 @@ class PlacesSearchViewModel @Inject constructor(
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun onAutocompletePredictionClicked(prediction: AutocompletePrediction) {
         val handler = CoroutineExceptionHandler { _, e ->
             e.printStackTrace()
@@ -84,9 +87,9 @@ class PlacesSearchViewModel @Inject constructor(
             val place = placesClient.awaitFetchPlace(
                 prediction.placeId,
                 listOf(
-                    Place.Field.NAME,
-                    Place.Field.ADDRESS,
-                    Place.Field.LAT_LNG,
+                    Place.Field.DISPLAY_NAME,
+                    Place.Field.FORMATTED_ADDRESS,
+                    Place.Field.LOCATION,
                     Place.Field.BUSINESS_STATUS
                 )
             )
