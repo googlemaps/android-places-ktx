@@ -36,7 +36,7 @@ class AutocompleteDemoActivity : AppCompatActivity() {
                 as AutocompleteSupportFragment
 
         // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, 	Place.Field.DISPLAY_NAME))
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID,Place.Field.DISPLAY_NAME))
 
         // Listen to place selection events
         lifecycleScope.launch {
