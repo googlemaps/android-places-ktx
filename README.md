@@ -23,7 +23,7 @@ If you are using the Places SDK through Google Play Services:
 
 ```groovy
 dependencies {
-    implementation 'com.google.maps.android:places-ktx:3.2.0'
+    implementation 'com.google.maps.android:places-ktx:3.3.0'
 }
 ```
 
