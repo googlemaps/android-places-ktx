@@ -19,7 +19,7 @@ on:
   repository_dispatch:
     types: [test]
   pull_request:
-    branches: ['*']
+    branches-ignore: ['gh-pages','googlemaps-bot/update_gh_pages']
 
 jobs:
   run-unit-test:
