@@ -1,9 +1,8 @@
-[![Discord](https://img.shields.io/discord/676948200904589322)](https://discord.gg/hYsWbmk)
-![Beta](https://img.shields.io/badge/stability-beta-yellow)
-![Apache-2.0](https://img.shields.io/badge/license-Apache-blue)
+![Tests/Build Status](https://github.com/googlemaps/android-places-ktx/workflows/Test/badge.svg)
+![Release](https://github.com/googlemaps/android-places-ktx/workflows/Release/badge.svg)
+![Stable](https://img.shields.io/badge/stability-stable-green)
 
-Places Android KTX
-==================
+# Places Android KTX
 
 ## Description
 This repository contains Kotlin extensions (KTX) for:
@@ -12,10 +11,13 @@ This repository contains Kotlin extensions (KTX) for:
 It enables you to write more concise, idiomatic Kotlin.
 
 ## Requirements
+
+* [Sign up with Google Maps Platform]
+* A Google Maps Platform [project] with the **Maps SDK for Android** enabled
+* An [API key] associated with the project above
+* Android API level 21+
 * Kotlin-enabled project
 * Kotlin coroutines
-* API level 21+
-* An [API key](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
 
 ## Installation
 
@@ -27,11 +29,11 @@ dependencies {
 }
 ```
 
-## Example Usage
+## Usage
 
 Accessing API responses made by `PlacesClient` can be retrieved using coroutines vs. using
 [Task](https://developers.google.com/android/reference/com/google/android/gms/tasks/Task.html) objects.
-The example here demonstrates how you can use this feature alongside with Android’s [ViewModel KTX](viewmodel-ktx)’s `viewModelScope`.
+The example here demonstrates how you can use this feature alongside with Android’s [ViewModel KTX][viewmodel-ktx]’s `viewModelScope`.
 Additionally, you can use a DSL provided by this library to construct requests vs. using builders.
 
 _Before_
@@ -84,41 +86,62 @@ viewModelScope.launch(handler) {
 }
 ```
 
-### Demo App
+### Sample App
 
 A [demo](app) application is contained within this repository that illustrates the use of this KTX library.
 
-To run the demo app, you'll have to:
-
-1. [Get a Places API key][api-key]
-2. Update the `local.properties` file in your root directory called (Note: this file should *NOT* be
+To run the demo app, update the `local.properties` file in your root directory called (Note: this file should *NOT* be
 under version control to protect your API key) and add a single line to `local.properties` that
 looks like `PLACES_API_KEY="YOUR_API_KEY"`, where `YOUR_API_KEY` is the API key you obtained in
 the first step. You can also take a look at the [local.defaults.properties](local.defaults.properties)
-as an example.
-3. Build and run
+as an example. Then build and run.
+
 
 ## Documentation
 
 You can learn more about all the extensions provided by this library by reading the [reference documents].
 
+For more information, check out the [detailed guide][places-sdk].
+
+## Contributing
+
+Contributions are welcome and encouraged! If you'd like to contribute, send us a [pull request] and refer to our [code of conduct] and [contributing guide].
+
+## Terms of Service
+
+This library uses Google Maps Platform services. Use of Google Maps Platform services through this library is subject to the Google Maps Platform [Terms of Service].
+
+This library is not a Google Maps Platform Core Service. Therefore, the Google Maps Platform Terms of Service (e.g. Technical Support Services, Service Level Agreements, and Deprecation Policy) do not apply to the code in this library.
+
 ## Support
 
-Encounter an issue while using this library?
+This library is offered via an open source [license]. It is not governed by the Google Maps Platform Support [Technical Support Services Guidelines, the SLA, or the [Deprecation Policy]. However, any Google Maps Platform services used by the library remain subject to the Google Maps Platform Terms of Service.
 
-If you find a bug or have a feature request, please [file an issue].
-Or, if you'd like to contribute, send us a [pull request] and refer to our [code of conduct].
+This library adheres to [semantic versioning] to indicate when backwards-incompatible changes are introduced. Accordingly, while the library is in version 0.x, backwards-incompatible changes may be introduced at any time.
 
-You can also reach us on our [Discord channel].
+If you find a bug, or have a feature request, please [file an issue] on GitHub. If you would like to get answers to technical questions from other Google Maps Platform developers, ask through one of our [developer community channels]. If you'd like to contribute, please check the [contributing guide].
 
-For more information, check out the detailed guide on the
-[Google Developers site][places-sdk].
+You can also discuss this library on our [Discord server].
 
-[api-key]: https://developers.google.com/places/android-sdk/get-api-key
-[Discord channel]: https://discord.gg/hYsWbmk
-[code of conduct]: CODE_OF_CONDUCT.md
-[file an issue]: https://github.com/googlemaps/android-places-ktx/issues/new/choose
 [places-sdk]: https://developers.google.com/maps/documentation/places/android-sdk/overview
-[pull request]: https://github.com/googlemaps/android-places-ktx/compare
-[reference documents]: https://googlemaps.github.io/android-places-ktx
 [viewmodel-ktx]: https://developer.android.com/kotlin/ktx#viewmodel
+
+[API key]: https://developers.google.com/maps/documentation/android-sdk/get-api-key
+[documentation]: https://googlemaps.github.io/android-places-ktx
+
+[code of conduct]: CODE_OF_CONDUCT.md
+[contributing guide]: CONTRIBUTING.md
+[Deprecation Policy]: https://cloud.google.com/maps-platform/terms
+[developer community channels]: https://developers.google.com/maps/developer-community
+[Discord server]: https://discord.gg/hYsWbmk
+[file an issue]: https://github.com/googlemaps/android-places-ktx/issues/new/choose
+[license]: LICENSE
+[project]: https://developers.google.com/maps/documentation/android-sdk/cloud-setup
+[pull request]: https://github.com/googlemaps/android-places-ktx/compare
+[semantic versioning]: https://semver.org
+[Sign up with Google Maps Platform]: https://console.cloud.google.com/google/maps-apis/start
+[similar inquiry]: https://github.com/googlemaps/android-places-compose/issues
+[SLA]: https://cloud.google.com/maps-platform/terms/sla
+[Technical Support Services Guidelines]: https://cloud.google.com/maps-platform/terms/tssg
+[Terms of Service]: https://cloud.google.com/maps-platform/terms
+
