@@ -74,7 +74,7 @@ dependencies {
 
     // Hilt
     implementation libs.hilt.android
-    kapt "com.google.dagger:hilt-android-compiler:2.52"
+    kapt "com.google.dagger:hilt-android-compiler:2.53.1"
 
     implementation project(':places-ktx')
 }
