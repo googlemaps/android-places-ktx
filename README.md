@@ -1,6 +1,11 @@
-![Tests/Build Status](https://github.com/googlemaps/android-places-ktx/workflows/Test/badge.svg)
 ![Release](https://github.com/googlemaps/android-places-ktx/workflows/Release/badge.svg)
 ![Stable](https://img.shields.io/badge/stability-stable-green)
+[![Tests/Build](https://github.com/googlemaps/android-places-ktx/actions/workflows/test.yml/badge.svg)](https://github.com/googlemaps/android-places-ktx/actions/workflows/test.yml)
+
+![Contributors](https://img.shields.io/github/contributors/googlemaps/android-places-ktx?color=green)
+[![License](https://img.shields.io/github/license/googlemaps/android-places-ktx?color=blue)][license]
+[![StackOverflow](https://img.shields.io/stackexchange/stackoverflow/t/google-maps?color=orange&label=google-maps&logo=stackoverflow)](https://stackoverflow.com/questions/tagged/google-maps)
+[![Discord](https://img.shields.io/discord/676948200904589322?color=6A7EC2&logo=discord&logoColor=ffffff)][Discord server]
 
 # Places Android KTX
 
@@ -12,12 +17,12 @@ It enables you to write more concise, idiomatic Kotlin.
 
 ## Requirements
 
-* [Sign up with Google Maps Platform]
-* A Google Maps Platform [project] with the **Maps SDK for Android** enabled
-* An [API key] associated with the project above
-* Android API level 21+
-* Kotlin-enabled project
-* Kotlin coroutines
+- [Sign up with Google Maps Platform]
+- A Google Maps Platform [project] with the **Maps SDK for Android** enabled
+- An [API key] associated with the project above
+- Android API level 21+
+- Kotlin-enabled project
+- Kotlin coroutines
 
 ## Installation
 
@@ -129,7 +134,7 @@ You can also discuss this library on our [Discord server].
 [API key]: https://developers.google.com/maps/documentation/android-sdk/get-api-key
 [documentation]: https://googlemaps.github.io/android-places-ktx
 
-[code of conduct]: CODE_OF_CONDUCT.md
+[code of conduct]: ?tab=coc-ov-file#readme
 [contributing guide]: CONTRIBUTING.md
 [Deprecation Policy]: https://cloud.google.com/maps-platform/terms
 [developer community channels]: https://developers.google.com/maps/developer-community
