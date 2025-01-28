@@ -58,6 +58,9 @@ jobs:
         committer: googlemaps-bot <googlemaps-bot@google.com>
         author: googlemaps-bot <googlemaps-bot@google.com>
         title: 'docs: Update docs'
+        labels: |
+          docs
+          automerge
         body: |
             Updated GitHub pages with latest from `./gradlew dokka`.
         branch: googlemaps-bot/update_gh_pages
