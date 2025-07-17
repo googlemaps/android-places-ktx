@@ -32,7 +32,9 @@ buildscript {
 
 plugins {
     id "org.jetbrains.dokka" version "1.9.10"
+    id "com.vanniktech.maven.publish" version "0.34.0" apply false
 }
+
 
 
 ext.projectArtifactId = { project ->
@@ -43,9 +45,6 @@ ext.projectArtifactId = { project ->
     }
 }
 
-/**
- * Shared configs across subprojects
- */
 allprojects {
     group = 'com.google.maps.android'
     version = '3.3.1'
@@ -60,9 +59,6 @@ allprojects {
     }
 }
 
-/**
- * Publishing and signing info
- */
 subprojects { project ->
     if (project.ext.artifactId == null) return
 
@@ -70,9 +66,8 @@ subprojects { project ->
     plugins.apply(libs.plugins.mavenPublish.get().pluginId)
     plugins.apply(libs.plugins.dokka.get().pluginId)
     plugins.apply(libs.plugins.jacocoAndroid.get().pluginId)
-    plugins.apply(libs.plugins.signing.get().pluginId)
+    plugins.apply(libs.plugins.vanniktech.get().pluginId)
 
-    // Code coverage
     jacoco {
         toolVersion = "0.8.7"
     }
@@ -82,90 +77,44 @@ subprojects { project ->
         jacoco.excludes = ['jdk.internal.*']
     }
 
-    tasks.register('sourcesJar', Jar) {
-        from android.sourceSets.main.java.source
-        archiveClassifier = "sources"
-    }
+    mavenPublishing {
+        publishToMavenCentral()
+        signAllPublications()
 
-    tasks.register('javadocJar', Jar) {
-        dependsOn(tasks.named("dokkaHtml"))
-        dependsOn(tasks.named("dokkaJavadoc"))
-        archiveClassifier.set("javadoc")
-        from new File(buildDir, "dokka/javadoc")
-    }
+        pom {
+            name = project.name
+            description = "Kotlin extensions (KTX) for Places SDK for Android"
+            url = "https://github.com/googlemaps/android-places-ktx"
 
-    publishing {
-        publications {
-            aar(MavenPublication) {
-                groupId project.group
-                artifactId project.ext.artifactId
-                version project.version
-
-                pom {
-                    name = project.name
-                    description = "Kotlin extensions (KTX) for Places SDK for Android"
-                    url = "https://github.com/googlemaps/android-places-ktx"
-                    scm {
-                        connection = 'scm:git@github.com:googlemaps/android-places-ktx.git'
-                        developerConnection = 'scm:git@github.com:googlemaps/android-places-ktx.git'
-                        url = 'https://github.com/googlemaps/android-places-ktx'
-                    }
-
-                    licenses {
-                        license {
-                            name = 'The Apache Software License, Version 2.0'
-                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                            distribution = 'repo'
-                        }
-                    }
-
-                    organization {
-                        name = 'Google Inc'
-                        url = 'http://developers.google.com/maps'
-                    }
-
-                    developers {
-                        developer {
-                            name = 'Google Inc.'
-                        }
-                    }
+            licenses {
+                license {
+                    name = "The Apache Software License, Version 2.0"
+                    url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    distribution = "repo"
                 }
+            }
 
-                pom.withXml {
-                    def dependenciesNode = asNode().appendNode('dependencies')
-                    project.configurations.api.allDependencies.each { dependency ->
-                        def dependencyNode = dependenciesNode.appendNode('dependency')
-                        dependencyNode.appendNode('groupId', dependency.group)
-                        dependencyNode.appendNode('artifactId', dependency.name)
-                        dependencyNode.appendNode('version', dependency.version)
-                    }
-                }
+            scm {
+                connection = "scm:git@github.com:googlemaps/android-places-ktx.git"
+                developerConnection = "scm:git@github.com:googlemaps/android-places-ktx.git"
+                url = "https://github.com/googlemaps/android-places-ktx"
+            }
 
-                afterEvaluate {
-                    artifact "$buildDir/outputs/aar/$project.name-release.aar"
-                    artifact javadocJar
-                    artifact sourcesJar
+            organization {
+                name = "Google Inc"
+                url = "http://developers.google.com/maps"
+            }
+
+            developers {
+                developer {
+                    id = "google"
+                    name = "Google Inc."
                 }
             }
         }
-
-        repositories {
-            maven {
-                name = "mavencentral"
-                url = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"
-                credentials {
-                    username sonatypeToken
-                    password sonatypeTokenPassword
-                }
-            }
-        }
-    }
-
-    signing {
-        sign publishing.publications.aar
     }
 }
 
-tasks.register('clean', Delete) {
+tasks.register("clean", Delete) {
     delete rootProject.layout.buildDirectory
 }
