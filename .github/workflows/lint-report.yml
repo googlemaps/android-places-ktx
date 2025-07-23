@@ -39,11 +39,14 @@ jobs:
       - name: Run Android Lint
         run: ./gradlew lint
 
-      - name: Merge SARIF files
-        run: |
-          jq -s '{ "$schema": "https://json.schemastore.org/sarif-2.1.0", "version": "2.1.0", "runs": map(.runs) | add }'  app/build/reports/lint-results.sarif  places-ktx/build/reports/lint-results.sarif > merged.sarif
-
-      - name: Upload SARIF file
+      - name: Upload SARIF for app
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: merged.sarif
+          sarif_file: app/build/reports/lint-results.sarif
+          category: app
+
+      - name: Upload SARIF for places-ktx
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: places-ktx/build/reports/lint-results.sarif
+          category: places-ktx
