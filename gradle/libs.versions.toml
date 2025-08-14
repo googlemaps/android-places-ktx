@@ -1,10 +1,10 @@
 [versions]
-androidCompileSdk = "36"
-androidTargetSdk = "36"
+androidCompileSdk = "34"
+androidTargetSdk = "34"
 androidMinSdk = "23"
 
 appcompat = "1.7.1"
-coreKtx = "1.16.0"
+coreKtx = "1.17.0"
 dokkaGradlePlugin = "2.0.0"
 fragmentKtx = "1.8.9"
 gradle = "8.12.0"
