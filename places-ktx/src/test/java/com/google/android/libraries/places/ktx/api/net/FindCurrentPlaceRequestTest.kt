@@ -23,17 +23,17 @@ internal class FindCurrentPlaceRequestTest {
 
     @Test
     fun testBuilderNoActions() {
-        val request = findCurrentPlaceRequest(listOf(Place.Field.NAME))
-        assertEquals(listOf(Place.Field.NAME), request.placeFields)
+        val request = findCurrentPlaceRequest(listOf(Place.Field.DISPLAY_NAME))
+        assertEquals(listOf(Place.Field.DISPLAY_NAME), request.placeFields)
     }
 
     @Test
     fun testBuilderWithActions() {
         val cancellationToken = CancellationTokenSource().token
-        val request = findCurrentPlaceRequest(listOf(Place.Field.NAME)) {
+        val request = findCurrentPlaceRequest(listOf(Place.Field.DISPLAY_NAME)) {
             setCancellationToken(cancellationToken)
         }
-        assertEquals(listOf(Place.Field.NAME), request.placeFields)
+        assertEquals(listOf(Place.Field.DISPLAY_NAME), request.placeFields)
         assertEquals(cancellationToken, request.cancellationToken)
     }
 }

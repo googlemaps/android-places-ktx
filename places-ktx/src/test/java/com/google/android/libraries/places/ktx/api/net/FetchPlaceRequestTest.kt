@@ -26,10 +26,10 @@ internal class FetchPlaceRequestTest {
     fun testBuilderNoActions() {
         val request = fetchPlaceRequest(
             "placeId",
-            listOf(Place.Field.NAME)
+            listOf(Place.Field.DISPLAY_NAME)
         )
         assertEquals("placeId", request.placeId)
-        assertEquals(listOf(Place.Field.NAME), request.placeFields)
+        assertEquals(listOf(Place.Field.DISPLAY_NAME), request.placeFields)
     }
 
     @Test
@@ -38,13 +38,13 @@ internal class FetchPlaceRequestTest {
         val sessionToken = AutocompleteSessionToken.newInstance()
         val request = fetchPlaceRequest(
             "placeId",
-            listOf(Place.Field.NAME)
+            listOf(Place.Field.DISPLAY_NAME)
         ) {
             setCancellationToken(cancellationToken)
             setSessionToken(sessionToken)
         }
         assertEquals("placeId", request.placeId)
-        assertEquals(listOf(Place.Field.NAME), request.placeFields)
+        assertEquals(listOf(Place.Field.DISPLAY_NAME), request.placeFields)
         assertEquals(cancellationToken, request.cancellationToken)
         assertEquals(sessionToken, request.sessionToken)
     }
