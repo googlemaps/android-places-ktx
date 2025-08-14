@@ -4,7 +4,7 @@ androidTargetSdk = "34"
 androidMinSdk = "23"
 
 appcompat = "1.7.1"
-coreKtx = "1.17.0"
+coreKtx = "1.13.1"
 dokkaGradlePlugin = "2.0.0"
 fragmentKtx = "1.8.9"
 gradle = "8.12.0"
