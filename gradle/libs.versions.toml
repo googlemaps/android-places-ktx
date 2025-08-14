@@ -1,7 +1,7 @@
 [versions]
-androidCompileSdk = "35"
+androidCompileSdk = "36"
+androidTargetSdk = "36"
 androidMinSdk = "23"
-androidTargetSdk = "35"
 
 appcompat = "1.7.1"
 coreKtx = "1.16.0"
