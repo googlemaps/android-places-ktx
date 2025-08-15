@@ -29,11 +29,11 @@ internal class SearchByTextRequestTest {
     fun testBuilderNoActions() {
         val request = searchByTextRequest(
             textQuery = "test query",
-            placeFields = listOf(Place.Field.NAME)
+            placeFields = listOf(Place.Field.DISPLAY_NAME)
         )
 
         assertThat(request.textQuery).isEqualTo("test query")
-        assertThat(request.placeFields).containsExactly(Place.Field.NAME)
+        assertThat(request.placeFields).containsExactly(Place.Field.DISPLAY_NAME)
     }
 
     @Test
@@ -44,7 +44,7 @@ internal class SearchByTextRequestTest {
 
         val request = searchByTextRequest(
             textQuery = "test query",
-            placeFields = listOf(Place.Field.NAME, Place.Field.ADDRESS),
+            placeFields = listOf(Place.Field.DISPLAY_NAME, Place.Field.ADDRESS),
         ) {
             setCancellationToken(cancellationToken)
             includedType = "national_park"
