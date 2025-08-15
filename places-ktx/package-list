@@ -47,4 +47,3 @@ $dokka.location:com.google.android.libraries.places.ktx.widget/PlaceSelectionSuc
 com.google.android.libraries.places.ktx.api.model
 com.google.android.libraries.places.ktx.api.net
 com.google.android.libraries.places.ktx.widget
-
