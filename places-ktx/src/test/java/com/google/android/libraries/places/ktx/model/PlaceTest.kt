@@ -25,7 +25,7 @@ internal class PlaceTest {
     @Test
     fun testBuilder() {
         val place = place {
-            address = "address"
+            formattedAddress = "address"
             addressComponents = AddressComponents.newInstance(
                 listOf(
                     addressComponent("Main Street", listOf("street_address")) {
@@ -34,7 +34,7 @@ internal class PlaceTest {
                 )
             )
         }
-        assertEquals("address", place.address)
+        assertEquals("address", place.formattedAddress)
         assertEquals(AddressComponents.newInstance(
             listOf(
                 addressComponent("Main Street", listOf("street_address")) {
