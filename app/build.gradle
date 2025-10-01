@@ -20,6 +20,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'org.jetbrains.kotlin.plugin.compose' version '2.2.20'
 }
 
 android {
@@ -40,6 +41,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        compose = true
     }
 
     buildTypes {
@@ -58,10 +60,22 @@ android {
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+
     namespace "com.google.places.android.ktx.demo"
 }
 
 dependencies {
+    implementation platform(libs.androidx.compose.bom)
+
+    // Core Compose libraries
+    implementation libs.androidx.compose.ui
+    implementation libs.androidx.compose.ui.tooling.preview
+    implementation libs.androidx.compose.material3
+    implementation libs.androidx.activity.compose
+
+    debugImplementation libs.androidx.compose.ui.tooling
+    debugImplementation libs.androidx.compose.ui.test.manifest
+
     implementation libs.appcompat
     implementation libs.core.ktx
     implementation libs.kotlin.stdlib
@@ -74,16 +88,13 @@ dependencies {
 
     // Hilt
     implementation libs.hilt.android
+    implementation libs.runtime
     kapt libs.hilt.android.compiler
 
     implementation project(':places-ktx')
 }
 
 secrets {
-    // To add your Maps API key to this project:
-    // 1. Create a file ./secrets.properties in the root folder of the project
-    // 2. Add this line, where YOUR_API_KEY is your API key:
-    //        PLACES_API_KEY=YOUR_API_KEY
     propertiesFileName 'secrets.properties'
     defaultPropertiesFileName 'local.defaults.properties'
 }

@@ -1,59 +1,80 @@
-// Copyright 2023 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package com.google.places.android.ktx.demo
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.style.StyleSpan
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.ktx.widget.PlaceSelectionError
-import com.google.android.libraries.places.ktx.widget.PlaceSelectionSuccess
-import com.google.android.libraries.places.ktx.widget.placeSelectionEvents
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import kotlinx.coroutines.launch
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.google.android.libraries.places.widget.PlaceAutocomplete
+import com.google.android.libraries.places.widget.PlaceAutocompleteActivity
 
-class AutocompleteDemoActivity : AppCompatActivity() {
+class AutocompleteDemoActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_autocomplete)
 
-        val autocompleteFragment =
-            supportFragmentManager.findFragmentById(R.id.autocomplete_fragment)
-                as AutocompleteSupportFragment
+        setContent {
+            AutocompleteDemoScreen()
+        }
+    }
 
-        // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID,Place.Field.DISPLAY_NAME))
+    @Composable
+    private fun AutocompleteDemoScreen() {
+        var placeDetails by remember { mutableStateOf("No place selected yet") }
 
-        // Listen to place selection events
-        lifecycleScope.launch {
-            autocompleteFragment.placeSelectionEvents().collect { event ->
-                when (event) {
-                    is PlaceSelectionSuccess -> Toast.makeText(
-                        this@AutocompleteDemoActivity,
-                        "Got place '${event.place.displayName}'",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    is PlaceSelectionError -> Toast.makeText(
-                        this@AutocompleteDemoActivity,
-                        "Failed to get place '${event.status.statusMessage}'",
-                        Toast.LENGTH_SHORT
-                    ).show()
+        val startAutocomplete =
+            rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.StartActivityForResult()
+            ) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val intent = result.data
+                    if (intent != null) {
+                        val place = PlaceAutocomplete.getPredictionFromIntent(intent)
+                        if (place != null) {
+                            placeDetails =
+                                "Got place '${place.getFullText(StyleSpan(Typeface.NORMAL))}'"
+                        }
+                    }
+                } else if (result.resultCode == PlaceAutocompleteActivity.RESULT_ERROR) {
+                    val intent = result.data
+                    if (intent != null) {
+                        val status = PlaceAutocomplete.getResultStatusFromIntent(intent)
+                        Toast.makeText(
+                            this,
+                            "Failed to get place '${status?.statusMessage}'",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Button(onClick = {
+                val intent = PlaceAutocomplete.createIntent(this@AutocompleteDemoActivity)
+                startAutocomplete.launch(intent)
+            }) {
+                Text("Start Autocomplete")
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Text(placeDetails)
         }
     }
 }

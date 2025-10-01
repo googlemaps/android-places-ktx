@@ -1,9 +1,11 @@
 [versions]
+activityCompose = "1.11.0"
 androidCompileSdk = "36"
 androidTargetSdk = "36"
 androidMinSdk = "24"
 
 appcompat = "1.7.1"
+compose-bom = "2025.09.01"
 coreKtx = "1.17.0"
 dokkaGradlePlugin = "2.0.0"
 fragmentKtx = "1.8.9"
@@ -28,9 +30,17 @@ mockito-kotlin = "2.2.0"
 junit = "4.13.2"
 mockito-core = "5.20.0"
 gradleMavenPublishPlugin = "0.34.0"
+runtime = "1.9.2"
 
 [libraries]
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokkaGradlePlugin" }
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
@@ -58,8 +68,10 @@ mockito-kotlin = { group = "com.nhaarman.mockitokotlin2", name = "mockito-kotlin
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito-core" }
 gradle-maven-publish-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "gradleMavenPublishPlugin" }
+runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 
 [plugins]
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library" }
 mavenPublish = { id = "maven-publish" }
 dokka = { id = "org.jetbrains.dokka" }
