@@ -44,7 +44,7 @@ internal class SearchByTextRequestTest {
 
         val request = searchByTextRequest(
             textQuery = "test query",
-            placeFields = listOf(Place.Field.DISPLAY_NAME, Place.Field.ADDRESS),
+            placeFields = listOf(Place.Field.DISPLAY_NAME, Place.Field.FORMATTED_ADDRESS),
         ) {
             setCancellationToken(cancellationToken)
             includedType = "national_park"

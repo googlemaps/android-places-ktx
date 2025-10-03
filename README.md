@@ -20,7 +20,7 @@ It enables you to write more concise, idiomatic Kotlin.
 - [Sign up with Google Maps Platform]
 - A Google Maps Platform [project] with the **Maps SDK for Android** enabled
 - An [API key] associated with the project above
-- Android API level 21+
+- Android API level 24+
 - Kotlin-enabled project
 - Kotlin coroutines
 
