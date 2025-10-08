@@ -18,7 +18,6 @@ import android.Manifest.permission
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.android.libraries.places.api.model.LocationRestriction
 import com.google.android.libraries.places.api.model.PhotoMetadata
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPhotoRequest
