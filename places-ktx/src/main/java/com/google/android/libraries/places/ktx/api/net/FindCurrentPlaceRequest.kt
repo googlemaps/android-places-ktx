@@ -14,22 +14,25 @@
 
 package com.google.android.libraries.places.ktx.api.net
 
+import com.google.android.libraries.places.api.model.LocationRestriction
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
+import com.google.android.libraries.places.api.net.SearchNearbyRequest
 
 /**
- * Builds a new [FindCurrentPlaceRequest].
+ * Builds a new [SearchNearbyRequest].
  *
  * @param placeFields the fields of the places to be returned
- * @param actions the actions to apply to the [FindCurrentPlaceRequest.Builder]
+ * @param actions the actions to apply to the [SearchNearbyRequest.Builder]
  *
- * @return the constructed [FindCurrentPlaceRequest]
+ * @return the constructed [SearchNearbyRequest]
  */
 public fun findCurrentPlaceRequest(
+    locationRestriction: LocationRestriction,
     placeFields: List<Place.Field>,
-    actions: (FindCurrentPlaceRequest.Builder.() -> Unit)? = null
-): FindCurrentPlaceRequest {
-    return FindCurrentPlaceRequest.builder(placeFields).also { builder ->
+    actions: (SearchNearbyRequest.Builder.() -> Unit)? = null
+): SearchNearbyRequest {
+    return SearchNearbyRequest.builder(locationRestriction, placeFields).also { builder ->
         actions?.let { builder.apply(it) }
     }.build()
 }

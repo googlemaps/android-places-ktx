@@ -15,21 +15,21 @@
 package com.google.android.libraries.places.ktx.api.net
 
 import com.google.android.libraries.places.api.model.PhotoMetadata
-import com.google.android.libraries.places.api.net.FetchPhotoRequest
+import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
 
 /**
- * Builds a new [FetchPhotoRequest].
+ * Builds a new [FetchResolvedPhotoUriRequest].
  *
  * @param photoMetadata the metadata for the requested photo
- * @param actions the actions to apply to the [FetchPhotoRequest.Builder]
+ * @param actions the actions to apply to the [FetchResolvedPhotoUriRequest.Builder]
  *
- * @return the constructed [FetchPhotoRequest]
+ * @return the constructed [FetchResolvedPhotoUriRequest]
  */
 public fun fetchPhotoRequest(
     photoMetadata: PhotoMetadata,
-    actions: (FetchPhotoRequest.Builder.() -> Unit)? = null
-): FetchPhotoRequest {
-    return FetchPhotoRequest.builder(photoMetadata).also { builder ->
+    actions: (FetchResolvedPhotoUriRequest.Builder.() -> Unit)? = null
+): FetchResolvedPhotoUriRequest {
+    return FetchResolvedPhotoUriRequest.builder(photoMetadata).also { builder ->
         actions?.let { builder.apply(it) }
     }.build()
 }

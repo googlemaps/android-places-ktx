@@ -18,12 +18,15 @@ import android.Manifest.permission
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.libraries.places.api.model.LocationRestriction
 import com.google.android.libraries.places.api.model.PhotoMetadata
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPhotoResponse
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FetchPlaceResponse
+import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
+import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriResponse
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
@@ -53,6 +56,26 @@ public suspend fun PlacesClient.awaitFetchPhoto(
     return this.fetchPhoto(request)
         .await(cancellationTokenSource)
 }
+
+/**
+ * Wraps [PlacesClient.fetchResolvedPhotoUri] in a suspending function.
+ *
+ * Fetches a photo. If an error occurred, an [ApiException] will be thrown.
+ */
+@ExperimentalCoroutinesApi
+public suspend fun PlacesClient.awaitfetchResolvedPhotoUri(
+    photoMetadata: PhotoMetadata,
+    actions: FetchResolvedPhotoUriRequest.Builder.() -> Unit = {}
+): FetchResolvedPhotoUriResponse {
+    val cancellationTokenSource = CancellationTokenSource()
+    val request = FetchResolvedPhotoUriRequest.builder(photoMetadata)
+        .setCancellationToken(cancellationTokenSource.token)
+        .apply(actions)
+        .build()
+    return this.fetchResolvedPhotoUri(request)
+        .await(cancellationTokenSource)
+}
+
 
 /**
  * Wraps [PlacesClient.fetchPlace] in a suspending function.
