@@ -18,12 +18,15 @@ import android.Manifest.permission
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.libraries.places.api.model.LocationRestriction
 import com.google.android.libraries.places.api.model.PhotoMetadata
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPhotoResponse
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FetchPlaceResponse
+import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
+import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriResponse
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
@@ -32,6 +35,8 @@ import com.google.android.libraries.places.api.net.IsOpenResponse
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.api.net.SearchByTextRequest
 import com.google.android.libraries.places.api.net.SearchByTextResponse
+import com.google.android.libraries.places.api.net.SearchNearbyRequest
+import com.google.android.libraries.places.api.net.SearchNearbyResponse
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.tasks.await
 
@@ -95,6 +100,10 @@ public suspend fun PlacesClient.awaitFindAutocompletePredictions(
  * the appropriate permissions will result in a [SecurityException] being thrown. In addition, if
  * an error occurred while fetching the current place, an [ApiException] will be thrown.
  */
+@Deprecated(
+    "Use awaitSearchNearbyPlace(locationRestriction, placeFields) instead. This function uses the deprecated FindCurrentPlaceRequest.",
+    ReplaceWith("this.awaitSearchNearbyPlace(LocationRestriction(), placeFields)")
+)
 @ExperimentalCoroutinesApi
 @RequiresPermission(anyOf = [permission.ACCESS_FINE_LOCATION, permission.ACCESS_COARSE_LOCATION])
 public suspend fun PlacesClient.awaitFindCurrentPlace(
@@ -105,6 +114,31 @@ public suspend fun PlacesClient.awaitFindCurrentPlace(
         .setCancellationToken(cancellationTokenSource.token)
         .build()
     return this.findCurrentPlace(request).await(cancellationTokenSource)
+}
+
+/**
+ * Wraps [PlacesClient.searchNearby] in a suspending function.
+ *
+ * Fetches the approximate nearby places based on the provided [locationRestriction]. Calling this
+ * method without granting the appropriate permissions will result in a [SecurityException] being
+ * thrown. In addition, if an error occurred while fetching the places, an [ApiException] will be
+ * thrown.
+ *
+ * @param locationRestriction limits the scope of the search to a specific area.
+ * @param placeFields the fields of the places to be returned
+ * @return the response containing the nearby place results.
+ */
+@ExperimentalCoroutinesApi
+@RequiresPermission(anyOf = [permission.ACCESS_FINE_LOCATION, permission.ACCESS_COARSE_LOCATION])
+public suspend fun PlacesClient.awaitSearchNearbyPlace(
+    locationRestriction: LocationRestriction,
+    placeFields: List<Place.Field>
+): SearchNearbyResponse {
+    val cancellationTokenSource = CancellationTokenSource()
+    val request = SearchNearbyRequest.builder(locationRestriction, placeFields)
+        .setCancellationToken(cancellationTokenSource.token)
+        .build()
+    return this.searchNearby(request).await(cancellationTokenSource)
 }
 
 /**
