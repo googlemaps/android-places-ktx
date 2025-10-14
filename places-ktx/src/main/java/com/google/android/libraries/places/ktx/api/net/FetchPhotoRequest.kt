@@ -47,7 +47,7 @@ public fun fetchPhotoRequest(
  *
  * @return the constructed [FetchResolvedPhotoUriRequest]
  */
-public fun fetchPhotoRequest(
+public fun fetchResolvedPhotoUriRequest(
     photoMetadata: PhotoMetadata,
     actions: (FetchResolvedPhotoUriRequest.Builder.() -> Unit)? = null
 ): FetchResolvedPhotoUriRequest {
