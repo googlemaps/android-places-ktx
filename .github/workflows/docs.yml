@@ -40,7 +40,7 @@ jobs:
     # Run dokka and create tar
     - name: Generate documentation
       run: |
-        ./gradlew dokkaHtml
+        ./gradlew dokkaGenerate
 
         echo "Creating tar for generated docs"
         cd $GITHUB_WORKSPACE/places-ktx/build/dokka/html && tar cvf ~/places-ktx-docs.tar .
@@ -62,5 +62,5 @@ jobs:
           docs
           automerge
         body: |
-            Updated GitHub pages with latest from `./gradlew dokka`.
+            Updated GitHub pages with latest from `./gradlew dokkaGenerate`.
         branch: googlemaps-bot/update_gh_pages
