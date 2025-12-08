@@ -1,11 +1,11 @@
 [versions]
-activityCompose = "1.12.0"
+activityCompose = "1.12.1"
 androidCompileSdk = "36"
 androidTargetSdk = "36"
 androidMinSdk = "24"
 
 appcompat = "1.7.1"
-compose-bom = "2025.11.01"
+compose-bom = "2025.12.00"
 coreKtx = "1.17.0"
 dokkaGradlePlugin = "2.1.0"
 fragmentKtx = "1.8.9"
@@ -29,8 +29,7 @@ test-core = "1.7.0"
 mockito-kotlin = "2.2.0"
 junit = "4.13.2"
 mockito-core = "5.20.0"
-gradleMavenPublishPlugin = "0.35.0"
-runtime = "1.9.5"
+runtime = "1.10.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -67,14 +66,11 @@ test-core = { group = "androidx.test", name = "core", version.ref = "test-core" 
 mockito-kotlin = { group = "com.nhaarman.mockitokotlin2", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito-core" }
-gradle-maven-publish-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "gradleMavenPublishPlugin" }
 runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 
 [plugins]
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library" }
 mavenPublish = { id = "maven-publish" }
 dokka = { id = "org.jetbrains.dokka" }
 jacocoAndroid = { id = "com.mxalbert.gradle.jacoco-android" }
-signing = { id = "signing" }
 vanniktech = { id = "com.vanniktech.maven.publish" }
