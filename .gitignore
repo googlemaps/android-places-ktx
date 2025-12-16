@@ -9,3 +9,7 @@ secrets.properties
 project.properties
 .DS_Store
 secure.properties
+
+# This covers new IDEs, like Antigravity
+.vscode/
+**/bin/
