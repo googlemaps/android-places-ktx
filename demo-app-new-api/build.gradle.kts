@@ -15,18 +15,18 @@
  */
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin") // Dependency Injection framework
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") // Safely handles API keys
-    id("org.jetbrains.kotlin.plugin.compose") version "2.2.20" // Compiler plugin for Jetpack Compose
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.hilt) // Dependency Injection framework
+    alias(libs.plugins.secrets) // Safely handles API keys
+    alias(libs.plugins.compose) // Compiler plugin for Jetpack Compose
 }
 
 android {
     lint {
         // Output lint results to a standardized format for CI/CD ingestion
-        sarifOutput = file("$buildDir/reports/lint-results.sarif")
+        sarifOutput = layout.buildDirectory.file("reports/lint-results.sarif").get().asFile
     }
 
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
@@ -61,12 +61,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-        jvmTarget = "17"
-    }
-
     namespace = "com.google.places.android.ktx.demo.newapi"
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+    }
 }
 
 dependencies {

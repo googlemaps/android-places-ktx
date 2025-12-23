@@ -16,13 +16,13 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinAndroid)
 }
 
 android {
     lint {
-        sarifOutput = file("$buildDir/reports/lint-results.sarif")
+        sarifOutput = layout.buildDirectory.file("reports/lint-results.sarif").get().asFile
     }
 
     compileSdk = libs.versions.androidCompileSdk.get().toInt()
@@ -40,15 +40,17 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-        freeCompilerArgs += "-Xexplicit-api=strict"
-    }
-
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
     namespace = "com.google.android.libraries.places.ktx"
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        freeCompilerArgs.add("-Xexplicit-api=strict")
+    }
 }
 
 dependencies {

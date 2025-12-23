@@ -96,3 +96,9 @@ dokka = { id = "org.jetbrains.dokka" }
 jacocoAndroid = { id = "com.mxalbert.gradle.jacoco-android" }
 mavenPublish = { id = "maven-publish" }
 vanniktech = { id = "com.vanniktech.maven.publish" }
+androidApplication = { id = "com.android.application" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android" }
+kotlinKapt = { id = "org.jetbrains.kotlin.kapt" }
+hilt = { id = "com.google.dagger.hilt.android" }
+secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin" }
+compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
