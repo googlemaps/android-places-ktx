@@ -33,8 +33,8 @@ buildscript {
 }
 
 plugins {
-    id("org.jetbrains.dokka") version "2.0.0"
-    id("com.vanniktech.maven.publish") version "0.34.0" apply false
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.vanniktech) apply false
 }
 
 // Logic to determine artifact ID based on project name

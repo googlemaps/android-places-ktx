@@ -7,6 +7,7 @@ activityCompose = "1.12.2"
 appcompat = "1.7.1"
 compose-bom = "2025.12.01"
 coreKtx = "1.17.0"
+dokka = "2.0.0"
 dokkaGradlePlugin = "2.1.0"
 fragmentKtx = "1.8.9"
 gradle = "8.13.2"
@@ -29,6 +30,7 @@ runtime = "1.10.0"
 secretsGradlePlugin = "2.0.1"
 test-core = "1.7.0"
 truth = "1.4.5"
+vanniktech = "0.34.0"
 volley = "1.2.1"
 
 [libraries]
@@ -92,10 +94,10 @@ jacoco-android = { module = "com.mxalbert.gradle:jacoco-android", version.ref = 
 
 [plugins]
 androidLibrary = { id = "com.android.library" }
-dokka = { id = "org.jetbrains.dokka" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 jacocoAndroid = { id = "com.mxalbert.gradle.jacoco-android" }
 mavenPublish = { id = "maven-publish" }
-vanniktech = { id = "com.vanniktech.maven.publish" }
+vanniktech = { id = "com.vanniktech.maven.publish", version.ref = "vanniktech" }
 androidApplication = { id = "com.android.application" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android" }
 kotlinKapt = { id = "org.jetbrains.kotlin.kapt" }
