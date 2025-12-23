@@ -59,9 +59,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        flatDir {
-            dirs("libs")
-        }
     }
 }
 

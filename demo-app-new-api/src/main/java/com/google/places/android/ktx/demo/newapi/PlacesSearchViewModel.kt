@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.model.CircularBounds
-import com.google.android.libraries.places.api.model.LocationBias
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.PlaceTypes
 import com.google.android.libraries.places.api.net.PlacesClient
@@ -29,6 +28,7 @@ import com.google.android.libraries.places.api.net.kotlin.awaitFetchResolvedPhot
 import com.google.android.libraries.places.api.net.kotlin.awaitSearchNearby
 import com.google.android.libraries.places.ktx.api.net.awaitIsOpen
 import com.google.android.libraries.places.ktx.api.net.awaitSearchByText
+import com.google.places.android.ktx.demo.newapi.PlacesSearchViewModel.Companion.DEBOUNCE_DELAY_MS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.ExperimentalCoroutinesApi
