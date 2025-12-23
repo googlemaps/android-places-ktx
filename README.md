@@ -28,9 +28,9 @@ It enables you to write more concise, idiomatic Kotlin.
 
 If you are using the Places SDK through Google Play Services:
 
-```groovy
+```kotlin
 dependencies {
-    implementation 'com.google.maps.android:places-ktx:3.6.0' // {x-release-please-version}
+    implementation("com.google.maps.android:places-ktx:3.6.0") // {x-release-please-version}
 }
 ```
 
