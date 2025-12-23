@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <string name="app_name">Android Places KTX Demo</string>
+
     <string name="app_name_new_api">Android New Places Demo</string>
     <string name="programmatic_place_predictions_instructions">This activity demonstrates as-you-type programmatic place predictions. Tap on the search icon on the toolbar and search for a place.</string>
     <string name="search">Search</string>

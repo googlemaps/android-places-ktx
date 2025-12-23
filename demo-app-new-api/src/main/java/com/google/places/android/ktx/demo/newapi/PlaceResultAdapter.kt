@@ -14,20 +14,21 @@
 
 package com.google.places.android.ktx.demo.newapi
 
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.android.libraries.places.api.model.Place
-import java.util.*
 
 /**
- * A [RecyclerView.Adapter] for a [com.google.android.libraries.places.api.model.Place].
+ * A [ListAdapter] for displaying [Place] objects.
+ *
+ * This adapter demonstrates how to bind Place details to a UI list item.
  */
-class PlaceResultAdapter : RecyclerView.Adapter<PlaceResultAdapter.PlaceResultViewHolder>() {
-    private val places: MutableList<Place> = ArrayList()
+class PlaceResultAdapter : ListAdapter<Place, PlaceResultAdapter.PlaceResultViewHolder>(PlaceDiffCallback) {
     var onPlaceClickListener: ((Place) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceResultViewHolder {
@@ -37,7 +38,7 @@ class PlaceResultAdapter : RecyclerView.Adapter<PlaceResultAdapter.PlaceResultVi
     }
 
     override fun onBindViewHolder(holder: PlaceResultViewHolder, position: Int) {
-        val place = places[position]
+        val place = getItem(position)
         holder.setPlace(place)
         holder.itemView.setOnClickListener {
             onPlaceClickListener?.invoke(place)
@@ -45,26 +46,32 @@ class PlaceResultAdapter : RecyclerView.Adapter<PlaceResultAdapter.PlaceResultVi
     }
 
 
-    override fun getItemCount(): Int =
-        places.size
 
-    fun setPlaces(places: List<Place>) {
-        this.places.clear()
-        this.places.addAll(places)
-        notifyDataSetChanged()
-    }
-
-    class PlaceResultViewHolder(itemView: View) : ViewHolder(itemView) {
+    class PlaceResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.text_view_title)
         private val address: TextView = itemView.findViewById(R.id.text_view_address)
 
         fun setPlace(place: Place) {
             title.text = place.displayName ?: place.id ?: ""
             address.text = place.formattedAddress ?: ""
-            // Fallback to lat/lng or other fields if address is missing?
+            
+            // Minimal fallback: if address is missing, show location coordinates.
+            // In a real app, you might want to show a specific "Address not available" string or hide the view.
             if (address.text.isEmpty()) {
                 address.text = place.location?.toString() ?: ""
             }
+        }
+    }
+
+    companion object PlaceDiffCallback : DiffUtil.ItemCallback<Place>() {
+        override fun areItemsTheSame(oldItem: Place, newItem: Place): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Place, newItem: Place): Boolean {
+            return oldItem.displayName == newItem.displayName &&
+                   oldItem.formattedAddress == newItem.formattedAddress &&
+                   oldItem.location == newItem.location
         }
     }
 }

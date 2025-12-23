@@ -29,7 +29,9 @@ class DemoApplication : Application() {
         //
         // See API Key Best Practices for more information on how to secure your API key:
         // https://developers.google.com/maps/api-key-best-practices
-        // Initialize the Places SDK with New Places API enabled
+        // Initialize the Places SDK with New Places API enabled.
+        // The "New Places API" supports the new pricing model (Pay-as-you-go) and features
+        // like Place.Field.DISPLAY_NAME which are not available in the legacy API.
         Places.initializeWithNewPlacesApiEnabled(this, BuildConfig.PLACES_API_KEY)
     }
 }

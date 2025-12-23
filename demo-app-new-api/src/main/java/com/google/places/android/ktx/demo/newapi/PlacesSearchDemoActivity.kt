@@ -60,7 +60,7 @@ class PlacesSearchDemoActivity : AppCompatActivity() {
                 }
                 is PlacesSearchEventFound -> {
                     progressBar.isIndeterminate = false
-                    adapter.setPlaces(event.places)
+                    adapter.submitList(event.places)
                     viewAnimator.displayedChild = if (event.places.isEmpty()) 0 else 1
                 }
             }
