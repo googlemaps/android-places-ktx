@@ -29,6 +29,7 @@ class DemoApplication : Application() {
         //
         // See API Key Best Practices for more information on how to secure your API key:
         // https://developers.google.com/maps/api-key-best-practices
-        Places.initialize(this, BuildConfig.PLACES_API_KEY)
+        // Initialize the Places SDK with the new API engine enabled (default in 3.5.0+)
+        Places.initializeWithNewPlacesApiEnabled(this, BuildConfig.PLACES_API_KEY)
     }
 }
