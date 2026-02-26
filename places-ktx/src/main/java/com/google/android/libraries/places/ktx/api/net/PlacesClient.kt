@@ -15,22 +15,17 @@
 package com.google.android.libraries.places.ktx.api.net
 
 import android.Manifest.permission
+import android.annotation.SuppressLint
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.libraries.places.api.model.LocationRestriction
 import com.google.android.libraries.places.api.model.PhotoMetadata
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.net.FetchPhotoRequest
-import com.google.android.libraries.places.api.net.FetchPhotoResponse
-import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FetchPlaceResponse
 import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
 import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriResponse
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
-import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse
 import com.google.android.libraries.places.api.net.IsOpenResponse
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.api.net.SearchByTextRequest
@@ -38,42 +33,45 @@ import com.google.android.libraries.places.api.net.SearchByTextResponse
 import com.google.android.libraries.places.api.net.SearchNearbyRequest
 import com.google.android.libraries.places.api.net.SearchNearbyResponse
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.tasks.await
-
-/**
- * Wraps [PlacesClient.fetchPhoto] in a suspending function.
- *
- * Fetches a photo. If an error occurred, an [ApiException] will be thrown.
- */
-@ExperimentalCoroutinesApi
-public suspend fun PlacesClient.awaitFetchPhoto(
-    photoMetadata: PhotoMetadata,
-    actions: FetchPhotoRequest.Builder.() -> Unit = {}
-): FetchPhotoResponse {
-    val cancellationTokenSource = CancellationTokenSource()
-    val request = FetchPhotoRequest.builder(photoMetadata)
-        .setCancellationToken(cancellationTokenSource.token)
-        .apply(actions)
-        .build()
-    return this.fetchPhoto(request)
-        .await(cancellationTokenSource)
-}
+import com.google.android.libraries.places.api.net.kotlin.awaitFetchPlace as sdkAwaitFetchPlace
+import com.google.android.libraries.places.api.net.kotlin.awaitFetchResolvedPhotoUri as sdkAwaitFetchResolvedPhotoUri
+import com.google.android.libraries.places.api.net.kotlin.awaitFindAutocompletePredictions as sdkAwaitFindAutocompletePredictions
+import com.google.android.libraries.places.api.net.kotlin.awaitIsOpen as sdkAwaitIsOpen
+import com.google.android.libraries.places.api.net.kotlin.awaitSearchByText as sdkAwaitSearchByText
+import com.google.android.libraries.places.api.net.kotlin.awaitSearchNearby as sdkAwaitSearchNearby
 
 /**
  * Wraps [PlacesClient.fetchPlace] in a suspending function.
  *
  * Fetches the details of a place. If an error occurred, an [ApiException] will be thrown.
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("this.awaitFetchPlace(placeId, placeFields, actions)")
+)
 @ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitFetchPlace(
     placeId: String,
     placeFields: List<Place.Field>,
 ): FetchPlaceResponse {
-    val cancellationTokenSource = CancellationTokenSource()
-    val request = FetchPlaceRequest.builder(placeId, placeFields)
-        .setCancellationToken(cancellationTokenSource.token)
-        .build()
-    return this.fetchPlace(request).await(cancellationTokenSource)
+    return this.sdkAwaitFetchPlace(placeId, placeFields)
+}
+
+/**
+ * Wraps [PlacesClient.fetchResolvedPhotoUri] in a suspending function.
+ *
+ * Fetches a resolved photo URI. If an error occurred, an [ApiException] will be thrown.
+ */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("this.awaitFetchResolvedPhotoUri(photoMetadata, actions)")
+)
+@ExperimentalCoroutinesApi
+public suspend fun PlacesClient.awaitFetchResolvedPhotoUri(
+    photoMetadata: PhotoMetadata,
+    actions: FetchResolvedPhotoUriRequest.Builder.() -> Unit = {}
+): FetchResolvedPhotoUriResponse {
+    return this.sdkAwaitFetchResolvedPhotoUri(photoMetadata, actions)
 }
 
 /**
@@ -81,39 +79,15 @@ public suspend fun PlacesClient.awaitFetchPlace(
  *
  * Fetches autocomplete predictions. If an error occurred, an [ApiException] will be thrown.
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("this.awaitFindAutocompletePredictions(actions)")
+)
 @ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitFindAutocompletePredictions(
     actions: FindAutocompletePredictionsRequest.Builder.() -> Unit
 ): FindAutocompletePredictionsResponse {
-    val cancellationTokenSource = CancellationTokenSource()
-    val request = FindAutocompletePredictionsRequest.builder()
-        .setCancellationToken(cancellationTokenSource.token)
-        .apply(actions)
-        .build()
-    return this.findAutocompletePredictions(request).await(cancellationTokenSource)
-}
-
-/**
- * Wraps [PlacesClient.findCurrentPlace] in a suspending function.
- *
- * Fetches the approximate current place of the user's device. Calling this method without granting
- * the appropriate permissions will result in a [SecurityException] being thrown. In addition, if
- * an error occurred while fetching the current place, an [ApiException] will be thrown.
- */
-@Deprecated(
-    "Use awaitSearchNearbyPlace(locationRestriction, placeFields) instead. This function uses the deprecated FindCurrentPlaceRequest.",
-    ReplaceWith("this.awaitSearchNearbyPlace(LocationRestriction(), placeFields)")
-)
-@ExperimentalCoroutinesApi
-@RequiresPermission(anyOf = [permission.ACCESS_FINE_LOCATION, permission.ACCESS_COARSE_LOCATION])
-public suspend fun PlacesClient.awaitFindCurrentPlace(
-    placeFields: List<Place.Field>
-): FindCurrentPlaceResponse {
-    val cancellationTokenSource = CancellationTokenSource()
-    val request = FindCurrentPlaceRequest.builder(placeFields)
-        .setCancellationToken(cancellationTokenSource.token)
-        .build()
-    return this.findCurrentPlace(request).await(cancellationTokenSource)
+    return this.sdkAwaitFindAutocompletePredictions(actions)
 }
 
 /**
@@ -128,33 +102,62 @@ public suspend fun PlacesClient.awaitFindCurrentPlace(
  * @param placeFields the fields of the places to be returned
  * @return the response containing the nearby place results.
  */
+@Deprecated(
+    "Use awaitSearchNearby(locationRestriction, placeFields, actions) instead.",
+    ReplaceWith("this.awaitSearchNearby(locationRestriction, placeFields)")
+)
 @ExperimentalCoroutinesApi
 @RequiresPermission(anyOf = [permission.ACCESS_FINE_LOCATION, permission.ACCESS_COARSE_LOCATION])
+@SuppressLint("MissingPermission")
 public suspend fun PlacesClient.awaitSearchNearbyPlace(
     locationRestriction: LocationRestriction,
     placeFields: List<Place.Field>
 ): SearchNearbyResponse {
-    val cancellationTokenSource = CancellationTokenSource()
-    val request = SearchNearbyRequest.builder(locationRestriction, placeFields)
-        .setCancellationToken(cancellationTokenSource.token)
-        .build()
-    return this.searchNearby(request).await(cancellationTokenSource)
+    return this.sdkAwaitSearchNearby(locationRestriction, placeFields)
+}
+
+/**
+ * Wraps [PlacesClient.searchNearby] in a suspending function.
+ *
+ * Fetches the approximate nearby places based on the provided [locationRestriction]. Calling this
+ * method without granting the appropriate permissions will result in a [SecurityException] being
+ * thrown. In addition, if an error occurred while fetching the places, an [ApiException] will be
+ * thrown.
+ *
+ * @param locationRestriction limits the scope of the search to a specific area.
+ * @param placeFields the fields of the places to be returned
+ * @param actions the actions to apply to the [SearchNearbyRequest.Builder]
+ * @return the response containing the nearby place results.
+ */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("this.awaitSearchNearby(locationRestriction, placeFields, actions)")
+)
+@ExperimentalCoroutinesApi
+@RequiresPermission(anyOf = [permission.ACCESS_FINE_LOCATION, permission.ACCESS_COARSE_LOCATION])
+@SuppressLint("MissingPermission")
+public suspend fun PlacesClient.awaitSearchNearby(
+    locationRestriction: LocationRestriction,
+    placeFields: List<Place.Field>,
+    actions: SearchNearbyRequest.Builder.() -> Unit = {}
+): SearchNearbyResponse {
+    return this.sdkAwaitSearchNearby(locationRestriction, placeFields, actions)
 }
 
 /**
  * Wraps [PlacesClient.isOpen] in a suspending function with the given [Place] object.
  *
- * Returns whether or not a place is open. If an error occurred, an [ApiException] will be thrown.
+ * Returns whether a place is open. If an error occurred, an [ApiException] will be thrown.
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("this.awaitIsOpen(place, utcTimeMillis)")
+)
 @ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitIsOpen(
     place: Place, utcTimeMillis: Long? = null
 ): IsOpenResponse {
-    val cancellationTokenSource = CancellationTokenSource()
-    val request = isOpenRequest(place, utcTimeMillis) {
-        cancellationToken = cancellationTokenSource.token
-    }
-    return this.isOpen(request).await(cancellationTokenSource)
+    return this.sdkAwaitIsOpen(place, utcTimeMillis ?: 0L)
 }
 
 /**
@@ -162,17 +165,22 @@ public suspend fun PlacesClient.awaitIsOpen(
  *
  * Returns whether or not a place is open. If an error occurred, an [ApiException] will be thrown.
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("this.awaitIsOpen(placeId, utcTimeMillis)")
+)
 @ExperimentalCoroutinesApi
 public suspend fun PlacesClient.awaitIsOpen(
     placeId: String,
     utcTimeMillis: Long? = null,
 ): IsOpenResponse {
-    val cancellationTokenSource = CancellationTokenSource()
-    val request =
-        isOpenRequest(placeId, utcTimeMillis) { cancellationToken = cancellationTokenSource.token }
-    return this.isOpen(request).await(cancellationTokenSource)
+    return this.sdkAwaitIsOpen(placeId, utcTimeMillis ?: 0L)
 }
 
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("this.awaitSearchByText(textQuery, placeFields, actions)")
+)
 @ExperimentalCoroutinesApi
 /**
  * Wraps [PlacesClient.searchByText] in a suspending function.
@@ -185,10 +193,6 @@ public suspend fun PlacesClient.awaitSearchByText(
     placeFields: List<Place.Field>,
     actions: SearchByTextRequest.Builder.() -> Unit = {},
 ): SearchByTextResponse {
-    val cancellationTokenSource = CancellationTokenSource()
-    val request = searchByTextRequest(textQuery, placeFields) {
-        actions()
-        cancellationToken = cancellationTokenSource.token
-    }
-    return this.searchByText(request).await(cancellationTokenSource)
+    return this.sdkAwaitSearchByText(textQuery, placeFields, actions)
 }
+

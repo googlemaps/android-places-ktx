@@ -15,22 +15,28 @@
 package com.google.android.libraries.places.ktx.api.net
 
 import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.libraries.places.api.model.CircularBounds
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.gms.maps.model.LatLng
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 internal class FindCurrentPlaceRequestTest {
+    private val locationRestriction = CircularBounds.newInstance(
+        LatLng(37.7576948, -122.4727051), // Center
+        1000.0 // Radius in meters
+    )
 
     @Test
     fun testBuilderNoActions() {
-        val request = findCurrentPlaceRequest(listOf(Place.Field.DISPLAY_NAME))
+        val request = searchNearbyPlaceRequest(locationRestriction, listOf(Place.Field.DISPLAY_NAME))
         assertEquals(listOf(Place.Field.DISPLAY_NAME), request.placeFields)
     }
 
     @Test
     fun testBuilderWithActions() {
         val cancellationToken = CancellationTokenSource().token
-        val request = findCurrentPlaceRequest(listOf(Place.Field.DISPLAY_NAME)) {
+        val request = searchNearbyPlaceRequest(locationRestriction, listOf(Place.Field.DISPLAY_NAME)) {
             setCancellationToken(cancellationToken)
         }
         assertEquals(listOf(Place.Field.DISPLAY_NAME), request.placeFields)

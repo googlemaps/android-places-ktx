@@ -14,62 +14,104 @@
 
 package com.google.places.android.ktx.demo
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.google.places.android.ktx.demo.ui.DemoTheme
 
-class DemoActivity : AppCompatActivity() {
+class DemoActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContent {
+            DemoTheme {
+                DemoListScreen(
+                    onDemoSelected = { demo ->
+                        startActivity(Intent(this, demo.activity))
+                    }
+                )
+            }
+        }
+    }
+}
 
-        val listView = ListView(this).also {
-            it.layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DemoListScreen(onDemoSelected: (Demo) -> Unit) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        stringResource(R.string.app_name),
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                )
             )
-            it.adapter = DemoAdapter(this, Demo.entries.toTypedArray())
-            it.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
-                val demo = parent.adapter.getItem(position) as? Demo
-                demo?.let {
-                    startActivity(Intent(this, demo.activity))
-                }
-            }
         }
-        setContentView(listView)
-    }
-
-    private class DemoAdapter(context: Context, demos: Array<Demo>) :
-        ArrayAdapter<Demo>(context, R.layout.item_demo, demos) {
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val demoView = (convertView as? DemoItemView) ?: DemoItemView(context)
-            return demoView.also {
-                val demo = getItem(position)
-                it.title.setText(demo?.title ?: 0)
-                it.description.setText(demo?.description ?: 0)
+    ) { padding ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            item {
+                Text(
+                    text = "Places KTX Demo",
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+            }
+            items(Demo.entries) { demo ->
+                DemoItemCard(demo = demo, onClick = { onDemoSelected(demo) })
             }
         }
     }
+}
 
-    private class DemoItemView(context: Context) : LinearLayout(context) {
-
-        val title: TextView by lazy { findViewById(R.id.textViewTitle) }
-
-        val description: TextView by lazy { findViewById(R.id.textViewDescription) }
-
-        init {
-            LayoutInflater.from(context)
-                .inflate(R.layout.item_demo, this)
+@Composable
+fun DemoItemCard(demo: Demo, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = stringResource(demo.title),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = stringResource(demo.description),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }

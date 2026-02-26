@@ -17,6 +17,8 @@ package com.google.android.libraries.places.ktx.api.net
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 
+import com.google.android.libraries.places.api.net.kotlin.fetchPlaceRequest as sdkFetchPlaceRequest
+
 /**
  * Builds a new [FetchPlaceRequest].
  *
@@ -26,12 +28,14 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
  *
  * @return the constructed [FetchPlaceRequest]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("fetchPlaceRequest(placeId, placeFields, actions)", "com.google.android.libraries.places.api.net.kotlin.fetchPlaceRequest")
+)
 public fun fetchPlaceRequest(
     placeId: String,
     placeFields: List<Place.Field>,
     actions: (FetchPlaceRequest.Builder.() -> Unit)? = null
 ): FetchPlaceRequest {
-    return FetchPlaceRequest.builder(placeId, placeFields).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    return sdkFetchPlaceRequest(placeId, placeFields, actions ?: {})
 }

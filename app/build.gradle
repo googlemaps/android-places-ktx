@@ -1,5 +1,5 @@
 /**
- * Copyright 2024 Google Inc.
+ * Copyright 2026 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,6 +72,8 @@ dependencies {
     implementation libs.androidx.compose.ui.tooling.preview
     implementation libs.androidx.compose.material3
     implementation libs.androidx.activity.compose
+    implementation libs.androidx.compose.runtime.livedata
+    implementation libs.androidx.compose.material.icons.extended
 
     debugImplementation libs.androidx.compose.ui.tooling
     debugImplementation libs.androidx.compose.ui.test.manifest
@@ -83,6 +85,7 @@ dependencies {
     implementation libs.play.services.maps
     implementation libs.fragment.ktx
     implementation libs.lifecycle.runtime.ktx
+    implementation libs.lifecycle.runtime.compose
     implementation libs.material
     implementation libs.volley
 
@@ -91,10 +94,18 @@ dependencies {
     implementation libs.runtime
     kapt libs.hilt.android.compiler
 
+
     implementation project(':places-ktx')
 }
 
 secrets {
     propertiesFileName 'secrets.properties'
     defaultPropertiesFileName 'local.defaults.properties'
+}
+
+task installAndLaunch(type: Exec) {
+    description = "Installs and launches the demo app."
+    group = "install"
+    dependsOn("installDebug")
+    commandLine("adb", "shell", "am", "start", "-n", "com.google.maps.android.ktx.demo/com.google.places.android.ktx.demo.DemoActivity")
 }

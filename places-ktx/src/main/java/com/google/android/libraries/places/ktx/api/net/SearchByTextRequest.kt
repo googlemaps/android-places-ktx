@@ -17,6 +17,8 @@ package com.google.android.libraries.places.ktx.api.net
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.SearchByTextRequest
 
+import com.google.android.libraries.places.api.net.kotlin.searchByTextRequest as sdkSearchByTextRequest
+
 public enum class PriceLevel(public val value: Int) {
   FREE(0),  // Note: not for use in the API call.
   INEXPENSIVE(1),
@@ -33,14 +35,16 @@ public enum class PriceLevel(public val value: Int) {
  * @param actions the actions to apply to the [SearchByTextRequest.Builder]
  * @return the constructed [SearchByTextRequest]
  */
+@Deprecated(
+  "Use the version in the Places SDK instead.",
+  ReplaceWith("searchByTextRequest(textQuery, placeFields, actions)", "com.google.android.libraries.places.api.net.kotlin.searchByTextRequest")
+)
 public fun searchByTextRequest(
   textQuery: String,
   placeFields: List<Place.Field>,
   actions: SearchByTextRequest.Builder.() -> Unit = {},
 ): SearchByTextRequest {
-  return SearchByTextRequest.builder(textQuery, placeFields)
-    .apply(actions)
-    .build()
+  return sdkSearchByTextRequest(textQuery, placeFields, actions)
 }
 
 public fun SearchByTextRequest.Builder.setPriceLevels(
