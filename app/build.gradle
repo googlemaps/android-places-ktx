@@ -101,3 +101,10 @@ secrets {
     propertiesFileName 'secrets.properties'
     defaultPropertiesFileName 'local.defaults.properties'
 }
+
+task installAndLaunch(type: Exec) {
+    description = "Installs and launches the demo app."
+    group = "install"
+    dependsOn("installDebug")
+    commandLine("adb", "shell", "am", "start", "-n", "com.google.maps.android.ktx.demo/com.google.places.android.ktx.demo.DemoActivity")
+}
