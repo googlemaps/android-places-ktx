@@ -56,7 +56,6 @@ class PlacesSearchDemoActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlacesSearchScreen(
     viewModel: PlacesSearchViewModel,
@@ -75,6 +74,7 @@ fun PlacesSearchScreen(
         }
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     Scaffold(
         topBar = {
             TopAppBar(

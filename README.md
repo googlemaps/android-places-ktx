@@ -38,7 +38,7 @@ dependencies {
 
 Accessing API responses made by `PlacesClient` can be retrieved using coroutines via the official Places SDK extensions. 
 
-This library provides a compatibility shim and DSL builders for those migrating from older versions.
+This library serves as a **compatibility shim** and provides DSL builders for projects migrating from older versions of the Places KTX library. New projects are encouraged to use the official SDK extensions directly.
 
 ### Example: Programmatic Autocomplete
 The example here demonstrates how you can use the official SDK's KTX extensions alongside with Android’s [ViewModel KTX][viewmodel-ktx]’s `viewModelScope` and `StateFlow`.

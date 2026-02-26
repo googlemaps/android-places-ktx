@@ -14,24 +14,18 @@
 
 package com.google.android.libraries.places.ktx.api.net
 
-import android.annotation.SuppressLint
 import android.Manifest.permission
+import android.annotation.SuppressLint
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.libraries.places.api.model.LocationRestriction
 import com.google.android.libraries.places.api.model.PhotoMetadata
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.net.FetchPhotoRequest
-import com.google.android.libraries.places.api.net.FetchPhotoResponse
-import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FetchPlaceResponse
 import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
 import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriResponse
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
-import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse
 import com.google.android.libraries.places.api.net.IsOpenResponse
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.api.net.SearchByTextRequest
@@ -39,33 +33,12 @@ import com.google.android.libraries.places.api.net.SearchByTextResponse
 import com.google.android.libraries.places.api.net.SearchNearbyRequest
 import com.google.android.libraries.places.api.net.SearchNearbyResponse
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.tasks.await
-
-import com.google.android.libraries.places.api.net.kotlin.awaitFetchPhoto as sdkAwaitFetchPhoto
 import com.google.android.libraries.places.api.net.kotlin.awaitFetchPlace as sdkAwaitFetchPlace
 import com.google.android.libraries.places.api.net.kotlin.awaitFetchResolvedPhotoUri as sdkAwaitFetchResolvedPhotoUri
 import com.google.android.libraries.places.api.net.kotlin.awaitFindAutocompletePredictions as sdkAwaitFindAutocompletePredictions
-import com.google.android.libraries.places.api.net.kotlin.awaitFindCurrentPlace as sdkAwaitFindCurrentPlace
 import com.google.android.libraries.places.api.net.kotlin.awaitIsOpen as sdkAwaitIsOpen
 import com.google.android.libraries.places.api.net.kotlin.awaitSearchByText as sdkAwaitSearchByText
 import com.google.android.libraries.places.api.net.kotlin.awaitSearchNearby as sdkAwaitSearchNearby
-
-/**
- * Wraps [PlacesClient.fetchPhoto] in a suspending function.
- *
- * Fetches a photo. If an error occurred, an [ApiException] will be thrown.
- */
-@Deprecated(
-    "Use awaitFetchResolvedPhotoUri(photoMetadata, actions) instead. This function uses the deprecated FetchPhotoRequest.",
-    ReplaceWith("this.awaitFetchResolvedPhotoUri(photoMetadata, actions)")
-)
-@ExperimentalCoroutinesApi
-public suspend fun PlacesClient.awaitFetchPhoto(
-    photoMetadata: PhotoMetadata,
-    actions: FetchPhotoRequest.Builder.() -> Unit = {}
-): FetchPhotoResponse {
-    return this.sdkAwaitFetchPhoto(photoMetadata, actions)
-}
 
 /**
  * Wraps [PlacesClient.fetchPlace] in a suspending function.
@@ -115,26 +88,6 @@ public suspend fun PlacesClient.awaitFindAutocompletePredictions(
     actions: FindAutocompletePredictionsRequest.Builder.() -> Unit
 ): FindAutocompletePredictionsResponse {
     return this.sdkAwaitFindAutocompletePredictions(actions)
-}
-
-/**
- * Wraps [PlacesClient.findCurrentPlace] in a suspending function.
- *
- * Fetches the approximate current place of the user's device. Calling this method without granting
- * the appropriate permissions will result in a [SecurityException] being thrown. In addition, if
- * an error occurred while fetching the current place, an [ApiException] will be thrown.
- */
-@Deprecated(
-    "Use awaitSearchNearby(locationRestriction, placeFields, actions) instead. This function uses the deprecated FindCurrentPlaceRequest.",
-    ReplaceWith("this.awaitSearchNearby(/* TODO: provide LocationRestriction */, placeFields)")
-)
-@ExperimentalCoroutinesApi
-@RequiresPermission(anyOf = [permission.ACCESS_FINE_LOCATION, permission.ACCESS_COARSE_LOCATION])
-@SuppressLint("MissingPermission")
-public suspend fun PlacesClient.awaitFindCurrentPlace(
-    placeFields: List<Place.Field>
-): FindCurrentPlaceResponse {
-    return this.sdkAwaitFindCurrentPlace(placeFields)
 }
 
 /**
@@ -194,7 +147,7 @@ public suspend fun PlacesClient.awaitSearchNearby(
 /**
  * Wraps [PlacesClient.isOpen] in a suspending function with the given [Place] object.
  *
- * Returns whether or not a place is open. If an error occurred, an [ApiException] will be thrown.
+ * Returns whether a place is open. If an error occurred, an [ApiException] will be thrown.
  */
 @Deprecated(
     "Use the version in the Places SDK instead.",

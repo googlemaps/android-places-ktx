@@ -1,0 +1,310 @@
+
+> Configure project :
+WARNING: The option setting 'android.usesSdkInManifest.disallowed=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.sdk.defaultTargetSdkToCompileSdkIfUnset=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.enableAppCompileTimeRClass=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.builtInKotlin=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.newDsl=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.r8.optimizedResourceShrinking=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.defaults.buildfeatures.resvalues=true' is deprecated.
+The current default is 'false'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+WARNING: The option setting 'android.enableJetifier=true' is deprecated.
+The current default is 'false'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+
+> Configure project :app
+WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+WARNING: The property android.dependency.excludeLibraryComponentsFromConstraints improves project import performance for very large projects. It should be enabled to improve performance.
+To suppress this warning, add android.generateSyncIssueWhenLibraryConstraintsAreEnabled=false to gradle.properties
+WARNING: The property android.dependency.excludeLibraryComponentsFromConstraints improves project import performance for very large projects. It should be enabled to improve performance.
+To suppress this warning, add android.generateSyncIssueWhenLibraryConstraintsAreEnabled=false to gradle.properties
+WARNING: The property android.dependency.excludeLibraryComponentsFromConstraints improves project import performance for very large projects. It should be enabled to improve performance.
+To suppress this warning, add android.generateSyncIssueWhenLibraryConstraintsAreEnabled=false to gradle.properties
+WARNING: The property android.dependency.excludeLibraryComponentsFromConstraints improves project import performance for very large projects. It should be enabled to improve performance.
+To suppress this warning, add android.generateSyncIssueWhenLibraryConstraintsAreEnabled=false to gradle.properties
+WARNING: The multidex library is included as a dependency, but it is not needed for apps
+with minSdk >= 21. Please remove dependency 'androidx.multidex:multidex:2.0.1' from ':app'.
+See https://developer.android.com/build/multidex for more information.
+
+> Configure project :places-ktx
+WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+WARNING: The property android.dependency.excludeLibraryComponentsFromConstraints improves project import performance for very large projects. It should be enabled to improve performance.
+To suppress this warning, add android.generateSyncIssueWhenLibraryConstraintsAreEnabled=false to gradle.properties
+WARNING: The property android.dependency.excludeLibraryComponentsFromConstraints improves project import performance for very large projects. It should be enabled to improve performance.
+To suppress this warning, add android.generateSyncIssueWhenLibraryConstraintsAreEnabled=false to gradle.properties
+WARNING: The property android.dependency.excludeLibraryComponentsFromConstraints improves project import performance for very large projects. It should be enabled to improve performance.
+To suppress this warning, add android.generateSyncIssueWhenLibraryConstraintsAreEnabled=false to gradle.properties
+WARNING: The property android.dependency.excludeLibraryComponentsFromConstraints improves project import performance for very large projects. It should be enabled to improve performance.
+To suppress this warning, add android.generateSyncIssueWhenLibraryConstraintsAreEnabled=false to gradle.properties
+
+> Task :clean
+> Task :app:clean UP-TO-DATE
+> Task :places-ktx:clean UP-TO-DATE
+> Task :assemble UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:generateDebugBuildConfig
+> Task :places-ktx:preBuild UP-TO-DATE
+> Task :places-ktx:preDebugBuild UP-TO-DATE
+> Task :places-ktx:processDebugNavigationResources
+> Task :places-ktx:writeDebugAarMetadata
+> Task :app:processDebugNavigationResources
+> Task :app:checkDebugAarMetadata
+> Task :app:generateDebugResValues
+> Task :places-ktx:generateDebugResValues
+> Task :app:compileDebugNavigationResources
+> Task :places-ktx:generateDebugResources
+> Task :places-ktx:packageDebugResources
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :places-ktx:extractDeepLinksDebug
+> Task :places-ktx:compileDebugLibraryResources
+> Task :places-ktx:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :places-ktx:parseDebugLocalResources
+> Task :app:parseDebugLocalResources
+> Task :places-ktx:javaPreCompileDebug
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :places-ktx:generateDebugAssets UP-TO-DATE
+> Task :app:javaPreCompileDebug
+> Task :places-ktx:mergeDebugAssets
+> Task :places-ktx:generateDebugRFile
+> Task :places-ktx:processDebugManifest
+> Task :app:mergeDebugResources
+> Task :app:mergeDebugAssets
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:compressDebugAssets
+> Task :app:desugarDebugFileDependencies
+
+> Task :places-ktx:compileDebugKotlin
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FetchPhotoRequest.kt:18:8 'class FetchPhotoRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FetchPhotoRequest.kt:38:33 'class Builder : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FetchPhotoRequest.kt:39:4 'class FetchPhotoRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FetchPhotoRequest.kt:40:12 'fun fetchPhotoRequest(photoMetadata: PhotoMetadata, actions: (FetchPhotoRequest.Builder.() -> Unit)? = ...): FetchPhotoRequest' is deprecated. Replaced with new API.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FindCurrentPlaceRequest.kt:19:8 'class FindCurrentPlaceRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FindCurrentPlaceRequest.kt:39:39 'class Builder : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FindCurrentPlaceRequest.kt:40:4 'class FindCurrentPlaceRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FindCurrentPlaceRequest.kt:41:12 'fun findCurrentPlaceRequest(placeFields: List<Place.Field>, actions: (FindCurrentPlaceRequest.Builder.() -> Unit)? = ...): FindCurrentPlaceRequest' is deprecated. Replaced with new API.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:25:8 'class FetchPhotoRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:26:8 'class FetchPhotoResponse : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:33:8 'class FindCurrentPlaceRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:34:8 'class FindCurrentPlaceResponse : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:65:32 'class Builder : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:66:4 'class FetchPhotoResponse : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:67:17 'suspend fun PlacesClient.awaitFetchPhoto(photoMetadata: PhotoMetadata, actions: FetchPhotoRequest.Builder.() -> Unit = ...): FetchPhotoResponse' is deprecated. Replaced with new API.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:136:4 'class FindCurrentPlaceResponse : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:137:17 'suspend fun PlacesClient.awaitFindCurrentPlace(placeFields: List<Place.Field>): FindCurrentPlaceResponse' is deprecated. Replaced with new API.
+
+> Task :places-ktx:compileDebugJavaWithJavac NO-SOURCE
+> Task :places-ktx:bundleLibRuntimeToJarDebug
+> Task :places-ktx:processDebugJavaRes
+> Task :places-ktx:bundleLibCompileToJarDebug
+> Task :app:checkDebugDuplicateClasses
+> Task :app:mergeDebugJniLibFolders
+> Task :places-ktx:bundleLibRuntimeToDirDebug
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeExtDexDebug
+> Task :places-ktx:mergeDebugJniLibFolders
+> Task :places-ktx:mergeDebugNativeLibs NO-SOURCE
+> Task :places-ktx:copyDebugJniLibsProjectOnly
+> Task :app:validateSigningDebug
+> Task :app:mergeLibDexDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:mergeDebugNativeLibs
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:mergeReleaseJniLibFolders
+> Task :places-ktx:preReleaseBuild UP-TO-DATE
+> Task :places-ktx:mergeReleaseJniLibFolders
+> Task :places-ktx:mergeReleaseNativeLibs NO-SOURCE
+> Task :places-ktx:copyReleaseJniLibsProjectOnly
+> Task :places-ktx:generateReleaseResValues
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so. Run with --info option to learn more.
+
+> Task :places-ktx:generateReleaseResources
+> Task :app:mergeReleaseNativeLibs
+> Task :places-ktx:packageReleaseResources
+> Task :places-ktx:processReleaseNavigationResources
+
+> Task :app:stripReleaseDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so. Run with --info option to learn more.
+
+> Task :places-ktx:parseReleaseLocalResources
+> Task :places-ktx:javaPreCompileRelease
+> Task :app:extractReleaseNativeSymbolTables
+> Task :places-ktx:generateReleaseRFile
+> Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:buildKotlinToolingMetadata
+> Task :app:generateReleaseBuildConfig
+> Task :places-ktx:writeReleaseAarMetadata
+> Task :app:processReleaseNavigationResources
+> Task :app:compileReleaseNavigationResources
+> Task :app:generateReleaseResValues
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:generateReleaseResources
+> Task :app:checkReleaseAarMetadata
+
+> Task :places-ktx:compileReleaseKotlin
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FetchPhotoRequest.kt:18:8 'class FetchPhotoRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FetchPhotoRequest.kt:38:33 'class Builder : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FetchPhotoRequest.kt:39:4 'class FetchPhotoRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FetchPhotoRequest.kt:40:12 'fun fetchPhotoRequest(photoMetadata: PhotoMetadata, actions: (FetchPhotoRequest.Builder.() -> Unit)? = ...): FetchPhotoRequest' is deprecated. Replaced with new API.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FindCurrentPlaceRequest.kt:19:8 'class FindCurrentPlaceRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FindCurrentPlaceRequest.kt:39:39 'class Builder : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FindCurrentPlaceRequest.kt:40:4 'class FindCurrentPlaceRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/FindCurrentPlaceRequest.kt:41:12 'fun findCurrentPlaceRequest(placeFields: List<Place.Field>, actions: (FindCurrentPlaceRequest.Builder.() -> Unit)? = ...): FindCurrentPlaceRequest' is deprecated. Replaced with new API.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:25:8 'class FetchPhotoRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:26:8 'class FetchPhotoResponse : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:33:8 'class FindCurrentPlaceRequest : Any, zzmq' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:34:8 'class FindCurrentPlaceResponse : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:65:32 'class Builder : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:66:4 'class FetchPhotoResponse : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:67:17 'suspend fun PlacesClient.awaitFetchPhoto(photoMetadata: PhotoMetadata, actions: FetchPhotoRequest.Builder.() -> Unit = ...): FetchPhotoResponse' is deprecated. Replaced with new API.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:136:4 'class FindCurrentPlaceResponse : Any' is deprecated. Deprecated in Java.
+w: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/places-ktx/src/main/java/com/google/android/libraries/places/ktx/api/net/PlacesClient.kt:137:17 'suspend fun PlacesClient.awaitFindCurrentPlace(placeFields: List<Place.Field>): FindCurrentPlaceResponse' is deprecated. Replaced with new API.
+
+> Task :places-ktx:compileReleaseJavaWithJavac NO-SOURCE
+> Task :app:packageReleaseResources
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease
+> Task :places-ktx:extractDeepLinksRelease
+> Task :places-ktx:compileReleaseLibraryResources
+> Task :app:parseReleaseLocalResources
+> Task :places-ktx:bundleLibCompileToJarRelease
+> Task :places-ktx:processReleaseManifest
+> Task :places-ktx:bundleLibRuntimeToDirRelease
+> Task :app:mergeReleaseResources
+> Task :app:processReleaseMainManifest
+> Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
+> Task :app:javaPreCompileRelease
+> Task :app:desugarReleaseFileDependencies
+> Task :places-ktx:bundleLibRuntimeToJarRelease
+> Task :app:mergeReleaseStartupProfile
+> Task :app:processReleaseResources
+> Task :app:processDebugResources
+> Task :app:mergeExtDexRelease
+> Task :places-ktx:prepareReleaseArtProfile
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :places-ktx:generateReleaseAssets UP-TO-DATE
+> Task :places-ktx:mergeReleaseAssets
+> Task :app:mergeReleaseAssets
+> Task :app:compressReleaseAssets
+> Task :app:mergeReleaseArtProfile
+> Task :app:extractReleaseVersionControlInfo
+> Task :app:extractProguardFiles
+> Task :places-ktx:processReleaseJavaRes
+> Task :places-ktx:createFullJarRelease
+> Task :places-ktx:extractProguardFiles
+
+> Task :app:kaptGenerateStubsDebugKotlin
+w: Argument -Xopt-in is deprecated. Please use -opt-in instead
+
+> Task :app:kaptGenerateStubsReleaseKotlin
+w: Argument -Xopt-in is deprecated. Please use -opt-in instead
+
+> Task :places-ktx:generateReleaseLintModel
+> Task :places-ktx:prepareLintJarForPublish
+> Task :places-ktx:stripReleaseDebugSymbols NO-SOURCE
+> Task :places-ktx:copyReleaseJniLibsProjectAndLocalJars
+> Task :places-ktx:extractDeepLinksForAarRelease
+> Task :places-ktx:checkReleaseAarMetadata
+> Task :places-ktx:extractReleaseAnnotations
+> Task :places-ktx:mergeReleaseGeneratedProguardFiles
+> Task :places-ktx:mergeReleaseConsumerProguardFiles
+> Task :places-ktx:writeReleaseLintModelMetadata
+> Task :places-ktx:generateReleaseLintVitalModel
+> Task :places-ktx:mergeReleaseJavaResource
+
+> Task :app:kaptDebugKotlin
+/Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/app/build/tmp/kapt3/stubs/debug/com/google/places/android/ktx/demo/PlacesSearchDemoActivity.java:5: error: [Hilt] Expected @AndroidEntryPoint to have a value. Did you forget to apply the Gradle Plugin? (com.google.dagger.hilt.android)
+public final class PlacesSearchDemoActivity extends androidx.activity.ComponentActivity {
+             ^
+  See https://dagger.dev/hilt/gradle-setup.html
+  [1;31m[Hilt] Processing did not complete. See error above for details.[0m
+/Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/app/build/tmp/kapt3/stubs/debug/com/google/places/android/ktx/demo/DemoApplication.java:5: error: [Hilt] Expected @HiltAndroidApp to have a value. Did you forget to apply the Gradle Plugin? (com.google.dagger.hilt.android)
+public final class DemoApplication extends android.app.Application {
+             ^
+  See https://dagger.dev/hilt/gradle-setup.html
+  [1;31m[Hilt] Processing did not complete. See error above for details.[0m
+warning: File for type 'com.google.places.android.ktx.demo.DemoApplication_ComponentTreeDeps' created in the last round will not be subject to annotation processing.
+warning: File for type 'dagger.hilt.internal.processedrootsentinel.codegen._com_google_places_android_ktx_demo_DemoApplication' created in the last round will not be subject to annotation processing.
+
+> Task :app:kaptReleaseKotlin FAILED
+/Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/app/build/tmp/kapt3/stubs/release/com/google/places/android/ktx/demo/PlacesSearchDemoActivity.java:5: error: [Hilt] Expected @AndroidEntryPoint to have a value. Did you forget to apply the Gradle Plugin? (com.google.dagger.hilt.android)
+public final class PlacesSearchDemoActivity extends androidx.activity.ComponentActivity {
+             ^
+  See https://dagger.dev/hilt/gradle-setup.html
+  [1;31m[Hilt] Processing did not complete. See error above for details.[0m
+/Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/app/build/tmp/kapt3/stubs/release/com/google/places/android/ktx/demo/DemoApplication.java:5: error: [Hilt] Expected @HiltAndroidApp to have a value. Did you forget to apply the Gradle Plugin? (com.google.dagger.hilt.android)
+public final class DemoApplication extends android.app.Application {
+             ^
+  See https://dagger.dev/hilt/gradle-setup.html
+  [1;31m[Hilt] Processing did not complete. See error above for details.[0m
+warning: File for type 'com.google.places.android.ktx.demo.DemoApplication_ComponentTreeDeps' created in the last round will not be subject to annotation processing.
+warning: File for type 'dagger.hilt.internal.processedrootsentinel.codegen._com_google_places_android_ktx_demo_DemoApplication' created in the last round will not be subject to annotation processing.
+
+> Task :app:kaptDebugKotlin FAILED
+> Task :app:collectReleaseDependencies
+> Task :app:optimizeReleaseResources
+> Task :places-ktx:lintVitalAnalyzeRelease
+
+[Incubating] Problems report is available at: file:///Users/dkhawk/AndroidStudioProjects/github-maps-code/android-places-ktx/feat-update-deprecations/build/reports/problems/problems-report.html
+
+FAILURE: Build completed with 2 failures.
+
+1: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':app:kaptDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.gradle.internal.KaptWithoutKotlincTask$KaptExecutionWorkAction
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to generate a Build Scan (Powered by Develocity).
+> Get more help at https://help.gradle.org.
+==============================================================================
+
+2: Task failed with an exception.
+-----------
+* What went wrong:
+Execution failed for task ':app:kaptReleaseKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.gradle.internal.KaptWithoutKotlincTask$KaptExecutionWorkAction
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to generate a Build Scan (Powered by Develocity).
+> Get more help at https://help.gradle.org.
+==============================================================================
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.1.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1m 50s
+122 actionable tasks: 120 executed, 2 up-to-date

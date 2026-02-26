@@ -16,30 +16,9 @@ package com.google.android.libraries.places.ktx.api.net
 
 import com.google.android.libraries.places.api.model.LocationRestriction
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.SearchNearbyRequest
 
-import com.google.android.libraries.places.api.net.kotlin.findCurrentPlaceRequest as sdkFindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.kotlin.searchNearbyRequest as sdkSearchNearbyRequest
-
-/**
- * Builds a new [FindCurrentPlaceRequest].
- *
- * @param placeFields the fields of the places to be returned
- * @param actions the actions to apply to the [FindCurrentPlaceRequest.Builder]
- *
- * @return the constructed [FindCurrentPlaceRequest]
- */
-@Deprecated(
-    "Use searchNearbyPlaceRequest(locationRestriction, placeFields, actions) instead. FindCurrentPlaceRequest is deprecated.",
-    ReplaceWith("searchNearbyPlaceRequest(LocationRestriction(), placeFields, actions)")
-)
-public fun findCurrentPlaceRequest(
-    placeFields: List<Place.Field>,
-    actions: (FindCurrentPlaceRequest.Builder.() -> Unit)? = null
-): FindCurrentPlaceRequest {
-    return sdkFindCurrentPlaceRequest(placeFields, actions ?: {})
-}
 
 /**
  * Builds a new [SearchNearbyRequest] to find the current place.

@@ -121,6 +121,7 @@ class PlacesSearchViewModel @Inject constructor(
 
                 Log.d("PlacesSearchViewModel", "Got place ${response.place}")
             } catch (e: Exception) {
+                if (e is CancellationException) throw e
                 Log.e("PlacesSearchViewModel", "Error fetching place details", e)
                 _transientError.value = "Failed to fetch details for ${prediction.getPrimaryText(null)}"
             } finally {

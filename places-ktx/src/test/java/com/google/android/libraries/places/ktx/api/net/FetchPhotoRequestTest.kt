@@ -14,16 +14,12 @@
 
 package com.google.android.libraries.places.ktx.api.net
 
-import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
 import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.AuthorAttributions
 import com.google.android.libraries.places.api.model.PhotoMetadata
+import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import java.util.Collections.emptyList
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mockStatic
 
