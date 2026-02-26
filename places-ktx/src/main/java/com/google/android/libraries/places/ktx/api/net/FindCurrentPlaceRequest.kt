@@ -19,6 +19,9 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.SearchNearbyRequest
 
+import com.google.android.libraries.places.api.net.kotlin.findCurrentPlaceRequest as sdkFindCurrentPlaceRequest
+import com.google.android.libraries.places.api.net.kotlin.searchNearbyRequest as sdkSearchNearbyRequest
+
 /**
  * Builds a new [FindCurrentPlaceRequest].
  *
@@ -28,16 +31,14 @@ import com.google.android.libraries.places.api.net.SearchNearbyRequest
  * @return the constructed [FindCurrentPlaceRequest]
  */
 @Deprecated(
-    "Use the overload returning SearchNearbyRequest instead. FindCurrentPlaceRequest is deprecated.",
-    ReplaceWith("findCurrentPlaceRequest(LocationRestriction(), placeFields, actions)")
+    "Use searchNearbyPlaceRequest(locationRestriction, placeFields, actions) instead. FindCurrentPlaceRequest is deprecated.",
+    ReplaceWith("searchNearbyPlaceRequest(LocationRestriction(), placeFields, actions)")
 )
 public fun findCurrentPlaceRequest(
     placeFields: List<Place.Field>,
     actions: (FindCurrentPlaceRequest.Builder.() -> Unit)? = null
 ): FindCurrentPlaceRequest {
-    return FindCurrentPlaceRequest.builder(placeFields).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    return sdkFindCurrentPlaceRequest(placeFields, actions ?: {})
 }
 
 /**
@@ -49,12 +50,15 @@ public fun findCurrentPlaceRequest(
  *
  * @return the constructed [SearchNearbyRequest]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("searchNearbyRequest(locationRestriction, placeFields, actions)", "com.google.android.libraries.places.api.net.kotlin.searchNearbyRequest")
+)
 public fun searchNearbyPlaceRequest(
     locationRestriction: LocationRestriction,
     placeFields: List<Place.Field>,
     actions: (SearchNearbyRequest.Builder.() -> Unit)? = null
 ): SearchNearbyRequest {
-    return SearchNearbyRequest.builder(locationRestriction, placeFields).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    return sdkSearchNearbyRequest(locationRestriction, placeFields, actions ?: {})
 }
+

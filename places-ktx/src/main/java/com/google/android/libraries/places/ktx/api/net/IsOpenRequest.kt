@@ -17,6 +17,8 @@ package com.google.android.libraries.places.ktx.api.net
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.IsOpenRequest
 
+import com.google.android.libraries.places.api.net.kotlin.isOpenRequest as sdkIsOpenRequest
+
 /**
  * Builds a new [IsOpenRequest].
  *
@@ -25,18 +27,16 @@ import com.google.android.libraries.places.api.net.IsOpenRequest
  * @param actions the actions to apply to the [IsOpenRequest.Builder]
  * @return the constructed [IsOpenRequest]
  */
+@Deprecated(
+  "Use the version in the Places SDK instead.",
+  ReplaceWith("isOpenRequest(placeId, utcTimeMillis, actions)", "com.google.android.libraries.places.api.net.kotlin.isOpenRequest")
+)
 public fun isOpenRequest(
   placeId: String,
   utcTimeMillis: Long? = null,
   actions: (IsOpenRequest.Builder.() -> Unit)? = null,
 ): IsOpenRequest {
-  return if (utcTimeMillis == null) {
-    IsOpenRequest.builder(placeId)
-  } else {
-    IsOpenRequest.builder(placeId, utcTimeMillis)
-  }.also { request ->
-    actions?.let { request.apply(it) }
-  }.build()
+  return sdkIsOpenRequest(placeId, utcTimeMillis, actions ?: {})
 }
 
 /**
@@ -48,16 +48,14 @@ public fun isOpenRequest(
  * @return the constructed [IsOpenRequest]
  * @throws IllegalArgumentException if [Place] does not have a [Place.id] associated with it.
  */
+@Deprecated(
+  "Use the version in the Places SDK instead.",
+  ReplaceWith("isOpenRequest(place, utcTimeMillis, actions)", "com.google.android.libraries.places.api.net.kotlin.isOpenRequest")
+)
 public fun isOpenRequest(
   place: Place,
   utcTimeMillis: Long? = null,
   actions: (IsOpenRequest.Builder.() -> Unit)? = null,
 ): IsOpenRequest {
-  return if (utcTimeMillis == null) {
-    IsOpenRequest.builder(place)
-  } else {
-    IsOpenRequest.builder(place, utcTimeMillis)
-  }.also { request ->
-    actions?.let { request.apply(it) }
-  }.build()
+  return sdkIsOpenRequest(place, utcTimeMillis, actions ?: {})
 }

@@ -10,10 +10,10 @@
 # Places Android KTX
 
 ## Description
-This repository contains Kotlin extensions (KTX) for:
-1. The [Places SDK for Android][places-sdk]
-
-It enables you to write more concise, idiomatic Kotlin.
+> [!IMPORTANT]
+> **Kotlin extensions (KTX) are now natively supported by the [Places SDK for Android][places-sdk] (v3.3.0+).**
+>
+> This repository is now a compatibility layer that delegates to the official SDK extensions. New projects should prefer using the official SDK extensions directly.
 
 ## Requirements
 
@@ -36,10 +36,12 @@ dependencies {
 
 ## Usage
 
-Accessing API responses made by `PlacesClient` can be retrieved using coroutines vs. using
-[Task](https://developers.google.com/android/reference/com/google/android/gms/tasks/Task.html) objects.
-The example here demonstrates how you can use this feature alongside with Android’s [ViewModel KTX][viewmodel-ktx]’s `viewModelScope`.
-Additionally, you can use a DSL provided by this library to construct requests vs. using builders.
+Accessing API responses made by `PlacesClient` can be retrieved using coroutines via the official Places SDK extensions. 
+
+This library provides a compatibility shim and DSL builders for those migrating from older versions.
+
+### Example: Programmatic Autocomplete
+The example here demonstrates how you can use the official SDK's KTX extensions alongside with Android’s [ViewModel KTX][viewmodel-ktx]’s `viewModelScope` and `StateFlow`.
 
 _Before_
 ```kotlin
@@ -67,27 +69,32 @@ placesClient.findAutocompletePredictions(newRequest).addOnSuccessListener { resp
 
 _After_
 ```kotlin
-val handler = CoroutineExceptionHandler { _, exception ->
-    // Handle exception
-}
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken
+import com.google.android.libraries.places.api.net.kotlin.awaitFindAutocompletePredictions
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.flatMapLatest
 
-viewModelScope.launch(handler) {
-    val bias: LocationBias = RectangularBounds.newInstance(
-        LatLng(37.7576948, -122.4727051), // SW lat, lng
-        LatLng(37.808300, -122.391338) // NE lat, lng
-    )
+@OptIn(FlowPreview::class)
+class PlacesSearchViewModel(private val placesClient: PlacesClient) : ViewModel() {
+    private val _query = MutableStateFlow("")
+    private var sessionToken: AutocompleteSessionToken? = null
 
-    // Create a new programmatic Place Autocomplete request in Places SDK for Android using DSL
-    val request = findAutocompletePredictionsRequest {
-        locationBias = bias
-        typesFilter = listOf(PlaceTypes.ESTABLISHMENT)
-        query = "123 Main Street"
-        countries = listOf("US")
-    }
-
-    // Perform autocomplete predictions request
-    val response = placesClient.awaitFindAutocompletePredictions(request)
-    // Handle response
+    val results = _query
+        .debounce(300)
+        .flatMapLatest { query ->
+            flow {
+                if (sessionToken == null) {
+                    sessionToken = AutocompleteSessionToken.newInstance()
+                }
+                val response = placesClient.awaitFindAutocompletePredictions {
+                    this.query = query
+                    this.sessionToken = this@PlacesSearchViewModel.sessionToken
+                    countries = listOf("US")
+                }
+                emit(response.autocompletePredictions)
+            }
+        }
 }
 ```
 
@@ -95,11 +102,14 @@ viewModelScope.launch(handler) {
 
 A [demo](app) application is contained within this repository that illustrates the use of this KTX library.
 
-To run the demo app, update the `local.properties` file in your root directory called (Note: this file should *NOT* be
-under version control to protect your API key) and add a single line to `local.properties` that
-looks like `PLACES_API_KEY="YOUR_API_KEY"`, where `YOUR_API_KEY` is the API key you obtained in
-the first step. You can also take a look at the [local.defaults.properties](local.defaults.properties)
-as an example. Then build and run.
+To run the demo app, create a `secrets.properties` file in your root directory (Note: this file should *NOT* be
+under version control to protect your API key) and add your API key:
+
+```properties
+PLACES_API_KEY=YOUR_API_KEY
+```
+
+Replace `YOUR_API_KEY` with the API key you obtained in the first step. You can also refer to [local.defaults.properties](local.defaults.properties) for an example of the expected format. Then build and run.
 
 
 ## Documentation

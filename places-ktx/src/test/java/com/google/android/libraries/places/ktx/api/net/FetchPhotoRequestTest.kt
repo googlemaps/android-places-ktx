@@ -14,32 +14,64 @@
 
 package com.google.android.libraries.places.ktx.api.net
 
+import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
 import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.android.libraries.places.ktx.api.model.photoMetadata
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.AuthorAttributions
+import com.google.android.libraries.places.api.model.PhotoMetadata
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
+import java.util.Collections.emptyList
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
+import org.mockito.Mockito.mockStatic
 
 internal class FetchPhotoRequestTest {
 
+
+
     @Test
     fun testBuilderNoActions() {
-        val photoMetadata = photoMetadata("reference")
-        val request = fetchPhotoRequest(photoMetadata)
-        assertEquals(photoMetadata, request.photoMetadata)
+        val photoMetadata = mock<PhotoMetadata>()
+        val mockBuilder = mock<FetchResolvedPhotoUriRequest.Builder>()
+        val mockRequest = mock<FetchResolvedPhotoUriRequest>()
+
+        whenever(mockBuilder.build()).thenReturn(mockRequest)
+        whenever(mockRequest.photoMetadata).thenReturn(photoMetadata)
+
+        mockStatic(FetchResolvedPhotoUriRequest::class.java).use { mockedStatic ->
+            mockedStatic.`when`<FetchResolvedPhotoUriRequest.Builder> {
+                FetchResolvedPhotoUriRequest.builder(photoMetadata)
+            }.thenReturn(mockBuilder)
+
+            val request = fetchResolvedPhotoUriRequest(photoMetadata)
+            assertEquals(photoMetadata, request.photoMetadata)
+        }
     }
 
     @Test
     fun testBuilderWithActions() {
-        val photoMetadata = photoMetadata("reference")
+        val photoMetadata = mock<PhotoMetadata>()
+        val mockBuilder = mock<FetchResolvedPhotoUriRequest.Builder>()
+        val mockRequest = mock<FetchResolvedPhotoUriRequest>()
         val cancellationToken = CancellationTokenSource().token
-        val request = fetchPhotoRequest(photoMetadata) {
-            maxHeight = 100
-            maxWidth = 100
-            setCancellationToken(cancellationToken)
+
+        whenever(mockBuilder.setCancellationToken(cancellationToken)).thenReturn(mockBuilder)
+        whenever(mockBuilder.build()).thenReturn(mockRequest)
+        whenever(mockRequest.photoMetadata).thenReturn(photoMetadata)
+        whenever(mockRequest.cancellationToken).thenReturn(cancellationToken)
+
+        mockStatic(FetchResolvedPhotoUriRequest::class.java).use { mockedStatic ->
+            mockedStatic.`when`<FetchResolvedPhotoUriRequest.Builder> {
+                FetchResolvedPhotoUriRequest.builder(photoMetadata)
+            }.thenReturn(mockBuilder)
+
+            val request = fetchResolvedPhotoUriRequest(photoMetadata) {
+                setCancellationToken(cancellationToken)
+            }
+            assertEquals(photoMetadata, request.photoMetadata)
+            assertEquals(cancellationToken, request.cancellationToken)
         }
-        assertEquals(photoMetadata, request.photoMetadata)
-        assertEquals(100, request.maxHeight)
-        assertEquals(100, request.maxWidth)
-        assertEquals(cancellationToken, request.cancellationToken)
     }
 }

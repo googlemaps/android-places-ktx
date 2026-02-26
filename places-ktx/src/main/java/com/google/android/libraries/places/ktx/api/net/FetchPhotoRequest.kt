@@ -18,6 +18,9 @@ import com.google.android.libraries.places.api.model.PhotoMetadata
 import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
 
+import com.google.android.libraries.places.api.net.kotlin.fetchPhotoRequest as sdkFetchPhotoRequest
+import com.google.android.libraries.places.api.net.kotlin.fetchResolvedPhotoUriRequest as sdkFetchResolvedPhotoUriRequest
+
 /**
  * Builds a new [FetchPhotoRequest].
  *
@@ -27,16 +30,14 @@ import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
  * @return the constructed [FetchPhotoRequest]
  */
 @Deprecated(
-    "Use the overload returning FetchResolvedPhotoUriRequest instead. FetchPhotoRequest is deprecated.",
-    ReplaceWith("fetchPhotoRequest(photoMetadata, actions)")
+    "Use fetchResolvedPhotoUriRequest(photoMetadata, actions) instead. FetchPhotoRequest is deprecated.",
+    ReplaceWith("fetchResolvedPhotoUriRequest(photoMetadata, actions)")
 )
 public fun fetchPhotoRequest(
     photoMetadata: PhotoMetadata,
     actions: (FetchPhotoRequest.Builder.() -> Unit)? = null
 ): FetchPhotoRequest {
-    return FetchPhotoRequest.builder(photoMetadata).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    return sdkFetchPhotoRequest(photoMetadata, actions ?: {})
 }
 
 /**
@@ -47,11 +48,14 @@ public fun fetchPhotoRequest(
  *
  * @return the constructed [FetchResolvedPhotoUriRequest]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("fetchResolvedPhotoUriRequest(photoMetadata, actions)", "com.google.android.libraries.places.api.net.kotlin.fetchResolvedPhotoUriRequest")
+)
 public fun fetchResolvedPhotoUriRequest(
     photoMetadata: PhotoMetadata,
     actions: (FetchResolvedPhotoUriRequest.Builder.() -> Unit)? = null
 ): FetchResolvedPhotoUriRequest {
-    return FetchResolvedPhotoUriRequest.builder(photoMetadata).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    return sdkFetchResolvedPhotoUriRequest(photoMetadata, actions ?: {})
 }
+

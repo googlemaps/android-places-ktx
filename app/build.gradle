@@ -72,6 +72,8 @@ dependencies {
     implementation libs.androidx.compose.ui.tooling.preview
     implementation libs.androidx.compose.material3
     implementation libs.androidx.activity.compose
+    implementation libs.androidx.compose.runtime.livedata
+    implementation libs.androidx.compose.material.icons.extended
 
     debugImplementation libs.androidx.compose.ui.tooling
     debugImplementation libs.androidx.compose.ui.test.manifest
@@ -83,6 +85,7 @@ dependencies {
     implementation libs.play.services.maps
     implementation libs.fragment.ktx
     implementation libs.lifecycle.runtime.ktx
+    implementation libs.lifecycle.runtime.compose
     implementation libs.material
     implementation libs.volley
 
