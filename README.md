@@ -10,6 +10,9 @@
 # Places Android KTX
 
 ## Description
+> [!CAUTION]
+> **This library is approaching end-of-life.** We plan to icebox the library and archive this repository in the very near term. Users are strongly encouraged to migrate to the official SDK implementations immediately. Please refer to the [Migration Guide](MIGRATION_GUIDE.md) for detailed instructions.
+
 > [!IMPORTANT]
 > **Kotlin extensions (KTX) are now natively supported by the [Places SDK for Android][places-sdk] (v3.3.0+).**
 >
