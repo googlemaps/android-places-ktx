@@ -58,6 +58,49 @@ Some APIs were moved to new files to better match modern SDK naming conventions.
 | `FetchPhotoRequest.kt` | `FetchResolvedPhotoUriRequest.kt` | `fetchResolvedPhotoUriRequest` |
 | `FindCurrentPlaceRequest.kt` | `SearchNearbyRequest.kt` | `searchNearbyPlaceRequest` |
 
+## Migration Examples (1-to-1)
+
+### FindCurrentPlace to SearchNearby
+The `FindCurrentPlace` API has been removed in favor of `SearchNearby`.
+
+**Old (v3.x):**
+```kotlin
+val response = placesClient.findCurrentPlace(
+    findCurrentPlaceRequest(listOf(Place.Field.ID, Place.Field.NAME))
+).await()
+```
+
+**New (v4.0.0+):**
+```kotlin
+val locationRestriction = CircularBounds.newInstance(latLng, 1000.0)
+val response = placesClient.awaitSearchNearby(
+    locationRestriction,
+    listOf(Place.Field.ID, Place.Field.NAME)
+)
+```
+
+### FetchPhoto to FetchResolvedPhotoUri
+The `FetchPhoto` API (returning a `Bitmap`) is replaced by `FetchResolvedPhotoUri` (returning a `Uri`).
+
+**Old (v3.x):**
+```kotlin
+val response = placesClient.fetchPhoto(fetchPhotoRequest(metadata)).await()
+val bitmap = response.bitmap
+```
+
+**New (v4.0.0+):**
+```kotlin
+val response = placesClient.awaitFetchResolvedPhotoUri(metadata)
+val uri = response.uri
+// Use a library like Coil or Glide to load the URI into an ImageView/Compose
+```
+
+## Technical Notes
+
+### Behavioral Parity & Capabilities
+- **FetchResolvedPhotoUri**: Unlike `FetchPhoto`, this API returns a `Uri` instead of a `Bitmap`. This is more efficient for modern Android apps using image loading libraries (Coil, Glide, etc.).
+- **Cancellation Safety**: All `await*` functions in this library now delegate directly to the official SDK's native `suspend` functions. These are built to handle coroutine cancellation correctly, ensuring that associated SDK tasks are cancelled and resources are released if the calling coroutine is cancelled.
+
 ## Summary of Deprecated APIs
 
 The following APIs are now deprecated shims that delegate to the official SDK:
