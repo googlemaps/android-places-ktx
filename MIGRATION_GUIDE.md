@@ -1,6 +1,6 @@
-# Migration Guide - Places Android KTX v3 to v4.0.0
+# Migration Guide - Places Android KTX v3 to v4.0.0 // {x-release-please-version}
 
-This guide summarizes the changes and steps required to migrate your project from Places Android KTX v3.x to v4.0.0.
+This guide summarizes the changes and steps required to migrate your project from Places Android KTX v3.x to v4.0.0 // {x-release-please-version}.
 
 ## Overview
 
@@ -8,6 +8,12 @@ This guide summarizes the changes and steps required to migrate your project fro
 > **This library is approaching end-of-life.** We plan to icebox the library and archive this repository in the very near term. Users are strongly encouraged to migrate to the official SDK implementations immediately.
 
 Version 4.0.0 is a major release that transitions this library into a **compatibility shim**. Most functionality has been moved to the official [Places SDK for Android](https://developers.google.com/maps/documentation/places/android-sdk/overview) (v3.3.0+).
+
+While this library is now primarily a compatibility shim, it still provides a few minor Kotlin-specific conveniences not yet present in the core SDK:
+
+1.  **DSL Builders**: Lightweight Kotlin DSL builders for models (e.g., `place { ... }`, `photoMetadata { ... }`).
+2.  **PriceLevel Enum**: A type-safe `PriceLevel` enum for `SearchByTextRequest` filtering.
+3.  **SearchNearby Support**: Helper for `searchNearbyPlaceRequest` with a simplified API.
 
 ## Breaking Changes
 
@@ -19,7 +25,7 @@ The custom KTX extensions previously provided by this library (`await*` function
 import com.google.android.libraries.places.ktx.api.net.awaitFetchPlace
 ```
 
-**New (v4.0.0):**
+**New (v4.0.0 // {x-release-please-version}):**
 ```kotlin
 import com.google.android.libraries.places.api.net.kotlin.awaitFetchPlace
 ```
@@ -66,7 +72,7 @@ Update your `build.gradle` to reference the new version:
 
 ```kotlin
 dependencies {
-    implementation("com.google.maps.android:places-ktx:4.0.0")
+    implementation("com.google.maps.android:places-ktx:4.0.0") // {x-release-please-version}
 }
 ```
 
@@ -75,3 +81,5 @@ The demo application has been completely modernized:
 - **UI**: Migrated to **Jetpack Compose** and **Material 3**.
 - **Architecture**: Implemented **Hilt** and **ViewModel**.
 - **SDK**: Upgraded to **Places SDK v5.1.1**.
+
+Refer to the [app](app) directory for reference implementations using modern Android practices.
