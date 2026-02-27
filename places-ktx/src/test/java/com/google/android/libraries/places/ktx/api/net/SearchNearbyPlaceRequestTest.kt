@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.google.android.gms.maps.model.LatLng
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-internal class FindCurrentPlaceRequestTest {
+internal class SearchNearbyPlaceRequestTest {
     private val locationRestriction = CircularBounds.newInstance(
         LatLng(37.7576948, -122.4727051), // Center
         1000.0 // Radius in meters

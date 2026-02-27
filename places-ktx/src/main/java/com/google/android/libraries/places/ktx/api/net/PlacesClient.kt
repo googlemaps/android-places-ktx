@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -88,32 +88,6 @@ public suspend fun PlacesClient.awaitFindAutocompletePredictions(
     actions: FindAutocompletePredictionsRequest.Builder.() -> Unit
 ): FindAutocompletePredictionsResponse {
     return this.sdkAwaitFindAutocompletePredictions(actions)
-}
-
-/**
- * Wraps [PlacesClient.searchNearby] in a suspending function.
- *
- * Fetches the approximate nearby places based on the provided [locationRestriction]. Calling this
- * method without granting the appropriate permissions will result in a [SecurityException] being
- * thrown. In addition, if an error occurred while fetching the places, an [ApiException] will be
- * thrown.
- *
- * @param locationRestriction limits the scope of the search to a specific area.
- * @param placeFields the fields of the places to be returned
- * @return the response containing the nearby place results.
- */
-@Deprecated(
-    "Use awaitSearchNearby(locationRestriction, placeFields, actions) instead.",
-    ReplaceWith("this.awaitSearchNearby(locationRestriction, placeFields)")
-)
-@ExperimentalCoroutinesApi
-@RequiresPermission(anyOf = [permission.ACCESS_FINE_LOCATION, permission.ACCESS_COARSE_LOCATION])
-@SuppressLint("MissingPermission")
-public suspend fun PlacesClient.awaitSearchNearbyPlace(
-    locationRestriction: LocationRestriction,
-    placeFields: List<Place.Field>
-): SearchNearbyResponse {
-    return this.sdkAwaitSearchNearby(locationRestriction, placeFields)
 }
 
 /**
