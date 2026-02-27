@@ -18,8 +18,6 @@ import com.google.android.libraries.places.api.model.LocationRestriction
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.SearchNearbyRequest
 
-import com.google.android.libraries.places.api.net.kotlin.searchNearbyRequest as sdkSearchNearbyRequest
-
 /**
  * Builds a new [SearchNearbyRequest] to find the current place.
  *
@@ -38,5 +36,7 @@ public fun searchNearbyRequest(
     placeFields: List<Place.Field>,
     actions: (SearchNearbyRequest.Builder.() -> Unit)? = null
 ): SearchNearbyRequest {
-    return sdkSearchNearbyRequest(locationRestriction, placeFields, actions ?: {})
+    return SearchNearbyRequest.builder(locationRestriction, placeFields).also { builder ->
+        actions?.let { builder.apply(it) }
+    }.build()
 }

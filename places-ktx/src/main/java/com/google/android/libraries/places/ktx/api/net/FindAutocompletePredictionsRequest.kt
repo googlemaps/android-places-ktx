@@ -16,8 +16,6 @@ package com.google.android.libraries.places.ktx.api.net
 
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 
-import com.google.android.libraries.places.api.net.kotlin.findAutocompletePredictionsRequest as sdkFindAutocompletePredictionsRequest
-
 /**
  * Builds a new [FindAutocompletePredictionsRequest].
  *
@@ -31,5 +29,6 @@ import com.google.android.libraries.places.api.net.kotlin.findAutocompletePredic
 )
 public fun findAutocompletePredictionsRequest(
     actions: FindAutocompletePredictionsRequest.Builder.() -> Unit
-): FindAutocompletePredictionsRequest =
-    sdkFindAutocompletePredictionsRequest(actions)
+): FindAutocompletePredictionsRequest {
+    return FindAutocompletePredictionsRequest.builder().apply(actions).build()
+}

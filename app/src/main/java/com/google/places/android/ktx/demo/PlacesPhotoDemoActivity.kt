@@ -41,6 +41,18 @@ import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.places.android.ktx.demo.ui.DemoTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * A demo activity showcasing the use of the Places KTX library for photo fetching.
+ *
+ * This activity demonstrates:
+ * 1. Searching for places using [PlacesPhotoViewModel.searchResults].
+ * 2. Fetching place details to obtain photo metadata.
+ * 3. Resolving a photo URI using [com.google.android.libraries.places.api.net.kotlin.awaitFetchResolvedPhotoUri].
+ * 4. Displaying the resolved photo URI using the Coil library.
+ *
+ * The UI is built using Jetpack Compose and follows a standard MVI-lite pattern with a ViewModel
+ * exposing state via [StateFlow].
+ */
 @AndroidEntryPoint
 class PlacesPhotoDemoActivity : ComponentActivity() {
 
@@ -59,14 +71,27 @@ class PlacesPhotoDemoActivity : ComponentActivity() {
     }
 }
 
+/**
+ * The main screen for the Places Photo Demo.
+ *
+ * This composable manages the high-level state of the screen, switching between a search result
+ * list and a detailed photo display.
+ *
+ * @param viewModel The ViewModel providing state and handling interactions.
+ * @param onBackPressed Callback for when the user wants to navigate back.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlacesPhotoScreen(
     viewModel: PlacesPhotoViewModel,
     onBackPressed: () -> Unit
 ) {
+    // Collect the search results and photo state from the ViewModel.
+    // Using collectAsStateWithLifecycle ensures that collection stops when the app is in the background.
     val searchEvent by viewModel.searchResults.collectAsStateWithLifecycle()
     val photoState by viewModel.photoState.collectAsStateWithLifecycle()
+    
+    // searchQuery is local UI state used only for the text field input.
     var searchQuery by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
@@ -89,7 +114,7 @@ fun PlacesPhotoScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            // Search Input
+            // Search Input: Real-time search with a debounce applied in the ViewModel.
             TextField(
                 value = searchQuery,
                 onValueChange = {
@@ -105,16 +130,16 @@ fun PlacesPhotoScreen(
                 singleLine = true
             )
 
-            // Results or Photo display
+            // Content Area: Switch between search results and the photo display based on state.
             Box(modifier = Modifier.fillMaxSize()) {
                 if (photoState.uri != null || photoState.isLoading || photoState.error != null) {
-                    // Show Photo Display
+                    // When a photo is being fetched or displayed, show the PhotoDisplay.
                     PhotoDisplay(
                         state = photoState,
                         onBackPressed = { viewModel.onSearchQueryChanged(searchQuery) }
                     )
                 } else {
-                    // Show Search Results
+                    // Otherwise, show the interactive list of autocomplete predictions.
                     SearchResultsList(
                         event = searchEvent,
                         onPredictionClick = { viewModel.onPredictionClicked(it) }
@@ -125,6 +150,12 @@ fun PlacesPhotoScreen(
     }
 }
 
+/**
+ * Displays a list of autocomplete predictions as search results.
+ *
+ * @param event The current [PhotoDemoEvent] from the ViewModel.
+ * @param onPredictionClick Callback when a prediction is tapped.
+ */
 @Composable
 fun SearchResultsList(
     event: PhotoDemoEvent,
@@ -168,6 +199,15 @@ fun SearchResultsList(
     }
 }
 
+/**
+ * Displays the resolved photo URI or the loading/error state during resolution.
+ *
+ * This component showcases the integration with Coil's [AsyncImage] to display the photo
+ * once the URI is successfully fetched.
+ *
+ * @param state The current [PhotoState] containing the URI, loading status, or error.
+ * @param onBackPressed Callback to return to search results.
+ */
 @Composable
 fun PhotoDisplay(
     state: PhotoState,
@@ -201,7 +241,8 @@ fun PhotoDisplay(
             
             Spacer(Modifier.height(16.dp))
             
-            // This is the core of the demo: Using Coil's AsyncImage with the fetched URI
+            // This is the core of the demo: Using Coil's AsyncImage with the fetched URI.
+            // Coil handles the network fetching and caching of the actual image data from the URI.
             AsyncImage(
                 model = state.uri,
                 contentDescription = "Place Photo",

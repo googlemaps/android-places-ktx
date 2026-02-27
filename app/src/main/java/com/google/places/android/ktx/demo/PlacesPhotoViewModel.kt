@@ -40,7 +40,7 @@ import kotlinx.coroutines.CancellationException
 import javax.inject.Inject
 
 /**
- * State definitions for the photo fetching demo.
+ * State definitions for the photo fetching demo search flow.
  */
 sealed interface PhotoDemoEvent
 object PhotoDemoEventIdle : PhotoDemoEvent
@@ -48,26 +48,46 @@ object PhotoDemoEventLoading : PhotoDemoEvent
 data class PhotoDemoEventResults(val predictions: List<AutocompletePrediction>) : PhotoDemoEvent
 data class PhotoDemoEventError(val exception: Exception) : PhotoDemoEvent
 
+/**
+ * State for the photo resolution and display phase.
+ */
 data class PhotoState(
     val uri: Uri? = null,
     val isLoading: Boolean = false,
     val error: String? = null
 )
 
+/**
+ * ViewModel for the Places Photo Demo.
+ *
+ * This ViewModel manages two main flows:
+ * 1. An reactive search flow using [searchResults] which debounces user input and fetches predictions.
+ * 2. A manual photo resolution flow triggered by [onPredictionClicked].
+ *
+ * It showcases the use of Places KTX suspending extensions like [awaitFindAutocompletePredictions],
+ * [awaitFetchPlace], and [awaitFetchResolvedPhotoUri].
+ */
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 @HiltViewModel
 class PlacesPhotoViewModel @Inject constructor(
     private val placesClient: PlacesClient
 ) : ViewModel() {
 
+    // Internal state for the search query, used to drive the searchResults flow.
     private val _searchQuery = MutableStateFlow("")
+    
+    // An autocomplete session token used to group multiple requests into a single billing session.
     private var sessionToken: AutocompleteSessionToken? = null
 
+    // State for the photo fetching phase.
     private val _photoState = MutableStateFlow(PhotoState())
     val photoState: StateFlow<PhotoState> = _photoState
 
     /**
-     * Exposes search results based on the query.
+     * A [StateFlow] exposing the search results based on the current query.
+     *
+     * This flow uses [debounce] to avoid flooding the API while the user is typing,
+     * and [mapLatest] to ensure that if a new search starts, the previous one is cancelled.
      */
     val searchResults: StateFlow<PhotoDemoEvent> = _searchQuery
         .debounce(300)
@@ -76,16 +96,19 @@ class PlacesPhotoViewModel @Inject constructor(
             if (query.isBlank()) return@mapLatest PhotoDemoEventIdle
 
             try {
+                // Initialize a session token if it doesn't exist for this specific search session.
                 if (sessionToken == null) {
                     sessionToken = AutocompleteSessionToken.newInstance()
                 }
 
+                // Call the Places KTX suspending extension for autocomplete.
                 val response = placesClient.awaitFindAutocompletePredictions {
                     sessionToken = this@PlacesPhotoViewModel.sessionToken
                     this.query = query
                 }
                 PhotoDemoEventResults(response.autocompletePredictions)
             } catch (e: Exception) {
+                // Standard coroutine cancellation must be propagated.
                 if (e is CancellationException) throw e
                 PhotoDemoEventError(e)
             }
@@ -96,18 +119,31 @@ class PlacesPhotoViewModel @Inject constructor(
             initialValue = PhotoDemoEventIdle
         )
 
+    /**
+     * Updates the current search query and resets the photo state.
+     */
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query
-        // Reset photo state when starting a new search
+        // Reset photo state when starting a new search or clearing the query.
         _photoState.value = PhotoState()
     }
 
+    /**
+     * Triggers the photo resolution flow for a specific prediction.
+     *
+     * This method demonstrates the multi-step process required to get a photo URI:
+     * 1. Fetch place details (specifically [Place.Field.PHOTO_METADATAS]).
+     * 2. Use the metadata to request a resolved photo URI.
+     *
+     * @param prediction The selected autocomplete prediction.
+     */
     fun onPredictionClicked(prediction: AutocompletePrediction) {
         viewModelScope.launch {
             _photoState.value = PhotoState(isLoading = true)
             try {
                 val currentToken = sessionToken
-                // 1. Fetch place details to get photo metadata
+                // 1. Fetch place details to get photo metadata.
+                // We request only the PHOTO_METADATAS field to minimize data usage.
                 val placeResponse = placesClient.awaitFetchPlace(
                     prediction.placeId,
                     listOf(Place.Field.PHOTO_METADATAS)
@@ -121,8 +157,8 @@ class PlacesPhotoViewModel @Inject constructor(
                     return@launch
                 }
 
-                // 2. Fetch the resolved photo URI
-                // This is the improved API that returns a Uri directly.
+                // 2. Fetch the resolved photo URI using the new KTX extension.
+                // This API returns a Uri that can be directly used by image loading libraries like Coil.
                 val photoResponse = placesClient.awaitFetchResolvedPhotoUri(metadata)
                 _photoState.value = PhotoState(uri = photoResponse.uri)
 
@@ -132,6 +168,7 @@ class PlacesPhotoViewModel @Inject constructor(
                 Log.e("PlacesPhotoViewModel", "Error fetching photo", e)
                 _photoState.value = PhotoState(error = "Failed to fetch photo: ${e.message}")
             } finally {
+                // End the billing session by clearing the token after the final detail request.
                 sessionToken = null
             }
         }
