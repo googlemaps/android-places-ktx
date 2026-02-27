@@ -93,6 +93,7 @@ val bitmap = response.bitmap
 val response = placesClient.awaitFetchResolvedPhotoUri(metadata)
 val uri = response.uri
 // Use a library like Coil or Glide to load the URI into an ImageView/Compose
+// See PlacesPhotoDemoActivity in the app for a complete example.
 ```
 
 ## Technical Notes

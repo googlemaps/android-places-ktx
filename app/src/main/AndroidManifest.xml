@@ -49,5 +49,10 @@
         <activity
             android:name=".PlacesSearchDemoActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-    </application>
+    <activity
+        android:name=".PlacesPhotoDemoActivity"
+        android:exported="false"
+        android:label="@string/places_photo_demo_title"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+</application>
 </manifest>
