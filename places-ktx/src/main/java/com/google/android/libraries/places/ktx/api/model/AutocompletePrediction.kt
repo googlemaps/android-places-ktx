@@ -26,6 +26,10 @@ import com.google.android.libraries.places.api.model.AutocompletePrediction
  *
  * @return the constructed [AutocompletePrediction]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("autocompletePrediction(placeId, actions)", "com.google.android.libraries.places.api.model.kotlin.autocompletePrediction")
+)
 public fun autocompletePrediction(
     placeId: String,
     actions: (AutocompletePrediction.Builder.() -> Unit)? = null

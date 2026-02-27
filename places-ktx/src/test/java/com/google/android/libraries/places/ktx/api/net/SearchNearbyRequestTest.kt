@@ -21,7 +21,7 @@ import com.google.android.gms.maps.model.LatLng
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-internal class SearchNearbyPlaceRequestTest {
+internal class SearchNearbyRequestTest {
     private val locationRestriction = CircularBounds.newInstance(
         LatLng(37.7576948, -122.4727051), // Center
         1000.0 // Radius in meters
@@ -29,14 +29,14 @@ internal class SearchNearbyPlaceRequestTest {
 
     @Test
     fun testBuilderNoActions() {
-        val request = searchNearbyPlaceRequest(locationRestriction, listOf(Place.Field.DISPLAY_NAME))
+        val request = searchNearbyRequest(locationRestriction, listOf(Place.Field.DISPLAY_NAME))
         assertEquals(listOf(Place.Field.DISPLAY_NAME), request.placeFields)
     }
 
     @Test
     fun testBuilderWithActions() {
         val cancellationToken = CancellationTokenSource().token
-        val request = searchNearbyPlaceRequest(locationRestriction, listOf(Place.Field.DISPLAY_NAME)) {
+        val request = searchNearbyRequest(locationRestriction, listOf(Place.Field.DISPLAY_NAME)) {
             setCancellationToken(cancellationToken)
         }
         assertEquals(listOf(Place.Field.DISPLAY_NAME), request.placeFields)

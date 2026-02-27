@@ -33,7 +33,7 @@ import com.google.android.libraries.places.api.net.kotlin.searchNearbyRequest as
     "Use the version in the Places SDK instead.",
     ReplaceWith("searchNearbyRequest(locationRestriction, placeFields, actions)", "com.google.android.libraries.places.api.net.kotlin.searchNearbyRequest")
 )
-public fun searchNearbyPlaceRequest(
+public fun searchNearbyRequest(
     locationRestriction: LocationRestriction,
     placeFields: List<Place.Field>,
     actions: (SearchNearbyRequest.Builder.() -> Unit)? = null

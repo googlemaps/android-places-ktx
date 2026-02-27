@@ -24,6 +24,10 @@ import com.google.android.libraries.places.api.model.PhotoMetadata
  *
  * @return the constructed [PhotoMetadata]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("photoMetadata(photoReference, actions)", "com.google.android.libraries.places.api.model.kotlin.photoMetadata")
+)
 public fun photoMetadata(
     photoReference: String,
     actions: (PhotoMetadata.Builder.() -> Unit)? = null

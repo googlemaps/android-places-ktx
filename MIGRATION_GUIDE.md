@@ -11,9 +11,9 @@ Version 4.0.0 is a major release that transitions this library into a **compatib
 
 While this library is now primarily a compatibility shim, it still provides a few minor Kotlin-specific conveniences not yet present in the core SDK:
 
-1.  **DSL Builders**: Lightweight Kotlin DSL builders for models (e.g., `place { ... }`, `photoMetadata { ... }`).
+1.  **DSL Builders**: Lightweight Kotlin DSL builders for legacy model support (now deprecated in favor of SDK native versions).
 2.  **PriceLevel Enum**: A type-safe `PriceLevel` enum for `SearchByTextRequest` filtering.
-3.  **SearchNearby Support**: Helper for `searchNearbyPlaceRequest` with a simplified API.
+3.  **SearchNearby Support**: Helper for `searchNearbyRequest` with a simplified API.
 
 ## Breaking Changes
 
@@ -40,7 +40,7 @@ The following legacy components have been **removed**.
 The entire `AutocompleteSupportFragment.kt` file has been deleted.
 - **Removed**: `AutocompleteSupportFragment.placeSelectionEvents()`
 - **Removed**: `PlaceSelectionResult`, `PlaceSelectionSuccess`, and `PlaceSelectionError` classes.
-- **Migration**: Use the official SDK's `AutocompleteSupportFragment` or migrate to the Compose-based patterns shown in the demo app.
+- **Migration**: The `AutocompleteSupportFragment` itself is deprecated in the official SDK. Use [`PlaceAutocompleteActivity`](https://developers.google.com/maps/documentation/places/android-sdk/reference/com/google/android/libraries/places/widget/PlaceAutocompleteActivity) instead or migrate to the Compose-based patterns shown in the demo app.
 
 #### **Legacy Request Wrappers**
 - **Removed**: `fetchPhotoRequest(...)` (associated with the removed `FetchPhoto` API).
@@ -56,7 +56,7 @@ Some APIs were moved to new files to better match modern SDK naming conventions.
 | Old File | New File | API Maintained |
 | :--- | :--- | :--- |
 | `FetchPhotoRequest.kt` | `FetchResolvedPhotoUriRequest.kt` | `fetchResolvedPhotoUriRequest` |
-| `FindCurrentPlaceRequest.kt` | `SearchNearbyRequest.kt` | `searchNearbyPlaceRequest` |
+| `FindCurrentPlaceRequest.kt` | `SearchNearbyRequest.kt` | `searchNearbyRequest` |
 
 ## Migration Examples (1-to-1)
 
@@ -77,6 +77,8 @@ val response = placesClient.awaitSearchNearby(
     locationRestriction,
     listOf(Place.Field.ID, Place.Field.NAME)
 )
+// Or use the maintained request builder:
+val request = searchNearbyRequest(locationRestriction, listOf(Place.Field.ID))
 ```
 
 ### FetchPhoto to FetchResolvedPhotoUri
@@ -109,7 +111,11 @@ The following APIs are now deprecated shims that delegate to the official SDK:
 | File | API |
 | :--- | :--- |
 | **`PlacesClient.kt`** | `awaitFetchPlace`, `awaitFetchResolvedPhotoUri`, `awaitFindAutocompletePredictions`, `awaitSearchNearby`, `awaitIsOpen`, `awaitSearchByText` |
-| **DSL Builders** | `fetchPlaceRequest`, `findAutocompletePredictionsRequest`, `isOpenRequest`, `searchByTextRequest` |
+| **DSL Builders (Net)** | `fetchPlaceRequest`, `fetchResolvedPhotoUriRequest`, `findAutocompletePredictionsRequest`, `isOpenRequest`, `searchNearbyRequest`, `searchByTextRequest` |
+| **DSL Builders (Models)** | `place`, `photoMetadata`, `addressComponent`, `autocompletePrediction`, `openingHours`, `period`, `plusCode` |
+
+> [!TIP]
+> Most model builders (like `place { ... }`) are now natively provided by the official SDK in the `com.google.android.libraries.places.api.model.kotlin` package.
 
 ## Dependency Update
 Update your `build.gradle` to reference the new version:

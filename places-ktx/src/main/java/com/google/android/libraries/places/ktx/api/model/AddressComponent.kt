@@ -28,6 +28,10 @@ import com.google.android.libraries.places.api.model.AddressComponent
  *
  * @return the constructed [AddressComponent]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("addressComponent(name, types, actions)", "com.google.android.libraries.places.api.model.kotlin.addressComponent")
+)
 public fun addressComponent(
     name: String,
     types: List<String>,

@@ -23,6 +23,10 @@ import com.google.android.libraries.places.api.model.Place
  *
  * @return the constructed [Place]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("place(actions)", "com.google.android.libraries.places.api.model.kotlin.place")
+)
 public inline fun place(actions: Place.Builder.() -> Unit): Place =
     Place.builder()
         .apply(actions)
