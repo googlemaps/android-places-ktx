@@ -17,10 +17,9 @@ package com.google.android.libraries.places.ktx.api.net
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.SearchByTextRequest
 
-/**
- * Type-safe price levels for filtering search results.
- * 
  * @property value The integer value mapping to the SDK's price level constant.
+ * The exact amount indicated by a specific value will vary from region to region, though a
+ * value of 0 (FREE) always denotes that this place is free.
  */
 @Deprecated(
   "Use raw integers (1-4) in setPriceLevels instead to avoid dependency on this KTX library. " +
