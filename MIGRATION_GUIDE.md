@@ -7,13 +7,7 @@ This guide summarizes the changes and steps required to migrate your project fro
 > [!WARNING]
 > **This library is approaching end-of-life.** We plan to icebox the library and archive this repository in the very near term. Users are strongly encouraged to migrate to the official SDK implementations immediately.
 
-Version 4.0.0 is a major release that transitions this library into a **compatibility shim**. Most functionality has been moved to the official [Places SDK for Android](https://developers.google.com/maps/documentation/places/android-sdk/overview) (v3.3.0+).
-
-While this library is now primarily a compatibility shim, it still provides a few minor Kotlin-specific conveniences not yet present in the core SDK:
-
-1.  **DSL Builders**: Lightweight Kotlin DSL builders for legacy model support (now deprecated in favor of SDK native versions).
-2.  **PriceLevel Enum**: A type-safe `PriceLevel` enum for `SearchByTextRequest` filtering (now deprecated; use integers or define your own).
-3.  **SearchNearby Support**: Helper for `searchNearbyRequest` with a simplified API.
+Version 4.0.0 is a major release that transitions this library into a **compatibility shim**. Most functionality has been moved to the official [Places SDK for Android](https://developers.google.com/maps/documentation/places/android-sdk/overview).
 
 ## Breaking Changes
 
@@ -81,6 +75,9 @@ val response = placesClient.awaitSearchNearby(
 val request = searchNearbyRequest(locationRestriction, listOf(Place.Field.ID))
 ```
 
+> [!TIP]
+> See [PlacesPhotoViewModel.kt#L188-L230](app/src/main/java/com/google/places/android/ktx/demo/PlacesPhotoViewModel.kt#L188-L230) for a complete implementation of `SearchNearby`.
+
 ### FetchPhoto to FetchResolvedPhotoUri
 The `FetchPhoto` API (returning a `Bitmap`) is replaced by `FetchResolvedPhotoUri` (returning a `Uri`).
 
@@ -95,8 +92,10 @@ val bitmap = response.bitmap
 val response = placesClient.awaitFetchResolvedPhotoUri(metadata)
 val uri = response.uri
 // Use a library like Coil or Glide to load the URI into an ImageView/Compose
-// See PlacesPhotoDemoActivity in the app for a complete example.
 ```
+
+> [!TIP]
+> See [PlacesPhotoViewModel.kt#L144-L179](app/src/main/java/com/google/places/android/ktx/demo/PlacesPhotoViewModel.kt#L144-L179) for a complete implementation of `FetchResolvedPhotoUri`.
 
 ### PriceLevel Migration
 The `PriceLevel` enum and its builder extensions are deprecated. You should migrate to using raw integers directly in `setPriceLevels`.
