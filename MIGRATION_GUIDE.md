@@ -12,7 +12,7 @@ Version 4.0.0 is a major release that transitions this library into a **compatib
 While this library is now primarily a compatibility shim, it still provides a few minor Kotlin-specific conveniences not yet present in the core SDK:
 
 1.  **DSL Builders**: Lightweight Kotlin DSL builders for legacy model support (now deprecated in favor of SDK native versions).
-2.  **PriceLevel Enum**: A type-safe `PriceLevel` enum for `SearchByTextRequest` filtering (now deprecated; use raw integers instead).
+2.  **PriceLevel Enum**: A type-safe `PriceLevel` enum for `SearchByTextRequest` filtering (now deprecated; use integers or define your own).
 3.  **SearchNearby Support**: Helper for `searchNearbyRequest` with a simplified API.
 
 ## Breaking Changes
