@@ -25,7 +25,7 @@ The custom KTX extensions previously provided by this library (`await*` function
 import com.google.android.libraries.places.ktx.api.net.awaitFetchPlace
 ```
 
-**New (v4.0.0):**
+**New (v4.0.0+):**
 ```kotlin
 import com.google.android.libraries.places.api.net.kotlin.awaitFetchPlace
 ```
