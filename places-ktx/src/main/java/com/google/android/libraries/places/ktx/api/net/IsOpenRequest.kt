@@ -16,6 +16,7 @@ package com.google.android.libraries.places.ktx.api.net
 
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.IsOpenRequest
+import com.google.android.libraries.places.api.net.kotlin.isOpenRequest as sdkIsOpenRequest
 
 /**
  * Builds a new [IsOpenRequest].
@@ -31,11 +32,11 @@ import com.google.android.libraries.places.api.net.IsOpenRequest
 )
 public fun isOpenRequest(
     place: Place,
+    utcTimeMillis: Long? = null,
     actions: (IsOpenRequest.Builder.() -> Unit)? = null
 ): IsOpenRequest {
-    return IsOpenRequest.builder(place).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    val time = utcTimeMillis ?: System.currentTimeMillis()
+    return sdkIsOpenRequest(place, time, actions)
 }
 
 /**
@@ -52,9 +53,9 @@ public fun isOpenRequest(
 )
 public fun isOpenRequest(
     placeId: String,
+    utcTimeMillis: Long? = null,
     actions: (IsOpenRequest.Builder.() -> Unit)? = null
 ): IsOpenRequest {
-    return IsOpenRequest.builder(placeId).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    val time = utcTimeMillis ?: System.currentTimeMillis()
+    return sdkIsOpenRequest(placeId, time, actions)
 }

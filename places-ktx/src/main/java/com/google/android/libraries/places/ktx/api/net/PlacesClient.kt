@@ -137,7 +137,7 @@ public suspend fun PlacesClient.awaitIsOpen(
 /**
  * Wraps [PlacesClient.isOpen] in a suspending function with the given placeId.
  *
- * Returns whether or not a place is open. If an error occurred, an [ApiException] will be thrown.
+ * Returns whether a place is open. If an error occurred, an [ApiException] will be thrown.
  */
 @Deprecated(
     "Use the version in the Places SDK instead.",

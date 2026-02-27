@@ -53,9 +53,7 @@ public fun searchByTextRequest(
   placeFields: List<Place.Field>,
   actions: SearchByTextRequest.Builder.() -> Unit = {},
 ): SearchByTextRequest {
-  return SearchByTextRequest.builder(textQuery, placeFields).also { builder ->
-    builder.apply(actions)
-  }.build()
+  return com.google.android.libraries.places.api.net.kotlin.searchByTextRequest(textQuery, placeFields, actions)
 }
 
 /**

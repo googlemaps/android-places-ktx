@@ -15,6 +15,7 @@
 package com.google.android.libraries.places.ktx.api.model
 
 import com.google.android.libraries.places.api.model.AddressComponent
+import com.google.android.libraries.places.api.model.kotlin.addressComponent as sdkAddressComponent
 
 /**
  * Builds a new [AddressComponent].
@@ -37,7 +38,5 @@ public fun addressComponent(
     types: List<String>,
     actions: (AddressComponent.Builder.() -> Unit)? = null
 ): AddressComponent {
-    return AddressComponent.builder(name, types).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    return sdkAddressComponent(name, types, actions)
 }

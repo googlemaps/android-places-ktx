@@ -17,6 +17,7 @@
 package com.google.android.libraries.places.ktx.api.model
 
 import com.google.android.libraries.places.api.model.AutocompletePrediction
+import com.google.android.libraries.places.api.model.kotlin.autocompletePrediction as sdkAutocompletePrediction
 
 /**
  * Builds a new [AutocompletePrediction].
@@ -34,7 +35,5 @@ public fun autocompletePrediction(
     placeId: String,
     actions: (AutocompletePrediction.Builder.() -> Unit)? = null
 ): AutocompletePrediction {
-    return AutocompletePrediction.builder(placeId).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    return sdkAutocompletePrediction(placeId, actions)
 }

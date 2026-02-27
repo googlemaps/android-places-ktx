@@ -25,6 +25,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.api.net.kotlin.awaitFetchPlace
 import com.google.android.libraries.places.api.net.kotlin.awaitFetchResolvedPhotoUri
 import com.google.android.libraries.places.api.net.kotlin.awaitFindAutocompletePredictions
+import com.google.android.libraries.places.api.net.kotlin.awaitSearchNearby
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -36,6 +37,9 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.model.CircularBounds
+import com.google.android.libraries.places.api.model.PhotoMetadata
 import kotlinx.coroutines.CancellationException
 import javax.inject.Inject
 
@@ -170,6 +174,57 @@ class PlacesPhotoViewModel @Inject constructor(
             } finally {
                 // End the billing session by clearing the token after the final detail request.
                 sessionToken = null
+            }
+        }
+    }
+
+    /**
+     * Demonstrates the use of [com.google.android.libraries.places.api.net.kotlin.awaitSearchNearby] 
+     * as a replacement for the removed [PlacesClient.findCurrentPlace] API.
+     *
+     * This implementation uses a fixed location (Googleplex) for demonstration purposes.
+     * In a real application, you would pass the user's current location here.
+     */
+    fun searchNearby() {
+        viewModelScope.launch {
+            _searchQuery.value = "" // Clear textual search when doing nearby search
+            _photoState.value = PhotoState(isLoading = true)
+            
+            try {
+                // Define a location restriction (e.g., 500m around Googleplex)
+                val googleplex = LatLng(37.4220656, -122.0840897)
+                val locationRestriction = CircularBounds.newInstance(googleplex, 500.0)
+                
+                // Call the Places KTX suspending extension for SearchNearby.
+                // We request only the ID and PHOTO_METADATAS fields.
+                val response = placesClient.awaitSearchNearby(
+                    locationRestriction,
+                    listOf(Place.Field.ID, Place.Field.PHOTO_METADATAS)
+                ) {
+                    // Optional: filter by types or adjust other parameters
+                    maxResultCount = 10
+                }
+
+                // For the demo, we take the first place found that has a photo.
+                val placeWithPhoto: Place? = response.places.firstOrNull { place: Place -> 
+                    (place.photoMetadatas?.size ?: 0) > 0 
+                }
+                val metadata: PhotoMetadata? = placeWithPhoto?.photoMetadatas?.firstOrNull()
+
+                if (metadata == null) {
+                    _photoState.value = PhotoState(error = "No nearby places with photos found.")
+                    return@launch
+                }
+
+                // Resolve the photo URI
+                val photoResponse = placesClient.awaitFetchResolvedPhotoUri(metadata)
+                _photoState.value = PhotoState(uri = photoResponse.uri)
+                
+                Log.d("PlacesPhotoViewModel", "Successfully found nearby place and fetched photo URI: ${photoResponse.uri}")
+            } catch (e: Exception) {
+                if (e is CancellationException) throw e
+                Log.e("PlacesPhotoViewModel", "Error searching nearby", e)
+                _photoState.value = PhotoState(error = "Failed to search nearby: ${e.message}")
             }
         }
     }

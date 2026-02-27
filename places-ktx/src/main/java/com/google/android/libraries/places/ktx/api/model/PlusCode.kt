@@ -15,6 +15,7 @@
 package com.google.android.libraries.places.ktx.api.model
 
 import com.google.android.libraries.places.api.model.PlusCode
+import com.google.android.libraries.places.api.model.kotlin.plusCode as sdkPlusCode
 
 /**
  * Builds a new [PlusCode].

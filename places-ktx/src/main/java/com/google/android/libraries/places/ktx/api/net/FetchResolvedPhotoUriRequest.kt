@@ -16,6 +16,7 @@ package com.google.android.libraries.places.ktx.api.net
 
 import com.google.android.libraries.places.api.model.PhotoMetadata
 import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
+import com.google.android.libraries.places.api.net.kotlin.fetchResolvedPhotoUriRequest as sdkFetchResolvedPhotoUriRequest
 
 /**
  * Builds a new [FetchResolvedPhotoUriRequest].
@@ -33,7 +34,5 @@ public fun fetchResolvedPhotoUriRequest(
     photoMetadata: PhotoMetadata,
     actions: (FetchResolvedPhotoUriRequest.Builder.() -> Unit)? = null
 ): FetchResolvedPhotoUriRequest {
-    return FetchResolvedPhotoUriRequest.builder(photoMetadata).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    return sdkFetchResolvedPhotoUriRequest(photoMetadata, actions)
 }

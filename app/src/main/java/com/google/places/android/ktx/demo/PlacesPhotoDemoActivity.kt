@@ -25,6 +25,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.MyLocation
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -126,6 +127,18 @@ fun PlacesPhotoScreen(
                     .padding(16.dp),
                 placeholder = { Text("Search for a place with photos...") },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                trailingIcon = {
+                    IconButton(onClick = { 
+                        searchQuery = ""
+                        viewModel.searchNearby() 
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.MyLocation,
+                            contentDescription = "Search Nearby",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                },
                 shape = MaterialTheme.shapes.medium,
                 singleLine = true
             )
@@ -142,11 +155,74 @@ fun PlacesPhotoScreen(
                     // Otherwise, show the interactive list of autocomplete predictions.
                     SearchResultsList(
                         event = searchEvent,
+                        onSearchNearbyClick = { 
+                            searchQuery = ""
+                            viewModel.searchNearby() 
+                        },
                         onPredictionClick = { viewModel.onPredictionClicked(it) }
                     )
                 }
             }
         }
+    }
+}
+
+/**
+ * A prominent informational section shown when the app is in the idle state.
+ *
+ * This "Hero" card explicitly demonstrates that [com.google.android.libraries.places.api.net.kotlin.awaitSearchNearby]
+ * is the modern, recommended replacement for the deprecated [PlacesClient.findCurrentPlace] API.
+ */
+@Composable
+fun SearchNearbyHero(onSearchNearbyClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            )
+        ) {
+            Column(Modifier.padding(24.dp)) {
+                Text(
+                    "Need Nearby Places?",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    "The legacy 'findCurrentPlace' API has been removed. " +
+                    "Use 'searchNearby' with explicit location bounds instead.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+                
+                Spacer(Modifier.height(24.dp))
+                
+                Button(
+                    onClick = onSearchNearbyClick,
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(16.dp)
+                ) {
+                    Icon(Icons.Default.MyLocation, contentDescription = null)
+                    Spacer(Modifier.width(8.dp))
+                    Text("Search Near Googleplex")
+                }
+            }
+        }
+        
+        Spacer(Modifier.height(32.dp))
+        
+        Text(
+            "Or search for a specific place above",
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     }
 }
 
@@ -159,13 +235,12 @@ fun PlacesPhotoScreen(
 @Composable
 fun SearchResultsList(
     event: PhotoDemoEvent,
+    onSearchNearbyClick: () -> Unit,
     onPredictionClick: (AutocompletePrediction) -> Unit
 ) {
     when (event) {
         is PhotoDemoEventIdle -> {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Type to find a place", color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
+            SearchNearbyHero(onSearchNearbyClick)
         }
         is PhotoDemoEventLoading -> {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
