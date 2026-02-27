@@ -12,7 +12,7 @@ Version 4.0.0 is a major release that transitions this library into a **compatib
 While this library is now primarily a compatibility shim, it still provides a few minor Kotlin-specific conveniences not yet present in the core SDK:
 
 1.  **DSL Builders**: Lightweight Kotlin DSL builders for legacy model support (now deprecated in favor of SDK native versions).
-2.  **PriceLevel Enum**: A type-safe `PriceLevel` enum for `SearchByTextRequest` filtering.
+2.  **PriceLevel Enum**: A type-safe `PriceLevel` enum for `SearchByTextRequest` filtering (now deprecated; use raw integers instead).
 3.  **SearchNearby Support**: Helper for `searchNearbyRequest` with a simplified API.
 
 ## Breaking Changes
@@ -96,6 +96,32 @@ val response = placesClient.awaitFetchResolvedPhotoUri(metadata)
 val uri = response.uri
 // Use a library like Coil or Glide to load the URI into an ImageView/Compose
 // See PlacesPhotoDemoActivity in the app for a complete example.
+```
+
+### PriceLevel Migration
+The `PriceLevel` enum and its builder extensions are deprecated. You should migrate to using raw integers directly in `setPriceLevels`.
+
+**Old (v3.x):**
+```kotlin
+val request = searchByTextRequest(query, fields) {
+    setPriceLevels(listOf(PriceLevel.MODERATE, PriceLevel.EXPENSIVE))
+}
+```
+
+**New (v4.0.0+):**
+```kotlin
+// Option 1: Use raw integers directly (1=INEXPENSIVE, 2=MODERATE, etc.)
+val request = SearchByTextRequest.builder(query, fields)
+    .setPriceLevels(listOf(2, 3))
+    .build()
+
+// Option 2: Define a local enum in your project for type safety
+enum class MyPriceLevel(val value: Int) {
+    FREE(0), INEXPENSIVE(1), MODERATE(2), EXPENSIVE(3), VERY_EXPENSIVE(4)
+}
+val request = SearchByTextRequest.builder(query, fields)
+    .setPriceLevels(listOf(MyPriceLevel.MODERATE.value, MyPriceLevel.EXPENSIVE.value))
+    .build()
 ```
 
 ## Technical Notes

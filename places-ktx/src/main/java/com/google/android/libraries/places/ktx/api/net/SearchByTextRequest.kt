@@ -17,6 +17,16 @@ package com.google.android.libraries.places.ktx.api.net
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.SearchByTextRequest
 
+/**
+ * Type-safe price levels for filtering search results.
+ * 
+ * @property value The integer value mapping to the SDK's price level constant.
+ */
+@Deprecated(
+  "Use raw integers (1-4) in setPriceLevels instead to avoid dependency on this KTX library. " +
+  "Alternatively, define a local enum in your project for type safety. " +
+  "Values: 1=INEXPENSIVE, 2=MODERATE, 3=EXPENSIVE, 4=VERY_EXPENSIVE."
+)
 public enum class PriceLevel(public val value: Int) {
   FREE(0),  // Note: not for use in the API call.
   INEXPENSIVE(1),
@@ -47,12 +57,30 @@ public fun searchByTextRequest(
   }.build()
 }
 
+/**
+ * Sets the price levels for filtering search results.
+ *
+ * @param priceLevels A collection of [PriceLevel]s.
+ */
+@Deprecated(
+  "Use the SDK's setPriceLevels with raw integers instead.",
+  ReplaceWith("setPriceLevels(priceLevels.map { it.value })")
+)
 public fun SearchByTextRequest.Builder.setPriceLevels(
   priceLevels: Collection<PriceLevel>
 ): SearchByTextRequest.Builder {
   return this.setPriceLevels(priceLevels.map { it.value })
 }
 
+/**
+ * Sets the price levels for filtering search results.
+ *
+ * @param priceLevels A variable number of [PriceLevel]s.
+ */
+@Deprecated(
+  "Use the SDK's setPriceLevels with raw integers instead.",
+  ReplaceWith("setPriceLevels(priceLevels.map { it.value })")
+)
 public fun SearchByTextRequest.Builder.setPriceLevels(
   vararg priceLevels: PriceLevel
 ): SearchByTextRequest.Builder {
