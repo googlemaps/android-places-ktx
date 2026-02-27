@@ -4,6 +4,9 @@ This guide summarizes the changes and steps required to migrate your project fro
 
 ## Overview
 
+> [!WARNING]
+> **This library is approaching end-of-life.** We plan to icebox the library and archive this repository in the very near term. Users are strongly encouraged to migrate to the official SDK implementations immediately.
+
 Version 4.0.0 is a major release that transitions this library into a **compatibility shim**. Most functionality has been moved to the official [Places SDK for Android](https://developers.google.com/maps/documentation/places/android-sdk/overview) (v3.3.0+).
 
 ## Breaking Changes
