@@ -1,6 +1,6 @@
-# Migration Guide - Places Android KTX v3 to v4.0.0 // {x-release-please-version}
+# Migration Guide - Places Android KTX v3 to v4.x.x
 
-This guide summarizes the changes and steps required to migrate your project from Places Android KTX v3.x to v4.0.0 // {x-release-please-version}.
+This guide summarizes the changes and steps required to migrate your project from Places Android KTX v3.x to v4.0.0.
 
 ## Overview
 
@@ -25,7 +25,7 @@ The custom KTX extensions previously provided by this library (`await*` function
 import com.google.android.libraries.places.ktx.api.net.awaitFetchPlace
 ```
 
-**New (v4.0.0 // {x-release-please-version}):**
+**New (v4.0.0):**
 ```kotlin
 import com.google.android.libraries.places.api.net.kotlin.awaitFetchPlace
 ```
