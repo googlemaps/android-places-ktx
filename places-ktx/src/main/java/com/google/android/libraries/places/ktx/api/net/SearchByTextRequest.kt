@@ -16,6 +16,8 @@ package com.google.android.libraries.places.ktx.api.net
 
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.SearchByTextRequest
+import com.google.android.libraries.places.api.net.kotlin.searchByTextRequest as sdkSearchByTextRequest
+
 /**
  * Type-safe price levels for filtering search results.
  *
@@ -53,7 +55,7 @@ public fun searchByTextRequest(
   placeFields: List<Place.Field>,
   actions: SearchByTextRequest.Builder.() -> Unit = {},
 ): SearchByTextRequest {
-  return com.google.android.libraries.places.api.net.kotlin.searchByTextRequest(textQuery, placeFields, actions)
+  return sdkSearchByTextRequest(textQuery, placeFields, actions)
 }
 
 /**
