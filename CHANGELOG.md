@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/googlemaps/android-places-ktx/compare/v4.0.0...v5.0.0) (2026-03-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* finalize library as 100% compatibility shim ([#306](https://github.com/googlemaps/android-places-ktx/issues/306))
+
+### Bug Fixes
+
+* finalize library as 100% compatibility shim ([#306](https://github.com/googlemaps/android-places-ktx/issues/306)) ([8daf5b7](https://github.com/googlemaps/android-places-ktx/commit/8daf5b7740cafca0ed01d7946beb8d00b36d8d44))
+
 ## [4.0.0](https://github.com/googlemaps/android-places-ktx/compare/v3.6.0...v4.0.0) (2026-02-26)
 
 
