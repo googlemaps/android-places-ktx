@@ -23,6 +23,10 @@ import com.google.android.libraries.places.api.model.Period
  *
  * @return the constructed [Period]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("period(actions)", "com.google.android.libraries.places.api.model.kotlin.period")
+)
 public inline fun period(actions: Period.Builder.() -> Unit): Period =
     Period.builder()
         .apply(actions)

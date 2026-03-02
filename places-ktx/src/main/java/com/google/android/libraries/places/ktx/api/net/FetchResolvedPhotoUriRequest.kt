@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,30 +15,8 @@
 package com.google.android.libraries.places.ktx.api.net
 
 import com.google.android.libraries.places.api.model.PhotoMetadata
-import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchResolvedPhotoUriRequest
-
-import com.google.android.libraries.places.api.net.kotlin.fetchPhotoRequest as sdkFetchPhotoRequest
 import com.google.android.libraries.places.api.net.kotlin.fetchResolvedPhotoUriRequest as sdkFetchResolvedPhotoUriRequest
-
-/**
- * Builds a new [FetchPhotoRequest].
- *
- * @param photoMetadata the metadata for the requested photo
- * @param actions the actions to apply to the [FetchPhotoRequest.Builder]
- *
- * @return the constructed [FetchPhotoRequest]
- */
-@Deprecated(
-    "Use fetchResolvedPhotoUriRequest(photoMetadata, actions) instead. FetchPhotoRequest is deprecated.",
-    ReplaceWith("fetchResolvedPhotoUriRequest(photoMetadata, actions)")
-)
-public fun fetchPhotoRequest(
-    photoMetadata: PhotoMetadata,
-    actions: (FetchPhotoRequest.Builder.() -> Unit)? = null
-): FetchPhotoRequest {
-    return sdkFetchPhotoRequest(photoMetadata, actions ?: {})
-}
 
 /**
  * Builds a new [FetchResolvedPhotoUriRequest].
@@ -56,6 +34,5 @@ public fun fetchResolvedPhotoUriRequest(
     photoMetadata: PhotoMetadata,
     actions: (FetchResolvedPhotoUriRequest.Builder.() -> Unit)? = null
 ): FetchResolvedPhotoUriRequest {
-    return sdkFetchResolvedPhotoUriRequest(photoMetadata, actions ?: {})
+    return sdkFetchResolvedPhotoUriRequest(photoMetadata, actions)
 }
-

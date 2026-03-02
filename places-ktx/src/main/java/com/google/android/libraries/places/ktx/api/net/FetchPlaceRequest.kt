@@ -16,7 +16,6 @@ package com.google.android.libraries.places.ktx.api.net
 
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
-
 import com.google.android.libraries.places.api.net.kotlin.fetchPlaceRequest as sdkFetchPlaceRequest
 
 /**
@@ -37,5 +36,5 @@ public fun fetchPlaceRequest(
     placeFields: List<Place.Field>,
     actions: (FetchPlaceRequest.Builder.() -> Unit)? = null
 ): FetchPlaceRequest {
-    return sdkFetchPlaceRequest(placeId, placeFields, actions ?: {})
+    return sdkFetchPlaceRequest(placeId, placeFields, actions)
 }

@@ -23,6 +23,10 @@ import com.google.android.libraries.places.api.model.PlusCode
  *
  * @return the constructed [PlusCode]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("plusCode(actions)", "com.google.android.libraries.places.api.model.kotlin.plusCode")
+)
 public inline fun plusCode(actions: PlusCode.Builder.() -> Unit): PlusCode =
     PlusCode.builder()
         .apply(actions)

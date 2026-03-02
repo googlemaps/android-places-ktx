@@ -1,0 +1,160 @@
+# Migration Guide - Places Android KTX v3 to v4.x.x
+
+This guide summarizes the changes and steps required to migrate your project from Places Android KTX v3.x to v4.0.0.
+
+## Overview
+
+> [!WARNING]
+> **This library is approaching end-of-life.** We plan to icebox the library and archive this repository in the very near term. Users are strongly encouraged to migrate to the official SDK implementations immediately.
+
+Version 4.0.0 is a major release that transitions this library into a **compatibility shim**. Most functionality has been moved to the official [Places SDK for Android](https://developers.google.com/maps/documentation/places/android-sdk/overview).
+
+## Breaking Changes
+
+### 1. KTX Extensions Moved to SDK
+The custom KTX extensions previously provided by this library (`await*` functions) are now deprecated in favor of the official SDK implementations.
+
+**Old (v3.x):**
+```kotlin
+import com.google.android.libraries.places.ktx.api.net.awaitFetchPlace
+```
+
+**New (v4.0.0+):**
+```kotlin
+import com.google.android.libraries.places.api.net.kotlin.awaitFetchPlace
+```
+
+> [!NOTE]
+> The extension functions in this library now delegate to the official SDK versions. You should update your imports to use the SDK versions directly.
+
+### 2. Removal of Legacy Infrastructure
+The following legacy components have been **removed**.
+
+#### **AutocompleteSupportFragment Extensions**
+The entire `AutocompleteSupportFragment.kt` file has been deleted.
+- **Removed**: `AutocompleteSupportFragment.placeSelectionEvents()`
+- **Removed**: `PlaceSelectionResult`, `PlaceSelectionSuccess`, and `PlaceSelectionError` classes.
+- **Migration**: The `AutocompleteSupportFragment` itself is deprecated in the official SDK. Use [`PlaceAutocompleteActivity`](https://developers.google.com/maps/documentation/places/android-sdk/reference/com/google/android/libraries/places/widget/PlaceAutocompleteActivity) instead or migrate to the Compose-based patterns shown in the demo app.
+
+#### **Legacy Request Wrappers**
+- **Removed**: `fetchPhotoRequest(...)` (associated with the removed `FetchPhoto` API).
+- **Removed**: `findCurrentPlaceRequest(...)` (associated with the removed `FindCurrentPlace` API).
+
+#### **Redundant Suspending Functions**
+- **Removed**: `PlacesClient.awaitSearchNearbyPlace(...)`. 
+- **Migration**: Use `PlacesClient.awaitSearchNearby(...)` instead.
+
+### 3. API Relocations (Renamed Files)
+Some APIs were moved to new files to better match modern SDK naming conventions.
+
+| Old File | New File | API Maintained |
+| :--- | :--- | :--- |
+| `FetchPhotoRequest.kt` | `FetchResolvedPhotoUriRequest.kt` | `fetchResolvedPhotoUriRequest` |
+| `FindCurrentPlaceRequest.kt` | `SearchNearbyRequest.kt` | `searchNearbyRequest` |
+
+## Migration Examples (1-to-1)
+
+### FindCurrentPlace to SearchNearby
+The `FindCurrentPlace` API has been removed in favor of `SearchNearby`.
+
+**Old (v3.x):**
+```kotlin
+val response = placesClient.findCurrentPlace(
+    findCurrentPlaceRequest(listOf(Place.Field.ID, Place.Field.NAME))
+).await()
+```
+
+**New (v4.0.0+):**
+```kotlin
+val locationRestriction = CircularBounds.newInstance(latLng, 1000.0)
+val response = placesClient.awaitSearchNearby(
+    locationRestriction,
+    listOf(Place.Field.ID, Place.Field.NAME)
+)
+// Or use the maintained request builder:
+val request = searchNearbyRequest(locationRestriction, listOf(Place.Field.ID))
+```
+
+> [!TIP]
+> See [PlacesPhotoViewModel.kt#L188-L230](app/src/main/java/com/google/places/android/ktx/demo/PlacesPhotoViewModel.kt#L188-L230) for a complete implementation of `SearchNearby`.
+
+### FetchPhoto to FetchResolvedPhotoUri
+The `FetchPhoto` API (returning a `Bitmap`) is replaced by `FetchResolvedPhotoUri` (returning a `Uri`).
+
+**Old (v3.x):**
+```kotlin
+val response = placesClient.fetchPhoto(fetchPhotoRequest(metadata)).await()
+val bitmap = response.bitmap
+```
+
+**New (v4.0.0+):**
+```kotlin
+val response = placesClient.awaitFetchResolvedPhotoUri(metadata)
+val uri = response.uri
+// Use a library like Coil or Glide to load the URI into an ImageView/Compose
+```
+
+> [!TIP]
+> See [PlacesPhotoViewModel.kt#L144-L179](app/src/main/java/com/google/places/android/ktx/demo/PlacesPhotoViewModel.kt#L144-L179) for a complete implementation of `FetchResolvedPhotoUri`.
+
+### PriceLevel Migration
+The `PriceLevel` enum and its builder extensions are deprecated. You should migrate to using raw integers directly in `setPriceLevels`.
+
+**Old (v3.x):**
+```kotlin
+val request = searchByTextRequest(query, fields) {
+    setPriceLevels(listOf(PriceLevel.MODERATE, PriceLevel.EXPENSIVE))
+}
+```
+
+**New (v4.0.0+):**
+```kotlin
+// Option 1: Use raw integers directly (1=INEXPENSIVE, 2=MODERATE, etc.)
+val request = SearchByTextRequest.builder(query, fields)
+    .setPriceLevels(listOf(2, 3))
+    .build()
+
+// Option 2: Define a local enum in your project for type safety
+enum class MyPriceLevel(val value: Int) {
+    FREE(0), INEXPENSIVE(1), MODERATE(2), EXPENSIVE(3), VERY_EXPENSIVE(4)
+}
+val request = SearchByTextRequest.builder(query, fields)
+    .setPriceLevels(listOf(MyPriceLevel.MODERATE.value, MyPriceLevel.EXPENSIVE.value))
+    .build()
+```
+
+## Technical Notes
+
+### Behavioral Parity & Capabilities
+- **FetchResolvedPhotoUri**: Unlike `FetchPhoto`, this API returns a `Uri` instead of a `Bitmap`. This is more efficient for modern Android apps using image loading libraries (Coil, Glide, etc.).
+- **Cancellation Safety**: All `await*` functions in this library now delegate directly to the official SDK's native `suspend` functions. These are built to handle coroutine cancellation correctly, ensuring that associated SDK tasks are cancelled and resources are released if the calling coroutine is cancelled.
+
+## Summary of Deprecated APIs
+
+The following APIs are now deprecated shims that delegate to the official SDK:
+
+| File | API |
+| :--- | :--- |
+| **`PlacesClient.kt`** | `awaitFetchPlace`, `awaitFetchResolvedPhotoUri`, `awaitFindAutocompletePredictions`, `awaitSearchNearby`, `awaitIsOpen`, `awaitSearchByText` |
+| **DSL Builders (Net)** | `fetchPlaceRequest`, `fetchResolvedPhotoUriRequest`, `findAutocompletePredictionsRequest`, `isOpenRequest`, `searchNearbyRequest`, `searchByTextRequest` |
+| **DSL Builders (Models)** | `place`, `photoMetadata`, `addressComponent`, `autocompletePrediction`, `openingHours`, `period`, `plusCode` |
+
+> [!TIP]
+> Most model builders (like `place { ... }`) are now natively provided by the official SDK in the `com.google.android.libraries.places.api.model.kotlin` package.
+
+## Dependency Update
+Update your `build.gradle` to reference the new version:
+
+```kotlin
+dependencies {
+    implementation("com.google.maps.android:places-ktx:4.0.0") // {x-release-please-version}
+}
+```
+
+## Demo Application
+The demo application has been completely modernized:
+- **UI**: Migrated to **Jetpack Compose** and **Material 3**.
+- **Architecture**: Implemented **Hilt** and **ViewModel**.
+- **SDK**: Upgraded to **Places SDK v5.1.1**.
+
+Refer to the [app](app) directory for reference implementations using modern Android practices.

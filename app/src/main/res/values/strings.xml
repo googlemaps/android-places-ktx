@@ -21,4 +21,6 @@
 
     <string name="autocomplete_fragment_demo_title">Autocomplete Widget Demo</string>
     <string name="autocomplete_fragment_demo_description">Demonstrates using the Autocomplete Widget (Intent) via the Places SDK.</string>
+    <string name="places_photo_demo_title">Places Photo Demo</string>
+    <string name="places_photo_demo_description">Demonstrates fetching and displaying place photos using awaitFetchResolvedPhotoUri and Coil.</string>
 </resources>

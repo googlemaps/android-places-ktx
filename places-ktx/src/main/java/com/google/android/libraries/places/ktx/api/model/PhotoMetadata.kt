@@ -15,6 +15,7 @@
 package com.google.android.libraries.places.ktx.api.model
 
 import com.google.android.libraries.places.api.model.PhotoMetadata
+import com.google.android.libraries.places.api.model.kotlin.photoMetadata as sdkPhotoMetadata
 
 /**
  * Builds a new [PhotoMetadata].
@@ -24,11 +25,13 @@ import com.google.android.libraries.places.api.model.PhotoMetadata
  *
  * @return the constructed [PhotoMetadata]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("photoMetadata(photoReference, actions)", "com.google.android.libraries.places.api.model.kotlin.photoMetadata")
+)
 public fun photoMetadata(
     photoReference: String,
     actions: (PhotoMetadata.Builder.() -> Unit)? = null
 ): PhotoMetadata {
-    return PhotoMetadata.builder(photoReference).also { builder ->
-        actions?.let { builder.apply(it) }
-    }.build()
+    return sdkPhotoMetadata(photoReference, actions)
 }

@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package com.google.android.libraries.places.ktx.api.net
 import com.google.android.libraries.places.api.model.LocationRestriction
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.SearchNearbyRequest
-
 import com.google.android.libraries.places.api.net.kotlin.searchNearbyRequest as sdkSearchNearbyRequest
 
 /**
@@ -33,11 +32,10 @@ import com.google.android.libraries.places.api.net.kotlin.searchNearbyRequest as
     "Use the version in the Places SDK instead.",
     ReplaceWith("searchNearbyRequest(locationRestriction, placeFields, actions)", "com.google.android.libraries.places.api.net.kotlin.searchNearbyRequest")
 )
-public fun searchNearbyPlaceRequest(
+public fun searchNearbyRequest(
     locationRestriction: LocationRestriction,
     placeFields: List<Place.Field>,
     actions: (SearchNearbyRequest.Builder.() -> Unit)? = null
 ): SearchNearbyRequest {
-    return sdkSearchNearbyRequest(locationRestriction, placeFields, actions ?: {})
+    return sdkSearchNearbyRequest(locationRestriction, placeFields, actions)
 }
-

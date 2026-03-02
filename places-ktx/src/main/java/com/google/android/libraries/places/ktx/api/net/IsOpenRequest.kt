@@ -16,46 +16,46 @@ package com.google.android.libraries.places.ktx.api.net
 
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.IsOpenRequest
-
 import com.google.android.libraries.places.api.net.kotlin.isOpenRequest as sdkIsOpenRequest
 
 /**
  * Builds a new [IsOpenRequest].
  *
- * @param placeId The [Place.id] of the place for which isOpen is to be determined.
- * @param utcTimeMillis The milliseconds from 1970-01-01T00:00:00Z.
+ * @param place the place to check
  * @param actions the actions to apply to the [IsOpenRequest.Builder]
+ *
  * @return the constructed [IsOpenRequest]
  */
 @Deprecated(
-  "Use the version in the Places SDK instead.",
-  ReplaceWith("isOpenRequest(placeId, utcTimeMillis, actions)", "com.google.android.libraries.places.api.net.kotlin.isOpenRequest")
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("isOpenRequest(place, actions)", "com.google.android.libraries.places.api.net.kotlin.isOpenRequest")
 )
 public fun isOpenRequest(
-  placeId: String,
-  utcTimeMillis: Long? = null,
-  actions: (IsOpenRequest.Builder.() -> Unit)? = null,
+    place: Place,
+    utcTimeMillis: Long? = null,
+    actions: (IsOpenRequest.Builder.() -> Unit)? = null
 ): IsOpenRequest {
-  return sdkIsOpenRequest(placeId, utcTimeMillis, actions ?: {})
+    val time = utcTimeMillis ?: System.currentTimeMillis()
+    return sdkIsOpenRequest(place, time, actions)
 }
 
 /**
  * Builds a new [IsOpenRequest].
  *
- * @param place The [Place] for which isOpen is to be determined.
- * @param utcTimeMillis The milliseconds from 1970-01-01T00:00:00Z.
+ * @param placeId the ID of the place to check
  * @param actions the actions to apply to the [IsOpenRequest.Builder]
+ *
  * @return the constructed [IsOpenRequest]
- * @throws IllegalArgumentException if [Place] does not have a [Place.id] associated with it.
  */
 @Deprecated(
-  "Use the version in the Places SDK instead.",
-  ReplaceWith("isOpenRequest(place, utcTimeMillis, actions)", "com.google.android.libraries.places.api.net.kotlin.isOpenRequest")
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("isOpenRequest(placeId, actions)", "com.google.android.libraries.places.api.net.kotlin.isOpenRequest")
 )
 public fun isOpenRequest(
-  place: Place,
-  utcTimeMillis: Long? = null,
-  actions: (IsOpenRequest.Builder.() -> Unit)? = null,
+    placeId: String,
+    utcTimeMillis: Long? = null,
+    actions: (IsOpenRequest.Builder.() -> Unit)? = null
 ): IsOpenRequest {
-  return sdkIsOpenRequest(place, utcTimeMillis, actions ?: {})
+    val time = utcTimeMillis ?: System.currentTimeMillis()
+    return sdkIsOpenRequest(placeId, time, actions)
 }

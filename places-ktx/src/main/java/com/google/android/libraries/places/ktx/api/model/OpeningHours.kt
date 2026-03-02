@@ -23,6 +23,10 @@ import com.google.android.libraries.places.api.model.OpeningHours
  *
  * @return the constructed [OpeningHours]
  */
+@Deprecated(
+    "Use the version in the Places SDK instead.",
+    ReplaceWith("openingHours(actions)", "com.google.android.libraries.places.api.model.kotlin.openingHours")
+)
 public inline fun openingHours(actions: OpeningHours.Builder.() -> Unit): OpeningHours =
     OpeningHours.builder()
         .apply(actions)

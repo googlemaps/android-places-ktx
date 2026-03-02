@@ -31,5 +31,10 @@ enum class Demo(
         R.string.places_demo_title,
         R.string.places_demo_description,
         PlacesSearchDemoActivity::class.java
+    ),
+    PLACES_PHOTO_DEMO(
+        R.string.places_photo_demo_title,
+        R.string.places_photo_demo_description,
+        PlacesPhotoDemoActivity::class.java
     )
 }

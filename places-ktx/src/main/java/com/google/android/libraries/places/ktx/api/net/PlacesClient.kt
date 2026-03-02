@@ -100,32 +100,6 @@ public suspend fun PlacesClient.awaitFindAutocompletePredictions(
  *
  * @param locationRestriction limits the scope of the search to a specific area.
  * @param placeFields the fields of the places to be returned
- * @return the response containing the nearby place results.
- */
-@Deprecated(
-    "Use awaitSearchNearby(locationRestriction, placeFields, actions) instead.",
-    ReplaceWith("this.awaitSearchNearby(locationRestriction, placeFields)")
-)
-@ExperimentalCoroutinesApi
-@RequiresPermission(anyOf = [permission.ACCESS_FINE_LOCATION, permission.ACCESS_COARSE_LOCATION])
-@SuppressLint("MissingPermission")
-public suspend fun PlacesClient.awaitSearchNearbyPlace(
-    locationRestriction: LocationRestriction,
-    placeFields: List<Place.Field>
-): SearchNearbyResponse {
-    return this.sdkAwaitSearchNearby(locationRestriction, placeFields)
-}
-
-/**
- * Wraps [PlacesClient.searchNearby] in a suspending function.
- *
- * Fetches the approximate nearby places based on the provided [locationRestriction]. Calling this
- * method without granting the appropriate permissions will result in a [SecurityException] being
- * thrown. In addition, if an error occurred while fetching the places, an [ApiException] will be
- * thrown.
- *
- * @param locationRestriction limits the scope of the search to a specific area.
- * @param placeFields the fields of the places to be returned
  * @param actions the actions to apply to the [SearchNearbyRequest.Builder]
  * @return the response containing the nearby place results.
  */
@@ -163,7 +137,7 @@ public suspend fun PlacesClient.awaitIsOpen(
 /**
  * Wraps [PlacesClient.isOpen] in a suspending function with the given placeId.
  *
- * Returns whether or not a place is open. If an error occurred, an [ApiException] will be thrown.
+ * Returns whether a place is open. If an error occurred, an [ApiException] will be thrown.
  */
 @Deprecated(
     "Use the version in the Places SDK instead.",
