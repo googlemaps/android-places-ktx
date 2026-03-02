@@ -108,7 +108,7 @@
   <div class="breadcrumbs"><a href="../../../index.html">places-ktx</a><span class="delimiter">/</span><a href="../index.html">com.google.android.libraries.places.ktx.api.net</a><span class="delimiter">/</span><span class="current">PriceLevel</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Price</span><wbr></wbr><span><span>Level</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":places-ktx/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html">PriceLevel</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="index.html">PriceLevel</a><span class="token operator">&gt; </span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":places-ktx/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html"><strike>PriceLevel</strike></a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="index.html">PriceLevel</a><span class="token operator">&gt; </span></div><div class="deprecation-content"><h3 class="">Deprecated</h3><p class="paragraph">Use raw integers (1-4) in setPriceLevels instead to avoid dependency on this KTX library. Alternatively, define a local enum in your project for type safety. Values: 1=INEXPENSIVE, 2=MODERATE, 3=EXPENSIVE, 4=VERY_EXPENSIVE.</p></div><p class="paragraph">Type-safe price levels for filtering search results.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="ENTRY">Entries</button></div>
@@ -249,7 +249,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":places-ktx/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="value.html">value</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":places-ktx/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="value.html">value</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The integer value mapping to the SDK's price level constant. The exact amount indicated by a specific value will vary from region to region, though a value of 0 (FREE) always denotes that this place is free.</p></div></div></div>
                 </div>
               </div>
             </div>
