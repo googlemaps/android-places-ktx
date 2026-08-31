@@ -1,7 +1,5 @@
-![Release](https://github.com/googlemaps/android-places-ktx/workflows/Release/badge.svg)
-![Stable](https://img.shields.io/badge/stability-stable-green)
-[![Tests/Build](https://github.com/googlemaps/android-places-ktx/actions/workflows/test.yml/badge.svg)](https://github.com/googlemaps/android-places-ktx/actions/workflows/test.yml)
-
+[![Maven Central](https://img.shields.io/maven-central/v/com.google.maps.android/places-ktx)](https://maven-badges.herokuapp.com/maven-central/com.google.maps.android/places-ktx)
+![Archived](https://img.shields.io/badge/stability-archived-red)
 ![Contributors](https://img.shields.io/github/contributors/googlemaps/android-places-ktx?color=green)
 [![License](https://img.shields.io/github/license/googlemaps/android-places-ktx?color=blue)][license]
 [![StackOverflow](https://img.shields.io/stackexchange/stackoverflow/t/google-maps?color=orange&label=google-maps&logo=stackoverflow)](https://stackoverflow.com/questions/tagged/google-maps)
@@ -9,14 +7,27 @@
 
 # Places Android KTX
 
-## Description
-> [!CAUTION]
-> **This library is approaching end-of-life.** We plan to icebox the library and archive this repository in the very near term. Users are strongly encouraged to migrate to the official SDK implementations immediately. Please refer to the [Migration Guide](MIGRATION_GUIDE.md) for detailed instructions.
+# ⚠️ PROJECT ARCHIVED & DEPRECATED ⚠️
 
-> [!IMPORTANT]
-> **Kotlin extensions (KTX) are now natively supported by the [Places SDK for Android][places-sdk] (v3.3.0+).**
->
-> This repository is now a compatibility layer that delegates to the official SDK extensions. New projects should prefer using the official SDK extensions directly.
+**This library is no longer maintained and has been officially archived.**
+
+### Why is this project being retired?
+
+All Kotlin extensions (KTX) and coroutines functionality originally provided by this library have migrated directly into the official [Places SDK for Android][places-sdk] (v3.3.0+ / v5.x+).
+
+### Migration
+
+1. **Use Official Places SDK Extensions:** Replace the `com.google.maps.android:places-ktx` dependency by upgrading to the official Places SDK for Android:
+   ```groovy
+   implementation 'com.google.android.libraries.places:places:<latest-version>'
+   ```
+   All Kotlin extension functions (such as `awaitFetchPlace`, `awaitFindAutocompletePredictions`, `awaitSearchNearby`, `awaitIsOpen`, and model builders) are now natively provided by the SDK under the `com.google.android.libraries.places.api.net.kotlin` and `com.google.android.libraries.places.api.model.kotlin` packages.
+2. **Jetpack Compose:** For Jetpack Compose UI components, refer to [android-places-compose](https://github.com/googlemaps/android-places-compose).
+3. **Detailed Guide:** Refer to the [Migration Guide](MIGRATION_GUIDE.md) for full step-by-step instructions.
+
+---
+
+## Description
 
 ## Requirements
 
